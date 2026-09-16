@@ -1,0 +1,26 @@
+Time resolution is 1 ps
+[5000] Gate change: Sa=x Sb=x Sc=x
+=== MPC Top-Level Testbench ===
+[10000] Asserting reset...
+[15000] Gate change: Sa=0 Sb=0 Sc=0
+[1010000] Reset released.
+
+--- Test 1: Disabled state ---
+PASS: All gates OFF when disabled.
+
+--- Test 2: Enable MPC (zero current, zero speed) ---
+[206010000] Inverter ENABLED.
+[1206010000] After 1ms: gate changes = 2
+
+--- Test 3: Apply 5A on phase A ---
+[1706010000] Gate changes after current injection = 2
+
+--- Test 4: Encoder at 900 RPM ---
+[3706011000] Motor running, gate changes = 2
+
+--- Test 5: Disable inverter ---
+PASS: All gates OFF after disable.
+
+=== Simulation Complete ===
+Total gate state changes: 2
+$finish called at time : 3806011 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_mpc_top.v" Line 224

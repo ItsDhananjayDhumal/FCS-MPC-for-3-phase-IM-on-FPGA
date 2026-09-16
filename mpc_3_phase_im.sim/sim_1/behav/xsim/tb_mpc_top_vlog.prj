@@ -1,0 +1,21 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/adc_pmod_ad1.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/clarke_transform.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/control_fsm.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/cost_evaluator.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/encoder_reader.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/gate_driver.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_top.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/optimal_selector.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/vdc_manager.v" \
+"../../../../mpc_3_phase_im.srcs/sources_1/imports/rtl/voltage_lut.v" \
+"../../../../mpc_3_phase_im.srcs/sim_1/imports/tb/tb_mpc_top.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

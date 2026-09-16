@@ -1,0 +1,26 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/adc_pmod_ad1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module adc_pmod_ad1
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/clarke_transform.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clarke_transform
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/control_fsm.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module control_fsm
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/cost_evaluator.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cost_evaluator
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/encoder_reader.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module encoder_reader
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module flux_observer
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/gate_driver.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gate_driver
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module motor_predictor
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mpc_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/optimal_selector.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module optimal_selector
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/vdc_manager.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module vdc_manager
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/voltage_lut.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module voltage_lut
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_mpc_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_mpc_top

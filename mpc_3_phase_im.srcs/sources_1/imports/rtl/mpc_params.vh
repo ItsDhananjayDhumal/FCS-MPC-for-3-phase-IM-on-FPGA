@@ -1,0 +1,65 @@
+`ifndef MPC_PARAMS_VH
+`define MPC_PARAMS_VH
+
+`define DATA_WIDTH 32
+`define FRAC_BITS  20
+
+`define SYS_CLK_FREQ   100_000_000
+`define SWITCHING_FREQ 10_000
+`define TS_COUNTER_MAX (`SYS_CLK_FREQ / `SWITCHING_FREQ)
+
+`define DEAD_TIME_NS     2000
+`define DEAD_TIME_CYCLES (`SYS_CLK_FREQ / (1_000_000_000 / `DEAD_TIME_NS))
+
+`define ADC_BITS     12
+`define ADC_SCLK_DIV 8
+`define ADC_NUM_BITS 16
+`define ADC_OFFSET   2048
+
+`define ADC_SCALE 32'sd10240
+
+`define ENCODER_PPR 2500
+`define ENCODER_CPR (`ENCODER_PPR * 4)
+`define NUM_POLES   4
+`define ENCODER_Z_RESET 1'b1
+
+`define SPEED_SCALE 32'sd13176795
+
+`define SPEED_ALPHA           32'sd104858
+`define SPEED_ONE_MINUS_ALPHA 32'sd943718
+
+`define C11 32'sd1029293
+`define C12 32'sd45224
+`define C13 32'sd8758
+`define D1  32'sd9016
+`define E21 32'sd110
+`define E22 32'sd1048034
+`define TS_Q 32'sd105
+
+`define KT 32'sd3055130
+
+`define VDC_DEFAULT_INT 10'd311
+`define VDC_COARSE_STEP 10'd25
+`define VDC_FINE_STEP   10'd2
+
+`define TWO_THIRDS 32'sd699051
+`define ONE_THIRD  32'sd349525
+`define INV_SQRT3  32'sd605510
+
+`define LAMBDA_T 32'sd1048576
+`define LAMBDA_PSI 32'sd104857600
+
+`define PSI_REF_SQ 32'sd966367
+`define TE_REF_DEFAULT 32'sd5242880
+`define SPEED_REF_DEFAULT 32'sd104857600
+
+`define PI_KP 32'sd5242880
+`define PI_KI 32'sd104857
+`define TE_MAX 32'sd20971520
+`define TE_MIN -32'sd20971520
+
+`define MAX_CURRENT_RAW 12'd3800
+`define MIN_CURRENT_RAW 12'd200
+`define NUM_VECTORS 8
+
+`endif

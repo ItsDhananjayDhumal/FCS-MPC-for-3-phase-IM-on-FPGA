@@ -154,7 +154,7 @@ module tb_mpc_top;
     
     initial begin
         
-        cpu_resetn  = 1'b0;
+        cpu_resetn  = 1'b1;
         btnu        = 1'b0;
         btnc        = 1'b0;
         btnd        = 1'b0;
@@ -170,6 +170,9 @@ module tb_mpc_top;
 
         adc_ch0_value = 12'd2048;
         adc_ch1_value = 12'd2048;
+        
+        #10;
+        cpu_resetn  = 1'b0;
 
         $display("=== MPC Top-Level Testbench ===");
         $display("[%0t] Asserting reset...", $time);
