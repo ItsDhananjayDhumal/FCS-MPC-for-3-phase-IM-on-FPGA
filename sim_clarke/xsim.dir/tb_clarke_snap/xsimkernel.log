@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_clarke_snap/xsimk.exe -runall -simmode gui -wdb tb_clarke_snap.wdb -simrunnum 0 -socket 64294
+Design successfully loaded
+Design Loading Memory Usage: 9408 KB (Peak: 9408 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 9956 KB (Peak: 9956 KB)
+Simulation CPU Usage: 15 ms

@@ -1,0 +1,1 @@
+-top "tb_vdc_manager" -snapshot "tb_vdc_snap" -timescale "1ns/1ps" 

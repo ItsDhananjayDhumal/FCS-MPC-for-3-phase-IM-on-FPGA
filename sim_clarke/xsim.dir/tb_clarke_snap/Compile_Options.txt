@@ -1,0 +1,1 @@
+-top "tb_clarke_transform" -snapshot "tb_clarke_snap" -timescale "1ns/1ps" 

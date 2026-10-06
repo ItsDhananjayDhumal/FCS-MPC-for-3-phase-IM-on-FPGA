@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_encoder_snap/xsimk.exe -runall -simmode gui -wdb tb_encoder_snap.wdb -simrunnum 0 -socket 49793
+Design successfully loaded
+Design Loading Memory Usage: 9484 KB (Peak: 9484 KB)
+Design Loading CPU Usage: 46 ms
+Simulation completed
+Simulation Memory Usage: 10004 KB (Peak: 10004 KB)
+Simulation CPU Usage: 6968 ms

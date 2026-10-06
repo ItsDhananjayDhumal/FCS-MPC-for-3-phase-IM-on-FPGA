@@ -24,7 +24,7 @@ module speed_pi #(
         mul_result_full <= mul_a * mul_b;
     end
 
-    reg [2:0] state;
+    reg [3:0] state;
     reg signed [DATA_WIDTH-1:0] p_term;
     reg signed [DATA_WIDTH-1:0] i_term;
     reg signed [DATA_WIDTH-1:0] unclipped_te;
@@ -49,8 +49,19 @@ module speed_pi #(
                     end
                 end
                 1: begin
-
-                    err_integ <= err_integ + err;
+                    // Anti-windup: only integrate if output is not saturated,
+                    // or if error would reduce the integrator magnitude
+                    if ((unclipped_te < `TE_MAX && unclipped_te > `TE_MIN) ||
+                        (unclipped_te >= `TE_MAX && err < 0) ||
+                        (unclipped_te <= `TE_MIN && err > 0)) begin
+                        // Saturating addition to prevent 32-bit signed overflow
+                        if (err > 0 && err_integ > (32'sd2147483647 - err))
+                            err_integ <= 32'sd2147483647;
+                        else if (err < 0 && err_integ < (-32'sd2147483648 - err))
+                            err_integ <= -32'sd2147483648;
+                        else
+                            err_integ <= err_integ + err;
+                    end
 
                     mul_a <= `PI_KP;
                     mul_b <= err; 

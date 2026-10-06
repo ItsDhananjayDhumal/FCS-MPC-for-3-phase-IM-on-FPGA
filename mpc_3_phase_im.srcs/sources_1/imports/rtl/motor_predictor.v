@@ -23,13 +23,13 @@ module motor_predictor #(
     output reg  done
 );
 
-    localparam signed [DATA_WIDTH-1:0] C11  = 32'sd1029293;
-    localparam signed [DATA_WIDTH-1:0] C12  = 32'sd45224;
-    localparam signed [DATA_WIDTH-1:0] C13  = 32'sd8758;
-    localparam signed [DATA_WIDTH-1:0] D1   = 32'sd9016;
-    localparam signed [DATA_WIDTH-1:0] E21  = 32'sd110;
-    localparam signed [DATA_WIDTH-1:0] E22  = 32'sd1048034;
-    localparam signed [DATA_WIDTH-1:0] TS_Q = 32'sd105;
+    localparam signed [DATA_WIDTH-1:0] C11  = `C11;
+    localparam signed [DATA_WIDTH-1:0] C12  = `C12;
+    localparam signed [DATA_WIDTH-1:0] C13  = `C13;
+    localparam signed [DATA_WIDTH-1:0] D1   = `D1;
+    localparam signed [DATA_WIDTH-1:0] E21  = `E21;
+    localparam signed [DATA_WIDTH-1:0] E22  = `E22;
+    localparam signed [DATA_WIDTH-1:0] TS_Q = `TS_Q;
 
     reg [4:0] step;
     reg busy;

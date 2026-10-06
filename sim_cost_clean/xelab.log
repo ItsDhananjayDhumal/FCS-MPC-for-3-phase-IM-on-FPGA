@@ -1,0 +1,18 @@
+Vivado Simulator v2023.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe tb_cost_evaluator -s sim_cost_snap 
+Multi-threading is on. Using 18 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.speed_pi
+Compiling module work.voltage_lut
+Compiling module work.motor_predictor
+Compiling module work.cost_evaluator_default
+Compiling module work.optimal_selector
+Compiling module work.tb_cost_evaluator
+Built simulation snapshot sim_cost_snap

@@ -1,0 +1,69 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sat Oct  3 23:56:11 2026
+# Process ID: 5964
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_predictor
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_motor_predictor_sim/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_predictor/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_predictor\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_motor_predictor_sim/xsim_script.tcl
+# xsim {tb_motor_predictor_sim} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===============================================================================
+STARTING EXTENSIVE MOTOR PREDICTOR VERIFICATION SUITE (tb_motor_predictor)
+===============================================================================
+
+-------------------------------------------------------------------------------
+PHASE 1: EDGE CASES & NUMERICAL BOUNDARIES
+-------------------------------------------------------------------------------
+PASS: [1.1] Reset outputs cleanly cleared to zero.
+FAIL: [1.4] Anti-symmetry broken! Negated output mismatch.
+
+-------------------------------------------------------------------------------
+PHASE 2: INVERTER VOLTAGE VECTOR SWEEP (V0 THROUGH V7)
+-------------------------------------------------------------------------------
+PASS: [2.1] Zero-Vector Equivalence (V0 and V7 produce bit-identical predictions).
+PASS: [2.3 & 2.4] Rotor flux invariance and D1*vs differential proven across all 8 vectors.
+
+-------------------------------------------------------------------------------
+PHASE 3: PHYSICAL OPERATION REGIMES & STATE REASONABLENESS
+-------------------------------------------------------------------------------
+PASS: [3.1] Flux builds monotonically (0.100 Wb -> 0.1004 Wb) under magnetizing current.
+PASS: [3.2] No-load predicted flux magnitude is physically stable: 0.9604 Wb (Target: 0.96 Wb)
+PASS: [3.3] Full-load predicted torque is reasonable: 14.64 Nm (Rated ~ 14.5 Nm)
+PASS: [3.4] Regenerative braking torque correctly negative: -14.59 Nm
+PASS: [3.6] Dynamic vector switching slew-rate exactly matches 2 * D1 * v_s.
+
+-------------------------------------------------------------------------------
+PHASE 4: EXHAUSTIVE MULTI-POINT SWEEP (520 COMPREHENSIVE TEST CASES)
+-------------------------------------------------------------------------------
+PASS: All 520 sweep test points matched exact golden reference! Max error: 0 LSB.
+
+-------------------------------------------------------------------------------
+PHASE 5: FSM TIMING PROTOCOL, HANDSHAKE & LATENCY VERIFICATION
+-------------------------------------------------------------------------------
+FAIL: [5.1] Expected latency 28 cycles, observed: 30 cycles!
+PASS: [5.2] Done pulse width is strictly 1 clock cycle (clean single-tick handshake).
+FAIL: [5.3] Spurious start pulses corrupted execution timeline (took 30 cycles)!
+FAIL: [5.4] Back-to-back execution failed latency check (30 cycles).
+
+===============================================================================
+MOTOR PREDICTOR TESTBENCH COMPLETE
+===============================================================================
+Total Tests Executed : 571
+Tests Passed         : 567
+Tests Failed         : 4
+Max Discrepancy (LSB): 0
+Overall Reliability  : 99.30 %
+===============================================================================
+
+>>> SOME CHECKS FAILED! REVIEW LOG FOR DETAILS. <<<
+$finish called at time : 176765 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_motor_predictor.v" Line 813
+exit
+INFO: [Common 17-206] Exiting xsim at Sat Oct  3 23:56:17 2026...

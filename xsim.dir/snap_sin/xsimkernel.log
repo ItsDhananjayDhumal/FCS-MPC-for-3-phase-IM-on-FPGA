@@ -1,0 +1,7 @@
+Running: xsim.dir/snap_sin/xsimk.exe -runall -simmode gui -wdb snap_sin.wdb -simrunnum 0 -socket 63166
+Design successfully loaded
+Design Loading Memory Usage: 10344 KB (Peak: 10344 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 10640 KB (Peak: 10640 KB)
+Simulation CPU Usage: 15 ms

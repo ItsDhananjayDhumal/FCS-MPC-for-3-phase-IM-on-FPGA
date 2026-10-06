@@ -55,6 +55,9 @@ module control_fsm #(
     output reg                           gate_update,
     output reg  [2:0]                    gate_switch_state,
 
+    output reg  signed [12:0]            adc_offset,     // Auto-tare calibrated ADC zero offset
+    output reg                           cal_done,       // Calibration complete flag
+
     output reg  [4:0]                    fsm_state_out,  
     output reg                           heartbeat        
 );
@@ -77,23 +80,6 @@ module control_fsm #(
 
     
     
-    reg [12:0] hb_prescaler;
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            hb_prescaler <= 0;
-            heartbeat <= 0;
-        end else if (ts_tick) begin
-            if (hb_prescaler >= 13'd4999) begin 
-                hb_prescaler <= 0;
-                heartbeat <= ~heartbeat;
-            end else begin
-                hb_prescaler <= hb_prescaler + 1;
-            end
-        end
-    end
-
-    
-    
     localparam [4:0]
         S_IDLE        = 5'd0,
         S_WAIT_TS     = 5'd1,
@@ -112,9 +98,49 @@ module control_fsm #(
         S_APPLY       = 5'd14,
         S_DISABLED    = 5'd15,
         S_WAIT_SEL    = 5'd16,
-        S_ERROR       = 5'd17;
+        S_ERROR       = 5'd17,
+        // Auto-tare calibration states
+        S_CAL_WARMUP  = 5'd18,
+        S_CAL_ADC     = 5'd19,
+        S_CAL_WAIT    = 5'd20,
+        S_CAL_ACCUM   = 5'd21,
+        S_CAL_DONE    = 5'd22,
+        // Pre-magnetization states
+        S_MAG_WAIT_TS = 5'd23,
+        S_MAG_APPLY   = 5'd24,
+        S_MAG_ADC     = 5'd25,
+        S_MAG_WAIT_ADC= 5'd26,
+        S_MAG_CHECK   = 5'd27;
 
     reg [4:0] state;
+
+    reg [12:0] hb_prescaler;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            hb_prescaler <= 0;
+            heartbeat <= 0;
+        end else if (state == S_ERROR) begin
+            heartbeat <= 1'b1;  // Solid ON = fault indicator
+        end else if (ts_tick) begin
+            if (hb_prescaler >= 13'd4999) begin 
+                hb_prescaler <= 0;
+                heartbeat <= ~heartbeat;
+            end else begin
+                hb_prescaler <= hb_prescaler + 1;
+            end
+        end
+    end
+
+    // Auto-tare calibration registers
+    reg [28:0] warmup_cnt;           // 5-second warmup counter
+    reg [8:0]  cal_sample_cnt;       // sample counter (0-255)
+    reg [8:0]  cal_valid_cnt;        // count of non-outlier samples
+    reg signed [23:0] cal_accum_ch0; // accumulator for ch0 (enough for 256*4095)
+    reg signed [23:0] cal_accum_ch1; // accumulator for ch1
+    reg signed [12:0] cal_mean;      // running mean estimate
+
+    // Pre-magnetization registers
+    reg [7:0] mag_cycle_cnt;         // magnetization Ts period counter
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -132,7 +158,21 @@ module control_fsm #(
             sel_cost_valid   <= 1'b0;
             gate_update      <= 1'b0;
             gate_switch_state <= 3'b000;
-        end else if (ts_counter == 16'd9900 && state != S_WAIT_TS && state != S_IDLE && state != S_DISABLED && state != S_ERROR) begin
+            adc_offset       <= 13'sd2048;  // Default until calibration
+            cal_done         <= 1'b0;
+            warmup_cnt       <= 0;
+            cal_sample_cnt   <= 0;
+            cal_valid_cnt    <= 0;
+            cal_accum_ch0    <= 0;
+            cal_accum_ch1    <= 0;
+            cal_mean         <= 13'sd2048;
+            mag_cycle_cnt    <= 0;
+        end else if (ts_counter == 16'd9900 && state != S_WAIT_TS && state != S_IDLE && 
+                     state != S_DISABLED && state != S_ERROR &&
+                     state != S_CAL_WARMUP && state != S_CAL_ADC && state != S_CAL_WAIT &&
+                     state != S_CAL_ACCUM && state != S_CAL_DONE &&
+                     state != S_MAG_WAIT_TS && state != S_MAG_APPLY && 
+                     state != S_MAG_ADC && state != S_MAG_WAIT_ADC && state != S_MAG_CHECK) begin
             state <= S_ERROR;
         end else begin
             
@@ -149,8 +189,10 @@ module control_fsm #(
             case (state)
                 
                 S_IDLE: begin
-                    if (enable)
-                        state <= S_WAIT_TS;
+                    if (!cal_done)
+                        state <= S_CAL_WARMUP;  // Auto-tare first
+                    else if (enable)
+                        state <= S_MAG_WAIT_TS; // Magnetize before MPC
                     else
                         state <= S_DISABLED;
                 end
@@ -160,7 +202,7 @@ module control_fsm #(
                     gate_switch_state <= 3'b000;
                     gate_update       <= 1'b1;
                     if (enable)
-                        state <= S_WAIT_TS;
+                        state <= S_MAG_WAIT_TS; // Magnetize on enable
                 end
 
                 S_WAIT_TS: begin
@@ -182,8 +224,11 @@ module control_fsm #(
                         clarke_ia_raw <= adc_data_ch0;
                         clarke_ib_raw <= adc_data_ch1;
 
-                        if (adc_data_ch0 > `MAX_CURRENT_RAW || adc_data_ch0 < `MIN_CURRENT_RAW ||
-                            adc_data_ch1 > `MAX_CURRENT_RAW || adc_data_ch1 < `MIN_CURRENT_RAW) begin
+                        // Symmetric overcurrent protection around calibrated zero offset (+/- 5.0A = +/- 310 counts)
+                        if (($signed({1'b0, adc_data_ch0}) - adc_offset) > `MAX_CURRENT_DELTA ||
+                            ($signed({1'b0, adc_data_ch0}) - adc_offset) < -`MAX_CURRENT_DELTA ||
+                            ($signed({1'b0, adc_data_ch1}) - adc_offset) > `MAX_CURRENT_DELTA ||
+                            ($signed({1'b0, adc_data_ch1}) - adc_offset) < -`MAX_CURRENT_DELTA) begin
                             state <= S_ERROR; 
                         end else begin
                             state <= S_CLARKE;
@@ -251,8 +296,9 @@ module control_fsm #(
                 end
 
                 S_ERROR: begin
-                    gate_switch_state <= 3'b000;
-                    gate_update       <= 1'b1;
+                    // Tri-state coast: keep all gates LOW (no gate_update!)
+                    // gate_switch_state does not matter since gate_update stays 0
+                    // Heartbeat is frozen (handled below) to signal fault
                     if (!enable) state <= S_IDLE; 
                 end
 
@@ -275,6 +321,124 @@ module control_fsm #(
                 end
 
                 default: state <= S_IDLE;
+
+                // ============================================
+                // Auto-Tare Calibration States
+                // ============================================
+
+                S_CAL_WARMUP: begin
+                    // Wait 5 seconds for sensor/power supply to settle
+                    if (warmup_cnt >= `AUTOTARE_WARMUP_CYCLES) begin
+                        warmup_cnt     <= 0;
+                        cal_sample_cnt <= 0;
+                        cal_valid_cnt  <= 0;
+                        cal_accum_ch0  <= 0;
+                        cal_accum_ch1  <= 0;
+                        cal_mean       <= 13'sd2048; // Initial estimate
+                        state          <= S_CAL_ADC;
+                    end else begin
+                        warmup_cnt <= warmup_cnt + 1;
+                    end
+                end
+
+                S_CAL_ADC: begin
+                    // Trigger ADC conversion
+                    adc_start <= 1'b1;
+                    state     <= S_CAL_WAIT;
+                end
+
+                S_CAL_WAIT: begin
+                    // Wait for ADC conversion to complete
+                    if (adc_done) begin
+                        state <= S_CAL_ACCUM;
+                    end
+                end
+
+                S_CAL_ACCUM: begin
+                    // Outlier rejection: check if sample is within ±THRESHOLD of mean
+                    if (($signed({1'b0, adc_data_ch0}) > (cal_mean - `AUTOTARE_OUTLIER_THRESH)) &&
+                        ($signed({1'b0, adc_data_ch0}) < (cal_mean + `AUTOTARE_OUTLIER_THRESH))) begin
+                        cal_accum_ch0 <= cal_accum_ch0 + $signed({1'b0, adc_data_ch0});
+                        cal_accum_ch1 <= cal_accum_ch1 + $signed({1'b0, adc_data_ch1});
+                        cal_valid_cnt <= cal_valid_cnt + 1;
+                        // Update running mean from accumulated average
+                        if (cal_valid_cnt > 0)
+                            cal_mean <= (cal_accum_ch0 + $signed({1'b0, adc_data_ch0})) / 
+                                        ($signed({20'd0, cal_valid_cnt}) + 1);
+                    end
+                    // else: outlier, skip this sample
+
+                    cal_sample_cnt <= cal_sample_cnt + 1;
+
+                    if (cal_sample_cnt >= `AUTOTARE_NUM_SAMPLES - 1) begin
+                        state <= S_CAL_DONE;
+                    end else begin
+                        state <= S_CAL_ADC; // Take next sample
+                    end
+                end
+
+                S_CAL_DONE: begin
+                    // Compute final offset = average of valid samples
+                    if (cal_valid_cnt > 0)
+                        adc_offset <= cal_accum_ch0[23:0] / $signed({15'd0, cal_valid_cnt});
+                    else
+                        adc_offset <= 13'sd2048; // Fallback if all samples rejected
+                    cal_done <= 1'b1;
+                    state    <= S_DISABLED; // Wait for enable
+                end
+
+                // ============================================
+                // Pre-Magnetization Startup States
+                // ============================================
+
+                S_MAG_WAIT_TS: begin
+                    // Wait for Ts tick to synchronize magnetization
+                    if (!enable) begin
+                        state <= S_DISABLED;
+                    end else if (ts_tick) begin
+                        state <= S_MAG_APPLY;
+                    end
+                end
+
+                S_MAG_APPLY: begin
+                    // Apply fixed voltage vector for flux build-up
+                    gate_switch_state <= `MAG_VECTOR;
+                    gate_update       <= 1'b1;
+                    // Trigger ADC to monitor current
+                    adc_start <= 1'b1;
+                    state     <= S_MAG_ADC;
+                end
+
+                S_MAG_ADC: begin
+                    state <= S_MAG_WAIT_ADC;
+                end
+
+                S_MAG_WAIT_ADC: begin
+                    if (adc_done) begin
+                        state <= S_MAG_CHECK;
+                    end
+                end
+
+                S_MAG_CHECK: begin
+                    // Check overcurrent protection during magnetization (25% limit = 1.25A = 78 counts)
+                    if (($signed({1'b0, adc_data_ch0}) - adc_offset) > `MAG_CURRENT_MAX_DELTA ||
+                        ($signed({1'b0, adc_data_ch0}) - adc_offset) < -`MAG_CURRENT_MAX_DELTA ||
+                        ($signed({1'b0, adc_data_ch1}) - adc_offset) > `MAG_CURRENT_MAX_DELTA ||
+                        ($signed({1'b0, adc_data_ch1}) - adc_offset) < -`MAG_CURRENT_MAX_DELTA) begin
+                        // Current too high: stop magnetization, go to error
+                        gate_switch_state <= 3'b000;
+                        gate_update       <= 1'b1;
+                        state             <= S_ERROR;
+                    end else if (mag_cycle_cnt >= `MAG_CYCLES - 1) begin
+                        // Magnetization complete: transition to normal MPC
+                        mag_cycle_cnt <= 0;
+                        sample_tick   <= 1'b1; // Initial sample tick for encoder
+                        state         <= S_WAIT_TS;
+                    end else begin
+                        mag_cycle_cnt <= mag_cycle_cnt + 1;
+                        state         <= S_MAG_WAIT_TS;
+                    end
+                end
             endcase
         end
     end

@@ -58,7 +58,26 @@ module mpc_top (
             btnu_sync2 <= btnu_sync1;
         end
     end
-    wire enable = btnu_sync2;
+
+    // Debounce filter: require stable input for 10ms (1,000,000 cycles)
+    reg enable_debounced;
+    reg [19:0] db_counter;
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            enable_debounced <= 1'b0;
+            db_counter <= 20'd0;
+        end else if (btnu_sync2 != enable_debounced) begin
+            if (db_counter >= 20'd999999) begin
+                enable_debounced <= btnu_sync2;
+                db_counter <= 20'd0;
+            end else begin
+                db_counter <= db_counter + 20'd1;
+            end
+        end else begin
+            db_counter <= 20'd0;
+        end
+    end
+    wire enable = enable_debounced;
 
     assign inverter_en = enable;
 
@@ -119,8 +138,15 @@ module mpc_top (
     wire        gate_update_w;
     wire [2:0]  gate_switch_state_w;
 
-    wire [3:0]  fsm_state_w;
+    wire [4:0]  fsm_state_w;  // 5-bit: supports states 0-17
     wire        heartbeat_w;
+
+    // Speed PI controller output
+    wire signed [`DATA_WIDTH-1:0] te_ref_w;
+
+    // Auto-tare calibration signals
+    wire signed [12:0] adc_offset_w;
+    wire               cal_done_w;
 
     
 
@@ -160,14 +186,15 @@ module mpc_top (
         .DATA_WIDTH(`DATA_WIDTH),
         .FRAC_BITS(`FRAC_BITS)
     ) u_clarke (
-        .clk     (clk),
-        .rst_n   (rst_n),
-        .start   (clarke_start_w),
-        .ia_raw  (clarke_ia_raw_w),
-        .ib_raw  (clarke_ib_raw_w),
-        .i_alpha (i_alpha_w),
-        .i_beta  (i_beta_w),
-        .done    (clarke_done_w)
+        .clk        (clk),
+        .rst_n      (rst_n),
+        .start      (clarke_start_w),
+        .ia_raw     (clarke_ia_raw_w),
+        .ib_raw     (clarke_ib_raw_w),
+        .adc_offset (adc_offset_w),    // Dynamic offset from auto-tare
+        .i_alpha    (i_alpha_w),
+        .i_beta     (i_beta_w),
+        .done       (clarke_done_w)
     );
 
     flux_observer #(
@@ -246,8 +273,22 @@ module mpc_top (
         .is_beta_pred     (is_beta_pred_w),
         .psi_r_alpha_pred (psi_r_alpha_pred_w),
         .psi_r_beta_pred  (psi_r_beta_pred_w),
+        .te_ref_in        (te_ref_w),          // Connected to speed_pi output
         .cost             (cost_value_w),
         .done             (cost_done_w)
+    );
+
+    // Speed PI controller: cascaded speed loop driving torque reference
+    speed_pi #(
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
+    ) u_speed_pi (
+        .clk         (clk),
+        .rst_n       (rst_n),
+        .sample_tick (sample_tick_w),
+        .speed_ref   (`SPEED_REF_DEFAULT),
+        .speed_fb    (speed_elec_w),
+        .te_ref      (te_ref_w)
     );
 
     optimal_selector #(
@@ -332,6 +373,9 @@ module mpc_top (
         .gate_update       (gate_update_w),
         .gate_switch_state (gate_switch_state_w),
         
+        .adc_offset        (adc_offset_w),
+        .cal_done          (cal_done_w),
+
         .fsm_state_out     (fsm_state_w),
         .heartbeat         (heartbeat_w)
     );

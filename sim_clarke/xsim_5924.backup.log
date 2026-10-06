@@ -1,0 +1,257 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Sep 29 13:52:48 2026
+# Process ID: 5924
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_clarke
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_clarke_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_clarke/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_clarke\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_clarke_snap/xsim_script.tcl
+# xsim {tb_clarke_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===================================================================
+       RIGOROUS VERIFICATION TESTBENCH: clarke_transform.v         
+===================================================================
+
+--- PHASE 1: Quiescent Zero Current Verification Across Offsets ---
+[PASS #001] Alpha:  0.000 A | Beta:  0.000 A | (Exp:  0.000,  0.000) | t at Offset=3115
+[PASS #002] Alpha:  0.000 A | Beta:  0.000 A | (Exp:  0.000,  0.000) | t at Offset=2048
+[PASS #003] Alpha:  0.000 A | Beta:  0.000 A | (Exp:  0.000,  0.000) | t at Offset=1985
+[PASS #004] Alpha:  0.000 A | Beta:  0.000 A | (Exp:  0.000,  0.000) | t at Offset=3474
+
+--- PHASE 2: DC Current Steps (+/- 1A to +/- 5A at Nominal Offset) ---
+[FAIL #005] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=3177, ib_raw=3084, offset=3115
+           Alpha Expected: 0.9990 A, Got: 0.9990 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #006] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=3239, ib_raw=3053, offset=3115
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #007] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=3301, ib_raw=3022, offset=3115
+           Alpha Expected: 2.9971 A, Got: 2.9971 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #008] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=3363, ib_raw=2991, offset=3115
+           Alpha Expected: 3.9961 A, Got: 3.9961 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #009] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=3425, ib_raw=2960, offset=3115
+           Alpha Expected: 4.9951 A, Got: 4.9951 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #010] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=3053, ib_raw=3146, offset=3115
+           Alpha Expected: 131.0010 A, Got: -0.9990 A (Diff: 132.0000 A)
+           Beta  Expected: 76.2102 A, Got: 0.0000 A (Diff: 76.2102 A)
+[FAIL #011] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=2991, ib_raw=3177, offset=3115
+           Alpha Expected: 130.0020 A, Got: -1.9980 A (Diff: 132.0000 A)
+           Beta  Expected: 76.2102 A, Got: 0.0000 A (Diff: 76.2102 A)
+[FAIL #012] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=2929, ib_raw=3208, offset=3115
+           Alpha Expected: 129.0029 A, Got: -2.9971 A (Diff: 132.0000 A)
+           Beta  Expected: 76.2102 A, Got: 0.0000 A (Diff: 76.2102 A)
+[FAIL #013] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=2867, ib_raw=3239, offset=3115
+           Alpha Expected: 128.0039 A, Got: -3.9961 A (Diff: 132.0000 A)
+           Beta  Expected: 76.2102 A, Got: 0.0000 A (Diff: 76.2102 A)
+[FAIL #014] ARITHMETIC ERROR! ( A Balanced Step)
+           Inputs: ia_raw=2805, ib_raw=3270, offset=3115
+           Alpha Expected: 127.0049 A, Got: -4.9951 A (Diff: 132.0000 A)
+           Beta  Expected: 76.2102 A, Got: 0.0000 A (Diff: 76.2102 A)
+[PASS #015] Alpha:  0.000 A | Beta:  1.154 A | (Exp:  0.000,  1.154) | eta Current Step
+
+--- PHASE 3: 360-Degree Rotating Vector Trajectory (3.0A Peak) ---
+[FAIL #019] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3301, ib_raw=3022, offset=3115
+           Alpha Expected: 2.9971 A, Got: 2.9971 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #020] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3298, ib_raw=3052, offset=3115
+           Alpha Expected: 2.9487 A, Got: 2.9487 A (Diff: 0.0000 A)
+           Beta  Expected: 152.9507 A, Got: 0.5304 A (Diff: 152.4204 A)
+[FAIL #021] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3289, ib_raw=3083, offset=3115
+           Alpha Expected: 2.8037 A, Got: 2.8037 A (Diff: 0.0000 A)
+           Beta  Expected: 153.4438 A, Got: 1.0235 A (Diff: 152.4203 A)
+[FAIL #029] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3083, ib_raw=3289, offset=3115
+           Alpha Expected: 131.4844 A, Got: -0.5156 A (Diff: 132.0000 A)
+           Beta  Expected: 79.1500 A, Got: 2.9403 A (Diff: 76.2097 A)
+[FAIL #030] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3052, ib_raw=3298, offset=3115
+           Alpha Expected: 130.9849 A, Got: -1.0151 A (Diff: 132.0000 A)
+           Beta  Expected: 79.0290 A, Got: 2.8193 A (Diff: 76.2097 A)
+[FAIL #031] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3022, ib_raw=3301, offset=3115
+           Alpha Expected: 130.5015 A, Got: -1.4985 A (Diff: 132.0000 A)
+           Beta  Expected: 78.8058 A, Got: 2.5960 A (Diff: 76.2097 A)
+[FAIL #032] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2996, ib_raw=3298, offset=3115
+           Alpha Expected: 130.0825 A, Got: -1.9175 A (Diff: 132.0000 A)
+           Beta  Expected: 78.5081 A, Got: 2.2983 A (Diff: 76.2098 A)
+[FAIL #033] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2973, ib_raw=3289, offset=3115
+           Alpha Expected: 129.7119 A, Got: -2.2881 A (Diff: 132.0000 A)
+           Beta  Expected: 78.1267 A, Got: 1.9168 A (Diff: 76.2099 A)
+[FAIL #034] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2954, ib_raw=3276, offset=3115
+           Alpha Expected: 129.4058 A, Got: -2.5942 A (Diff: 132.0000 A)
+           Beta  Expected: 77.7080 A, Got: 1.4981 A (Diff: 76.2100 A)
+[FAIL #035] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2941, ib_raw=3257, offset=3115
+           Alpha Expected: 129.1963 A, Got: -2.8037 A (Diff: 132.0000 A)
+           Beta  Expected: 77.2336 A, Got: 1.0235 A (Diff: 76.2100 A)
+[FAIL #036] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2932, ib_raw=3234, offset=3115
+           Alpha Expected: 129.0513 A, Got: -2.9487 A (Diff: 132.0000 A)
+           Beta  Expected: 76.7219 A, Got: 0.5118 A (Diff: 76.2101 A)
+[FAIL #037] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2929, ib_raw=3208, offset=3115
+           Alpha Expected: 129.0029 A, Got: -2.9971 A (Diff: 132.0000 A)
+           Beta  Expected: 76.2102 A, Got: 0.0000 A (Diff: 76.2102 A)
+[FAIL #038] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2932, ib_raw=3178, offset=3115
+           Alpha Expected: 129.0513 A, Got: -2.9487 A (Diff: 132.0000 A)
+           Beta  Expected: 75.6800 A, Got: -0.5304 A (Diff: 76.2103 A)
+[FAIL #039] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2941, ib_raw=3147, offset=3115
+           Alpha Expected: 129.1963 A, Got: -2.8037 A (Diff: 132.0000 A)
+           Beta  Expected: 75.1869 A, Got: -1.0235 A (Diff: 76.2104 A)
+[FAIL #040] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2954, ib_raw=3115, offset=3115
+           Alpha Expected: 129.4058 A, Got: -2.5942 A (Diff: 132.0000 A)
+           Beta  Expected: 74.7125 A, Got: -1.4981 A (Diff: 76.2105 A)
+[FAIL #041] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2973, ib_raw=3083, offset=3115
+           Alpha Expected: 129.7119 A, Got: -2.2881 A (Diff: 132.0000 A)
+           Beta  Expected: 226.7143 A, Got: -1.9168 A (Diff: 228.6311 A)
+[FAIL #042] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=2996, ib_raw=3052, offset=3115
+           Alpha Expected: 130.0825 A, Got: -1.9175 A (Diff: 132.0000 A)
+           Beta  Expected: 226.3515 A, Got: -2.2797 A (Diff: 228.6311 A)
+[FAIL #043] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3022, ib_raw=3022, offset=3115
+           Alpha Expected: 130.5015 A, Got: -1.4985 A (Diff: 132.0000 A)
+           Beta  Expected: 226.0352 A, Got: -2.5960 A (Diff: 228.6312 A)
+[FAIL #044] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3052, ib_raw=2996, offset=3115
+           Alpha Expected: 130.9849 A, Got: -1.0151 A (Diff: 132.0000 A)
+           Beta  Expected: 225.8305 A, Got: -2.8007 A (Diff: 228.6312 A)
+[FAIL #045] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3083, ib_raw=2973, offset=3115
+           Alpha Expected: 131.4844 A, Got: -0.5156 A (Diff: 132.0000 A)
+           Beta  Expected: 225.6910 A, Got: -2.9403 A (Diff: 228.6313 A)
+[FAIL #046] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3115, ib_raw=2954, offset=3115
+           Alpha Expected: 0.0000 A, Got: 0.0000 A (Diff: 0.0000 A)
+           Beta  Expected: 149.4249 A, Got: -2.9961 A (Diff: 152.4210 A)
+[FAIL #047] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3147, ib_raw=2941, offset=3115
+           Alpha Expected: 0.5156 A, Got: 0.5156 A (Diff: 0.0000 A)
+           Beta  Expected: 149.4807 A, Got: -2.9403 A (Diff: 152.4210 A)
+[FAIL #048] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3178, ib_raw=2932, offset=3115
+           Alpha Expected: 1.0151 A, Got: 1.0151 A (Diff: 0.0000 A)
+           Beta  Expected: 149.6017 A, Got: -2.8193 A (Diff: 152.4210 A)
+[FAIL #049] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3208, ib_raw=2929, offset=3115
+           Alpha Expected: 1.4985 A, Got: 1.4985 A (Diff: 0.0000 A)
+           Beta  Expected: 149.8249 A, Got: -2.5960 A (Diff: 152.4210 A)
+[FAIL #050] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3234, ib_raw=2932, offset=3115
+           Alpha Expected: 1.9175 A, Got: 1.9175 A (Diff: 0.0000 A)
+           Beta  Expected: 150.1226 A, Got: -2.2983 A (Diff: 152.4209 A)
+[FAIL #051] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3257, ib_raw=2941, offset=3115
+           Alpha Expected: 2.2881 A, Got: 2.2881 A (Diff: 0.0000 A)
+           Beta  Expected: 150.5041 A, Got: -1.9168 A (Diff: 152.4208 A)
+[FAIL #052] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3276, ib_raw=2954, offset=3115
+           Alpha Expected: 2.5942 A, Got: 2.5942 A (Diff: 0.0000 A)
+           Beta  Expected: 150.9227 A, Got: -1.4981 A (Diff: 152.4208 A)
+[FAIL #053] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3289, ib_raw=2973, offset=3115
+           Alpha Expected: 2.8037 A, Got: 2.8037 A (Diff: 0.0000 A)
+           Beta  Expected: 151.3971 A, Got: -1.0235 A (Diff: 152.4207 A)
+[FAIL #054] ARITHMETIC ERROR! (on (10 deg step))
+           Inputs: ia_raw=3298, ib_raw=2996, offset=3115
+           Alpha Expected: 2.9487 A, Got: 2.9487 A (Diff: 0.0000 A)
+           Beta  Expected: 151.9088 A, Got: -0.5118 A (Diff: 152.4206 A)
+
+--- PHASE 4: Dynamic Offset Modulation & Mid-Conversion Hazard Tests ---
+-> Test 4A: Tracking dynamic thermal drift across consecutive samples
+[FAIL #055] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3224, ib_raw=3038, offset=3100
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #056] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3227, ib_raw=3041, offset=3103
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #057] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3230, ib_raw=3044, offset=3106
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #058] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3233, ib_raw=3047, offset=3109
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #059] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3236, ib_raw=3050, offset=3112
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #060] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3239, ib_raw=3053, offset=3115
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #061] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3242, ib_raw=3056, offset=3118
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #062] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3245, ib_raw=3059, offset=3121
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #063] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3248, ib_raw=3062, offset=3124
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+[FAIL #064] ARITHMETIC ERROR! (l Drift Tracking)
+           Inputs: ia_raw=3251, ib_raw=3065, offset=3127
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+-> Test 4B: Mid-Conversion Offset Glitch Immunity Test
+[7825000] Injecting severe offset glitch during mid-pipeline (3115 -> 2048)...
+[PASS #065] Mid-conversion offset glitch safely rejected! Output:  1.998 A (Registered at Step 0).
+
+--- PHASE 5: Consecutive Zero-Slack Back-to-Back Conversions ---
+[PASS] Completed 8 zero-slack consecutive conversions with zero throughput penalty.
+
+--- PHASE 6: Mid-Computation Asynchronous Reset Recovery ---
+[8835000] Asserting rst_n LOW during Step 4...
+[PASS #074] Asynchronous reset cleanly cleared pipeline.
+[FAIL #075] ARITHMETIC ERROR! (n Sample (+2.0A))
+           Inputs: ia_raw=3239, ib_raw=3053, offset=3115
+           Alpha Expected: 1.9980 A, Got: 1.9980 A (Diff: 0.0000 A)
+           Beta  Expected: 152.4205 A, Got: 0.0000 A (Diff: 152.4205 A)
+
+===================================================================
+             CLARKE TRANSFORM TESTBENCH EXECUTION SUMMARY          
+===================================================================
+ Total Conversion Tests Evaluated   : 75
+ Passed Tests                       : 25
+ Failed Tests                       : 50
+===================================================================
+ >>> TESTBENCH FAILED WITH 50 ARITHMETIC/TIMING ERRORS! <<< 
+
+$finish called at time : 9035 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_clarke_transform.v" Line 362
+exit
+INFO: [Common 17-206] Exiting xsim at Tue Sep 29 13:52:54 2026...

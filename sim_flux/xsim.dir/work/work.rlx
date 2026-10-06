@@ -1,0 +1,11 @@
+0.7
+2020.2
+Oct 13 2023
+20:47:58
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/cordic_sincos.v,1790969055,verilog,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer_exact.v,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,cordic_sincos,,,../mpc_3_phase_im.srcs/sources_1/imports/rtl,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer.v,1790956900,verilog,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer_2nd_order.v,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,flux_observer,,,../mpc_3_phase_im.srcs/sources_1/imports/rtl,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer_2nd_order.v,1790967894,verilog,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux/tb_flux_observer_comparison.v,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,flux_observer_2nd_order,,,../mpc_3_phase_im.srcs/sources_1/imports/rtl,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer_exact.v,1790970973,verilog,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux/tb_flux_observer_3way_comparison.v,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,flux_observer_exact,,,../mpc_3_phase_im.srcs/sources_1/imports/rtl,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,1790955839,verilog,,,,,,,,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux/tb_flux_observer_3way_comparison.v,1790969773,verilog,,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,tb_flux_observer_3way_comparison,,,../mpc_3_phase_im.srcs/sources_1/imports/rtl,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux/tb_flux_observer_comparison.v,1790968151,verilog,,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,tb_flux_observer_comparison,,,../mpc_3_phase_im.srcs/sources_1/imports/rtl,,,,,

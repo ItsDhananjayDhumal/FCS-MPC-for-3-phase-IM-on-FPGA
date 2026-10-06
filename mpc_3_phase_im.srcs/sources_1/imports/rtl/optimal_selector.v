@@ -20,7 +20,7 @@ module optimal_selector #(
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            min_cost         <= {1'b0, {(DATA_WIDTH-1){1'b1}}}; 
+            min_cost         <= {1'b0, {(DATA_WIDTH-1){1'b1}}};  // INT32_MAX
             opt_switch_state <= 3'b000;
             eval_count       <= 4'd0;
             done             <= 1'b0;
@@ -29,12 +29,13 @@ module optimal_selector #(
 
             if (reset_search) begin
                 
-                min_cost         <= {1'b0, {(DATA_WIDTH-1){1'b1}}}; 
+                min_cost         <= {1'b0, {(DATA_WIDTH-1){1'b1}}};  // INT32_MAX
                 opt_switch_state <= 3'b000;
                 eval_count       <= 4'd0;
             end else if (cost_valid) begin
-                
-                if (cost < min_cost) begin
+                // Reject negative costs (overflow indicator) and use <=
+                // to break ties in favor of later (active) vectors
+                if (cost >= 0 && cost <= min_cost) begin
                     min_cost         <= cost;
                     opt_switch_state <= switch_state;
                 end

@@ -1,0 +1,108 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Sep 29 20:16:24 2026
+# Process ID: 3332
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_encoder
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_encoder_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_encoder/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_encoder\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_encoder_snap/xsim_script.tcl
+# xsim {tb_encoder_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===================================================================
+       RIGOROUS VERIFICATION TESTBENCH: encoder_reader.v           
+===================================================================
+
+--- PHASE 1: Reset & Standstill State ---
+[PASS #001] Initial reset state clean: position = 0, speed = 0.0 rad/s
+
+--- PHASE 2: Single-Step Quadrature Edge & Direction Logic ---
+[PASS #002] Forward 4 edges correctly advanced position by +4 (now 4)
+[PASS #003] Reverse 4 edges correctly decremented position by -4 (now 0)
+-> Testing illegal simultaneous edge transition rejection (00 -> 11)
+[PASS #004] Illegal transition rejected cleanly! Position remained 0
+-> Testing Z-index position reset immunity (ENCODER_Z_RESET = 0)
+[PASS #005] Z-index pulse did not reset position! (Position = 0 preserved)
+
+--- PHASE 3: Integer Multiples of 60 RPM (Constant Velocity) ---
+[FAIL #006] SPEED OUT OF TOLERANCE! (60.0 RPM (1 count/sample))
+           Target   :   60.00 RPM (  12.57 rad/s)
+           Measured :   57.46 RPM (  12.03 rad/s)
+           Error    :    2.54 RPM (Allowed Tol:  1.50 RPM)
+[FAIL #007] SPEED OUT OF TOLERANCE! (0.0 RPM (2 counts/sample))
+           Target   :  120.00 RPM (  25.13 rad/s)
+           Measured :  111.36 RPM (  23.32 rad/s)
+           Error    :    8.64 RPM (Allowed Tol:  1.50 RPM)
+[FAIL #008] SPEED OUT OF TOLERANCE! (0.0 RPM (5 counts/sample))
+           Target   :  300.00 RPM (  62.83 rad/s)
+           Measured :  268.55 RPM (  56.24 rad/s)
+           Error    :   31.45 RPM (Allowed Tol:  2.00 RPM)
+[FAIL #009] SPEED OUT OF TOLERANCE! (hronous Speed +1500.0 RPM)
+           Target   : 1500.00 RPM ( 314.16 rad/s)
+           Measured : 1328.11 RPM ( 278.16 rad/s)
+           Error    :  171.89 RPM (Allowed Tol:  3.00 RPM)
+
+--- PHASE 4: Sub-Quantum Fractional Speeds & IIR Averaging ---
+[FAIL #010] SPEED OUT OF TOLERANCE! (M (0.5 cnt/sample dither))
+           Target   :   30.00 RPM (   6.28 rad/s)
+           Measured :   48.78 RPM (  10.22 rad/s)
+           Error    :   18.78 RPM (Allowed Tol:  1.50 RPM)
+[PASS #011] Target:   45.00 RPM | Measured:   44.29 RPM (   9.28 rad/s) | Err:  0.71 RPM |  (0.75 cnt/sample dither)
+[FAIL #012] SPEED OUT OF TOLERANCE! (or Rated Load +1420.0 RPM)
+           Target   : 1420.00 RPM ( 297.40 rad/s)
+           Measured : 1257.80 RPM ( 263.43 rad/s)
+           Error    :  162.20 RPM (Allowed Tol:  3.00 RPM)
+[FAIL #013] SPEED OUT OF TOLERANCE! (5.0 RPM (0.25 cnt/sample))
+           Target   :   15.00 RPM (   3.14 rad/s)
+           Measured :   19.88 RPM (   4.16 rad/s)
+           Error    :    4.88 RPM (Allowed Tol:  2.00 RPM)
+
+--- PHASE 5: Reverse Speeds & Sudden Direction Inversion ---
+[FAIL #014] SPEED OUT OF TOLERANCE! (0.0 RPM (-1 count/sample))
+           Target   :  -60.00 RPM ( -12.57 rad/s)
+           Measured :  -58.05 RPM ( -12.16 rad/s)
+           Error    :    1.95 RPM (Allowed Tol:  1.50 RPM)
+[FAIL #015] SPEED OUT OF TOLERANCE! (se Full Speed -1500.0 RPM)
+           Target   : -1500.00 RPM (-314.16 rad/s)
+           Measured : -1323.37 RPM (-277.16 rad/s)
+           Error    :  176.63 RPM (Allowed Tol:  3.00 RPM)
+-> Testing high-speed dynamic reversal (+1200 RPM -> -1200 RPM)
+[FAIL #016] SPEED OUT OF TOLERANCE! (eversal forward +1200 RPM)
+           Target   : 1200.00 RPM ( 251.33 rad/s)
+           Measured :  989.48 RPM ( 207.24 rad/s)
+           Error    :  210.52 RPM (Allowed Tol:  3.00 RPM)
+[FAIL #017] SPEED OUT OF TOLERANCE! (eversal reverse -1200 RPM)
+           Target   : -1200.00 RPM (-251.33 rad/s)
+           Measured : -1056.79 RPM (-221.33 rad/s)
+           Error    :  143.21 RPM (Allowed Tol:  3.00 RPM)
+
+--- PHASE 6: Synchronizer High-Frequency Noise Glitch Immunity ---
+-> Injecting single-cycle 10ns noise glitches on enc_a and enc_b...
+[PASS #018] 10ns asynchronous noise glitch safely rejected by synchronizer!
+
+--- PHASE 7: Mid-Operation Asynchronous Reset Recovery ---
+[45700355000] Asserting rst_n LOW while motor is spinning...
+[PASS #019] Asynchronous reset instantly cleared all speed & position registers.
+[FAIL #020] SPEED OUT OF TOLERANCE! (Speed Recovery (+300 RPM))
+           Target   :  300.00 RPM (  62.83 rad/s)
+           Measured :  268.94 RPM (  56.33 rad/s)
+           Error    :   31.06 RPM (Allowed Tol:  2.00 RPM)
+
+===================================================================
+             ENCODER READER TESTBENCH EXECUTION SUMMARY            
+===================================================================
+ Total Verification Tests Evaluated : 20
+ Passed Tests                       : 8
+ Failed Tests                       : 12
+===================================================================
+ >>> TESTBENCH FAILED WITH 12 ARITHMETIC/TIMING ERRORS! <<< 
+
+$finish called at time : 49300455 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_encoder_reader.v" Line 422
+exit
+INFO: [Common 17-206] Exiting xsim at Tue Sep 29 20:16:30 2026...

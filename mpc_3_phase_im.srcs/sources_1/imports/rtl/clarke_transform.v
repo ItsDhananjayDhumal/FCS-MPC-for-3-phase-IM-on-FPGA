@@ -11,6 +11,7 @@ module clarke_transform #(
     input  wire start,
     input  wire [ADC_BITS-1:0] ia_raw,
     input  wire [ADC_BITS-1:0] ib_raw,
+    input  wire signed [12:0]  adc_offset,  // Dynamic offset from auto-tare calibration
     output reg  signed [DATA_WIDTH-1:0] i_alpha,
     output reg  signed [DATA_WIDTH-1:0] i_beta,
     output reg  done
@@ -18,13 +19,13 @@ module clarke_transform #(
 
     
     
-    localparam signed [DATA_WIDTH-1:0] INV_SQRT3 = 32'sd605510; 
+    localparam signed [DATA_WIDTH-1:0] INV_SQRT3 = `INV_SQRT3; 
 
     `ifndef ADC_OFFSET
         `define ADC_OFFSET 2048
     `endif
     `ifndef ADC_SCALE
-        `define ADC_SCALE 32'sd10485 
+        `define ADC_SCALE 32'sd16896 
     `endif
     
     reg [3:0] step;
@@ -61,15 +62,15 @@ module clarke_transform #(
             case (step)
                 0: begin
                     if (start) begin
-                        
-                        ia_signed <= $signed({1'b0, ia_raw}) - $signed(`ADC_OFFSET);
-                        ib_signed <= $signed({1'b0, ib_raw}) - $signed(`ADC_OFFSET);
+                        // Use dynamic offset from auto-tare calibration
+                        ia_signed <= $signed({1'b0, ia_raw}) - adc_offset;
+                        ib_signed <= $signed({1'b0, ib_raw}) - adc_offset;
                         step <= 1;
                     end
                 end
                 1: begin
-                    
-                    mul_a <= ia_signed;
+                    // Convert integer count to Q12.20 before Q12.20 multiply
+                    mul_a <= ia_signed <<< FRAC_BITS;
                     mul_b <= `ADC_SCALE;
                     step <= 2;
                 end
@@ -79,8 +80,8 @@ module clarke_transform #(
                 end
                 3: begin
                     ia <= mul_result; 
-                    
-                    mul_a <= ib_signed;
+                    // Convert integer count to Q12.20 before Q12.20 multiply
+                    mul_a <= ib_signed <<< FRAC_BITS;
                     mul_b <= `ADC_SCALE;
                     step <= 4;
                 end

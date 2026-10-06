@@ -1,0 +1,79 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Sep 29 20:18:35 2026
+# Process ID: 19232
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_encoder
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_encoder_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_encoder/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_encoder\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_encoder_snap/xsim_script.tcl
+# xsim {tb_encoder_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===================================================================
+       RIGOROUS VERIFICATION TESTBENCH: encoder_reader.v           
+===================================================================
+
+--- PHASE 1: Reset & Standstill State ---
+[PASS #001] Initial reset state clean: position = 0, speed = 0.0 rad/s
+
+--- PHASE 2: Single-Step Quadrature Edge & Direction Logic ---
+[PASS #002] Forward 4 edges correctly advanced position by +4 (now 4)
+[PASS #003] Reverse 4 edges correctly decremented position by -4 (now 0)
+-> Testing illegal simultaneous edge transition rejection (00 -> 11)
+[PASS #004] Illegal transition rejected cleanly! Position remained 0
+-> Testing Z-index position reset immunity (ENCODER_Z_RESET = 0)
+[PASS #005] Z-index pulse did not reset position! (Position = 0 preserved)
+
+--- PHASE 3: Integer Multiples of 60 RPM (Constant Velocity) ---
+[PASS #006] Target:   60.00 RPM | Measured:   59.88 RPM (  12.54 rad/s) | Err:  0.12 RPM | 60.0 RPM (1 count/sample)
+[PASS #007] Target:  120.00 RPM | Measured:  119.89 RPM (  25.11 rad/s) | Err:  0.11 RPM | 0.0 RPM (2 counts/sample)
+[PASS #008] Target:  300.00 RPM | Measured:  299.68 RPM (  62.76 rad/s) | Err:  0.32 RPM | 0.0 RPM (5 counts/sample)
+[PASS #009] Target: 1500.00 RPM | Measured: 1498.73 RPM ( 313.89 rad/s) | Err:  1.27 RPM | hronous Speed +1500.0 RPM
+
+--- PHASE 4: Sub-Quantum Fractional Speeds & IIR Averaging ---
+[FAIL #010] SPEED OUT OF TOLERANCE! (M (0.5 cnt/sample dither))
+           Target   :   30.00 RPM (   6.28 rad/s)
+           Measured :   33.14 RPM (   6.94 rad/s)
+           Error    :    3.14 RPM (Allowed Tol:  1.50 RPM)
+[PASS #011] Target:   45.00 RPM | Measured:   44.28 RPM (   9.27 rad/s) | Err:  0.72 RPM |  (0.75 cnt/sample dither)
+[PASS #012] Target: 1420.00 RPM | Measured: 1420.60 RPM ( 297.53 rad/s) | Err:  0.60 RPM | or Rated Load +1420.0 RPM
+[PASS #013] Target:   15.00 RPM | Measured:   16.58 RPM (   3.47 rad/s) | Err:  1.58 RPM | 5.0 RPM (0.25 cnt/sample)
+
+--- PHASE 5: Reverse Speeds & Sudden Direction Inversion ---
+[PASS #014] Target:  -60.00 RPM | Measured:  -59.85 RPM ( -12.54 rad/s) | Err:  0.15 RPM | 0.0 RPM (-1 count/sample)
+[PASS #015] Target: -1500.00 RPM | Measured: -1498.47 RPM (-313.84 rad/s) | Err:  1.53 RPM | se Full Speed -1500.0 RPM
+-> Testing high-speed dynamic reversal (+1200 RPM -> -1200 RPM)
+[FAIL #016] SPEED OUT OF TOLERANCE! (eversal forward +1200 RPM)
+           Target   : 1200.00 RPM ( 251.33 rad/s)
+           Measured : 1195.13 RPM ( 250.31 rad/s)
+           Error    :    4.87 RPM (Allowed Tol:  3.00 RPM)
+[PASS #017] Target: -1200.00 RPM | Measured: -1198.49 RPM (-251.01 rad/s) | Err:  1.51 RPM | eversal reverse -1200 RPM
+
+--- PHASE 6: Synchronizer High-Frequency Noise Glitch Immunity ---
+-> Injecting single-cycle 10ns noise glitches on enc_a and enc_b...
+[PASS #018] 10ns asynchronous noise glitch safely rejected by synchronizer!
+
+--- PHASE 7: Mid-Operation Asynchronous Reset Recovery ---
+[76550905000] Asserting rst_n LOW while motor is spinning...
+[PASS #019] Asynchronous reset instantly cleared all speed & position registers.
+[PASS #020] Target:  300.00 RPM | Measured:  299.44 RPM (  62.71 rad/s) | Err:  0.56 RPM | Speed Recovery (+300 RPM)
+
+===================================================================
+             ENCODER READER TESTBENCH EXECUTION SUMMARY            
+===================================================================
+ Total Verification Tests Evaluated : 20
+ Passed Tests                       : 18
+ Failed Tests                       : 2
+===================================================================
+ >>> TESTBENCH FAILED WITH 2 ARITHMETIC/TIMING ERRORS! <<< 
+
+$finish called at time : 82551005 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_encoder_reader.v" Line 403
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:07 . Memory (MB): peak = 207.680 ; gain = 0.000
+exit
+INFO: [Common 17-206] Exiting xsim at Tue Sep 29 20:18:45 2026...

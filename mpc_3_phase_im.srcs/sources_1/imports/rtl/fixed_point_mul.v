@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+`include "mpc_params.vh"
 
 module fixed_point_mul #(
     parameter DATA_WIDTH = `DATA_WIDTH,

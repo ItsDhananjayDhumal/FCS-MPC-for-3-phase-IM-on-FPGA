@@ -1,0 +1,58 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sat Oct  3 00:55:27 2026
+# Process ID: 31404
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_3way_sim/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_3way_sim/xsim_script.tcl
+# xsim {tb_3way_sim} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+================================================================================
+  3-WAY OBSERVER COMPARISON: 1st-ORDER vs 2nd-ORDER TAYLOR vs EXACT MATRIX EXP
+================================================================================
+
+--- TEST CASE 1: Standstill Magnetization (wr = 0 rad/s, Is = 4.73 A) ---
+Standstill (t = 0.6s):
+  1st-Order Euler: 0.9154 Wb
+  2nd-Order Euler: 0.9154 Wb
+  Exact MatrixExp: 0.9168 Wb
+  Nominal Lm*Is:   0.9600 Wb
+
+--- TEST CASE 2: Rated Speed (wr = 157.08 rad/s, fe = 50 Hz, Is = 4.73 A) ---
+Rated Speed (t = 1.2s, wr = 157.08 rad/s):
+  1st-Order Euler: 1.2278 Wb (Error: 0.2f%)27.8973
+  2nd-Order Euler: 0.9581 Wb (Error: 0.2f%)-0.193237
+  Exact MatrixExp: 0.9584 Wb (Error: 0.2f%)-0.162858
+
+--- TEST CASE 3: High Speed (wr = 250.0 rad/s = 2387 RPM, Is = 4.73 A) ---
+High Speed (t = 1.8s, wr = 250.0 rad/s):
+  1st-Order Euler: 2.0709 Wb (Error: 0.2f%)115.724
+  2nd-Order Euler: 0.9576 Wb (Error: 0.2f%)-0.253108
+  Exact MatrixExp: 0.9602 Wb (Error: 0.2f%)0.0253858
+
+--- TEST CASE 4: Beyond Stability Limit (wr = 350.0 rad/s > 321.5 rad/s) ---
+Beyond Limit (t = 2.3s, wr = 350.0 rad/s):
+  1st-Order Euler: 2.2731 Wb (Divergent/Saturated)
+  2nd-Order Euler: 0.9547 Wb (Error: 0.2f%)-0.553488
+  Exact MatrixExp: 0.9574 Wb (Error: 0.2f%)-0.268795
+
+--- TEST CASE 5: Reverse Rated Speed (wr = -157.08 rad/s, Is = 4.73 A) ---
+Reverse Speed (t = 2.9s, wr = -157.08 rad/s):
+  1st-Order Euler: 1.1576 Wb (Error: 0.2f%)20.5868
+  2nd-Order Euler: 0.9603 Wb (Error: 0.2f%)0.0338632
+  Exact MatrixExp: 0.9674 Wb (Error: 0.2f%)0.770222
+
+================================================================================
+  3-WAY COMPARISON TESTBENCH COMPLETED SUCCESSFULLY!
+================================================================================
+$finish called at time : 11890195 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_flux/tb_flux_observer_3way_comparison.v" Line 218
+exit
+INFO: [Common 17-206] Exiting xsim at Sat Oct  3 00:55:32 2026...

@@ -57,6 +57,7 @@ module adc_pmod_ad1 #(
     reg [15:0] shift_ch0, shift_ch1;
     reg [4:0] bit_cnt;
     reg [2:0] quiet_cnt;
+    reg       start_pending;
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -70,37 +71,58 @@ module adc_pmod_ad1 #(
             quiet_cnt <= 3'd0;
             shift_ch0 <= 16'd0;
             shift_ch1 <= 16'd0;
+            start_pending <= 1'b0;
         end else begin
             done <= 1'b0;
             case (state)
                 IDLE: begin
-                    if (start) begin
+                    if (start || start_pending) begin
                         state <= RUN;
                         adc_cs_n <= 1'b0;
                         sclk_en <= 1'b1;
                         bit_cnt <= 5'd0;
+                        start_pending <= 1'b0;
                     end
                 end
                 RUN: begin
-                    if (sclk_rise) begin
+                    if (sclk_fall) begin
+                        // Sample data bit on SCLK falling edge after access delay
                         shift_ch0 <= {shift_ch0[14:0], d0_in};
                         shift_ch1 <= {shift_ch1[14:0], d1_in};
-                    end else if (sclk_fall) begin
-                        bit_cnt <= bit_cnt + 5'd1;
+                        bit_cnt   <= bit_cnt + 5'd1;
                         if (bit_cnt == 5'd15) begin
-                            state <= QUIET;
-                            adc_cs_n <= 1'b1;
+                            // Stop clock divider while SCLK is low after 16th bit
                             sclk_en <= 1'b0;
-                            data_ch0 <= shift_ch0[11:0];
-                            data_ch1 <= shift_ch1[11:0];
-                            done <= 1'b1;
-                            quiet_cnt <= 3'd0;
                         end
+                    end else if (bit_cnt == 5'd16) begin
+                        // Exactly 1 clock cycle after 16th sclk_fall:
+                        // shift_ch0 and shift_ch1 hold all 16 bits cleanly
+                        state     <= QUIET;
+                        adc_cs_n  <= 1'b1;
+                        data_ch0  <= shift_ch0[11:0];
+                        data_ch1  <= shift_ch1[11:0];
+                        done      <= 1'b1;
+                        quiet_cnt <= 3'd0;
                     end
                 end
                 QUIET: begin
+                    // Queue start request if it arrives during the 40ns quiet period
+                    if (start) begin
+                        start_pending <= 1'b1;
+                    end
+
+                    // Satisfy full 40ns t_QUIET (4 clock cycles) before leaving
                     if (quiet_cnt == 3'd4) begin
-                        state <= IDLE;
+                        if (start || start_pending) begin
+                            // Immediately service pending conversion after quiet time is satisfied
+                            state <= RUN;
+                            adc_cs_n <= 1'b0;
+                            sclk_en <= 1'b1;
+                            bit_cnt <= 5'd0;
+                            start_pending <= 1'b0;
+                        end else begin
+                            state <= IDLE;
+                        end
                     end else begin
                         quiet_cnt <= quiet_cnt + 3'd1;
                     end

@@ -1,0 +1,29 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri Oct  2 21:13:29 2026
+# Process ID: 7820
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im
+# Command line: xsim.exe -mode tcl -source {xsim.dir/snap_override_test/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/snap_override_test/xsim_script.tcl
+# xsim {snap_override_test} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+================================================================================
+TEST: CHANGED MOTOR PARAMETERS (Rr=2x, 460V, 60Hz)
+================================================================================
+flux_observer.E21      = 110 (NEW value, was 110)
+flux_observer.E22      = 1048034 (NEW value, was 1048034)
+cost_evaluator.PSI_REF_SQ = 966367 (NEW value, was 966367)
+
+FAILURE: Constants did not update!
+================================================================================
+$finish called at time : 0 fs : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/tb_dynamic_override_test.v" Line 131
+exit
+INFO: [Common 17-206] Exiting xsim at Fri Oct  2 21:13:31 2026...

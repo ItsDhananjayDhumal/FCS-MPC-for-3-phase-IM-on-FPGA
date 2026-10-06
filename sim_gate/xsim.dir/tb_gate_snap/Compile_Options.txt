@@ -1,0 +1,1 @@
+-top "tb_gate_driver" -snapshot "tb_gate_snap" -timescale "1ns/1ps" 

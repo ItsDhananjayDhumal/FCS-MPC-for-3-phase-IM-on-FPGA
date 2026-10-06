@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+`include "mpc_params.vh"
 
 module voltage_lut #(
     parameter DATA_WIDTH = `DATA_WIDTH
@@ -12,13 +13,6 @@ module voltage_lut #(
     output reg  [2:0]                         switch_state 
 );
 
-    
-
-    
-
-    
-
-    
 
     always @(*) begin
         case (vec_idx)

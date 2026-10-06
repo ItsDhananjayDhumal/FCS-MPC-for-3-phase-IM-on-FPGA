@@ -5,6 +5,9 @@
 module encoder_reader #(
     parameter DATA_WIDTH = `DATA_WIDTH,
     parameter FRAC_BITS = `FRAC_BITS
+    // parameter ENCODER_CPR = `ENCODER_CPR,
+    // parameter POLE_PAIRS = `POLE_PAIRS,
+    // parameter SWITCHING_FREQ = `SWITCHING_FREQ
 ) (
     input  wire clk,
     input  wire rst_n,
@@ -13,9 +16,11 @@ module encoder_reader #(
     input  wire enc_z,
     input  wire sample_tick,
     output reg  signed [31:0] position,
-    output reg  signed [`DATA_WIDTH-1:0] speed_elec,
+    output reg  signed [DATA_WIDTH-1:0] speed_elec,
     output reg  speed_valid
 );
+
+    parameter SPEED_SCALE = `SPEED_SCALE;
 
     reg [2:0] a_sync, b_sync, z_sync;
     always @(posedge clk or negedge rst_n) begin
@@ -52,7 +57,7 @@ module encoder_reader #(
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             position <= 32'sd0;
-        end else if (z_rise && `ENCODER_Z_RESET) begin
+        end else if (1'b0) begin  // Z-index reset disabled for speed estimation
             position <= 32'sd0;
         end else if (move == 2'd1) begin
             position <= position + 32'sd1;
@@ -62,17 +67,17 @@ module encoder_reader #(
     end
 
     reg signed [31:0] prev_position;
-    reg signed [`DATA_WIDTH-1:0] speed_elec_prev;
+    reg signed [DATA_WIDTH-1:0] speed_elec_prev;
     reg [2:0] calc_state;
 
     reg signed [31:0] delta_reg;
-    reg signed [2*`DATA_WIDTH-1:0] raw_mult_reg;
-    reg signed [2*`DATA_WIDTH-1:0] filt_term1_reg;
-    reg signed [2*`DATA_WIDTH-1:0] filt_term2_reg;
+    reg signed [2*DATA_WIDTH-1:0] raw_mult_reg;
+    reg signed [2*DATA_WIDTH-1:0] filt_term1_reg;
+    reg signed [2*DATA_WIDTH-1:0] filt_term2_reg;
 
-    wire signed [`DATA_WIDTH-1:0] speed_raw = raw_mult_reg[`DATA_WIDTH+`FRAC_BITS-1 : `FRAC_BITS];
-    wire signed [`DATA_WIDTH-1:0] t1_trunc = filt_term1_reg[`DATA_WIDTH+`FRAC_BITS-1 : `FRAC_BITS];
-    wire signed [`DATA_WIDTH-1:0] t2_trunc = filt_term2_reg[`DATA_WIDTH+`FRAC_BITS-1 : `FRAC_BITS];
+    wire signed [DATA_WIDTH-1:0] speed_raw = raw_mult_reg[DATA_WIDTH-1 : 0];
+    wire signed [DATA_WIDTH-1:0] t1_trunc = filt_term1_reg[DATA_WIDTH+FRAC_BITS-1 : FRAC_BITS];
+    wire signed [DATA_WIDTH-1:0] t2_trunc = filt_term2_reg[DATA_WIDTH+FRAC_BITS-1 : FRAC_BITS];
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -97,7 +102,7 @@ module encoder_reader #(
                 end
                 3'd1: begin
                     
-                    raw_mult_reg <= delta_reg[`DATA_WIDTH-1:0] * `SPEED_SCALE;
+                    raw_mult_reg <= delta_reg * SPEED_SCALE;
                     calc_state <= 3'd2;
                 end
                 3'd2: begin

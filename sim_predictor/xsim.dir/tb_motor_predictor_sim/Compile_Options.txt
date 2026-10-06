@@ -1,0 +1,1 @@
+-debug "typical" "work.tb_motor_predictor" -s "tb_motor_predictor_sim" 

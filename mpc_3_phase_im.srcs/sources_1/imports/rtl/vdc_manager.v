@@ -15,17 +15,18 @@ module vdc_manager #(
     output reg  vdc_valid
 );
 
-    localparam signed [DATA_WIDTH-1:0] TWO_THIRDS = 32'sd699051;
-    localparam signed [DATA_WIDTH-1:0] ONE_THIRD  = 32'sd349525;
-    localparam signed [DATA_WIDTH-1:0] INV_SQRT3  = 32'sd605510;
-    localparam VDC_DEFAULT_INT = 311;
+    localparam signed [DATA_WIDTH-1:0] TWO_THIRDS = `TWO_THIRDS;
+    localparam signed [DATA_WIDTH-1:0] ONE_THIRD  = `ONE_THIRD;
+    localparam signed [DATA_WIDTH-1:0] INV_SQRT3  = `INV_SQRT3;
+    localparam VDC_DEFAULT_INT = `VDC_DEFAULT_INT;
 
     reg [7:0] sw_sync_1, sw_sync_2;
     reg [7:0] sw_stable;
     reg [19:0] debounce_cnt;
     reg startup_done;
+    reg sw_valid;
 
-    wire [15:0] vdc_integer = sw_stable[7:4] * 16'd25 + sw_stable[3:0] * 16'd2;
+    wire [15:0] vdc_integer = sw_stable[7:4] * 16'd40 + sw_stable[3:0] * 16'd3;
     reg [15:0] vdc_int_reg;
 
     reg signed [DATA_WIDTH-1:0] mul_a, mul_b;
@@ -44,6 +45,7 @@ module vdc_manager #(
             sw_sync_2 <= 0;
             sw_stable <= 8'h00; 
             startup_done <= 1'b0;
+            sw_valid <= 1'b0;
             debounce_cnt <= 0;
             
             vdc_int_reg <= VDC_DEFAULT_INT;
@@ -71,6 +73,7 @@ module vdc_manager #(
                     debounce_cnt <= debounce_cnt - 1;
                     if (debounce_cnt == 1) begin
                         sw_stable <= sw_sync_2;
+                        sw_valid <= 1'b1;
                     end
                 end
             end else begin
@@ -79,18 +82,16 @@ module vdc_manager #(
 
             case (step)
                 0: begin
-                    
-                    if ((vdc_integer != vdc_int_reg) || (!startup_done)) begin
-                        
-                        if (!startup_done) begin
-                             
-                             vdc_int_reg <= VDC_DEFAULT_INT;
-                             vdc_q <= (VDC_DEFAULT_INT << FRAC_BITS);
-                             startup_done <= 1'b1; 
-                        end else begin
-                             vdc_int_reg <= vdc_integer;
-                             vdc_q <= (vdc_integer << FRAC_BITS);
-                        end
+                    if (!startup_done) begin
+                        // First pass: use default Vdc
+                        vdc_int_reg <= VDC_DEFAULT_INT;
+                        vdc_q <= (VDC_DEFAULT_INT << FRAC_BITS);
+                        startup_done <= 1'b1;
+                        step <= 1;
+                    end else if (sw_valid && (vdc_integer != vdc_int_reg)) begin
+                        // Only update after debounce has completed at least once
+                        vdc_int_reg <= vdc_integer;
+                        vdc_q <= (vdc_integer << FRAC_BITS);
                         step <= 1;
                     end
                 end

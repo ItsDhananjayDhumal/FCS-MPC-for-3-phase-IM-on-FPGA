@@ -1,0 +1,1 @@
+-top "tb_flux_observer" -snapshot "snap_flux_observer" -log "sim_flux/xelab.log" 

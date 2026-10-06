@@ -1,0 +1,161 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Wed Sep 30 09:03:11 2026
+# Process ID: 20172
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_mul_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_mul_snap/xsim_script.tcl
+# xsim {tb_mul_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===================================================================
+       RIGOROUS VERIFICATION TESTBENCH: fixed_point_mul.v          
+===================================================================
+
+--- PHASE 1: Cycle-Accurate Latency Verification ---
+[55000] T0: Applied inputs a=3.0, b=4.0
+[PASS #001] Latency check Cycle 1: result is still 0 (as expected for 2-cycle pipeline)
+[FAIL #002] Latency check Cycle 2 failed! got 0, expected 12582912
+
+--- PHASE 2: Fundamental Algebraic Properties ---
+[FAIL #003] MULTIPLICATION ERROR! (ltiplication by Zero)
+           Inputs   : a =  0.0000 (0), b =  5.0000 (5242880)
+           Expected : 0.000000
+           Got      : 12.000000 (result = 12582912)
+           Error    : 12.000000
+[PASS #004]   5.000 *   0.000 =   0.0000 | Got:   0.0000 | Err: 0.000000 | Zero Multiplicand
+[FAIL #005] MULTIPLICATION ERROR! (ity: 1.0 * 1.0 = 1.0)
+           Inputs   : a =  1.0000 (1048576), b =  1.0000 (1048576)
+           Expected : 1.000000
+           Got      : 0.000000 (result = 0)
+           Error    : 1.000000
+[FAIL #006] MULTIPLICATION ERROR! (dentity: 1.0 * X = X)
+           Inputs   : a =  1.0000 (1048576), b =  7.3500 (7707033)
+           Expected : 7.350000
+           Got      : 1.000000 (result = 1048576)
+           Error    : 6.350000
+[FAIL #007] MULTIPLICATION ERROR! (rsion: -1.0 * X = -X)
+           Inputs   : a = -1.0000 (-1048576), b =  4.2500 (4456448)
+           Expected : -4.250000
+           Got      : 7.349999 (result = 7707033)
+           Error    : 11.599999
+[FAIL #008] MULTIPLICATION ERROR! (: -1.0 * -1.0 = +1.0)
+           Inputs   : a = -1.0000 (-1048576), b = -1.0000 (-1048576)
+           Expected : 1.000000
+           Got      : -4.250000 (result = -4456448)
+           Error    : 5.250000
+
+--- PHASE 3: Four-Quadrant Signed Operations ---
+[FAIL #009] MULTIPLICATION ERROR! (+2.5 * +4.0 = +10.0))
+           Inputs   : a =  2.5000 (2621440), b =  4.0000 (4194304)
+           Expected : 10.000000
+           Got      : 1.000000 (result = 1048576)
+           Error    : 9.000000
+[FAIL #010] MULTIPLICATION ERROR! ((+3.5 * -2.0 = -7.0))
+           Inputs   : a =  3.5000 (3670016), b = -2.0000 (-2097152)
+           Expected : -7.000000
+           Got      : 10.000000 (result = 10485760)
+           Error    : 17.000000
+[FAIL #011] MULTIPLICATION ERROR! ((-4.5 * +2.0 = -9.0))
+           Inputs   : a = -4.5000 (-4718592), b =  2.0000 (2097152)
+           Expected : -9.000000
+           Got      : -7.000000 (result = -7340032)
+           Error    : 2.000000
+[FAIL #012] MULTIPLICATION ERROR! (-3.0 * -4.0 = +12.0))
+           Inputs   : a = -3.0000 (-3145728), b = -4.0000 (-4194304)
+           Expected : 12.000000
+           Got      : -9.000000 (result = -9437184)
+           Error    : 21.000000
+[FAIL #013] MULTIPLICATION ERROR! (re: 0.5 * 0.5 = 0.25)
+           Inputs   : a =  0.5000 (524288), b =  0.5000 (524288)
+           Expected : 0.250000
+           Got      : 12.000000 (result = 12582912)
+           Error    : 11.750000
+[FAIL #014] MULTIPLICATION ERROR! (-0.25 * 0.5 = -0.125)
+           Inputs   : a = -0.2500 (-262144), b =  0.5000 (524288)
+           Expected : -0.125000
+           Got      : 0.250000 (result = 262144)
+           Error    : 0.375000
+
+--- PHASE 4: Realistic Motor & FCS-MPC Signal Values ---
+[FAIL #015] MULTIPLICATION ERROR! (bserver: E22 * psi_r)
+           Inputs   : a =  0.9995 (1048030), b =  0.9600 (1006632)
+           Expected : 0.959501
+           Got      : -0.125000 (result = -131072)
+           Error    : 1.084501
+[FAIL #016] MULTIPLICATION ERROR! ( Term: TS_Q * wr_psi)
+           Inputs   : a =  0.0001 (104), b = 300.0000 (314572800)
+           Expected : 0.030000
+           Got      : 0.959498 (result = 1006107)
+           Error    : 0.929498
+[FAIL #017] MULTIPLICATION ERROR! (1/sqrt(3) * beta_sum)
+           Inputs   : a =  0.5774 (605395), b =  4.3300 (4540334)
+           Expected : 2.499926
+           Got      : 0.029755 (result = 31200)
+           Error    : 2.470171
+[FAIL #018] MULTIPLICATION ERROR! (Kt * flux_cross_curr)
+           Inputs   : a =  2.9130 (3054501), b =  3.3600 (3523215)
+           Expected : 9.787680
+           Got      : 2.499924 (result = 2621360)
+           Error    : 7.287756
+[FAIL #019] MULTIPLICATION ERROR! (Manager: Vdc * (2/3))
+           Inputs   : a = 311.0000 (326107136), b =  0.6667 (699051)
+           Expected : 207.333437
+           Got      : 9.787676 (result = 10263122)
+           Error    : 197.545761
+
+--- PHASE 5: Boundary Values & Small Signal Precision ---
+[FAIL #020] MULTIPLICATION ERROR! ( (Near Q12.20 limit))
+           Inputs   : a = 45.0000 (47185920), b = 45.0000 (47185920)
+           Expected : 2025.000000
+           Got      : 207.333432 (result = 217404861)
+           Error    : 1817.666568
+[FAIL #021] MULTIPLICATION ERROR! (5.0 * 45.0 = -2025.0)
+           Inputs   : a = -45.0000 (-47185920), b = 45.0000 (47185920)
+           Expected : -2025.000000
+           Got      : 2025.000000 (result = 2123366400)
+           Error    : 4050.000000
+[FAIL #022] MULTIPLICATION ERROR! (01 (1 LSB precision))
+           Inputs   : a =  0.0010 (1048), b =  0.0010 (1048)
+           Expected : 0.000001
+           Got      : -2025.000000 (result = -2123366400)
+           Error    : 2025.000001
+[FAIL #023] MULTIPLICATION ERROR! (ount: (1/1024) * 1.0)
+           Inputs   : a =  0.0010 (1023), b =  1.0000 (1048576)
+           Expected : 0.000977
+           Got      : 0.000001 (result = 1)
+           Error    : 0.000976
+
+--- PHASE 6: Pipelined Streaming Throughput (Back-to-Back Operations) ---
+-> Streaming 10 continuous multiplications with zero idle bubble cycles...
+[FAIL #024] Stream item 0 mismatch! exp=  0.600, got= 48.600
+[FAIL #025] Stream item 1 mismatch! exp=  2.400, got= 60.000
+[FAIL #026] Stream item 2 mismatch! exp=  5.400, got=  0.000
+[FAIL #027] Stream item 3 mismatch! exp=  9.600, got=  0.000
+[FAIL #028] Stream item 4 mismatch! exp= 15.000, got=  0.000
+[FAIL #029] Stream item 5 mismatch! exp= 21.600, got=  0.000
+[FAIL #030] Stream item 6 mismatch! exp= 29.400, got=  0.000
+[FAIL #031] Stream item 7 mismatch! exp= 38.400, got=  0.000
+[FAIL #032] Stream item 8 mismatch! exp= 48.600, got=  0.000
+[FAIL #033] Stream item 9 mismatch! exp= 60.000, got=  0.000
+[PASS] Successfully processed 10 continuous multiplications at 100 MSamples/sec throughput!
+
+===================================================================
+           FIXED POINT MULTIPLIER TESTBENCH EXECUTION SUMMARY      
+===================================================================
+ Total Verification Tests Evaluated : 33
+ Passed Tests                       : 2
+ Failed Tests                       : 31
+===================================================================
+ >>> TESTBENCH FAILED WITH 31 ARITHMETIC/TIMING ERRORS! <<< 
+
+$finish called at time : 925 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_fixed_point_mul.v" Line 261
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Sep 30 09:03:15 2026...

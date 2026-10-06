@@ -1,0 +1,1 @@
+-top "tb_adc_pmod_ad1" -snapshot "tb_adc_snap" 

@@ -1,0 +1,8 @@
+0.7
+2020.2
+Oct 13 2023
+20:47:58
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_vdc_manager.v,1790740913,verilog,,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,tb_vdc_manager,,,..\mpc_3_phase_im.srcs\sources_1\imports\rtl,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,1790692995,verilog,,,,,,,,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/vdc_manager.v,1790350163,verilog,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/voltage_lut.v,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_params.vh,vdc_manager,,,..\mpc_3_phase_im.srcs\sources_1\imports\rtl,,,,,
+C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/voltage_lut.v,1789565584,verilog,,C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_vdc_manager.v,,voltage_lut,,,..\mpc_3_phase_im.srcs\sources_1\imports\rtl,,,,,

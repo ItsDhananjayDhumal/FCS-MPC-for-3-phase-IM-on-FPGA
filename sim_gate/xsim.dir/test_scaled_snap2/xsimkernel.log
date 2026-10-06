@@ -1,0 +1,7 @@
+Running: xsim.dir/test_scaled_snap2/xsimk.exe -runall -simmode gui -wdb test_scaled_snap2.wdb -simrunnum 0 -socket 59019
+Design successfully loaded
+Design Loading Memory Usage: 10372 KB (Peak: 10372 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 10620 KB (Peak: 10620 KB)
+Simulation CPU Usage: 30 ms

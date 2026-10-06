@@ -1,0 +1,73 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Thu Oct  1 09:48:04 2026
+# Process ID: 29112
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_speed_pi
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_pi_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_speed_pi/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_speed_pi\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_pi_snap/xsim_script.tcl
+# xsim {tb_pi_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===================================================================
+   RIGOROUS CLOSED-LOOP MOTOR LOCK-IN TESTBENCH: speed_pi.v        
+   Configuration: Kp = 0.5 Nm/(rad/s), Ki = 0.01, Max Te = 20.0 Nm 
+   Simulates 2.2 kW Motor Inertia J=0.02 kg*m^2 & Shaft Dynamics   
+===================================================================
+
+--- PHASE 1: Asynchronous Reset Verification ---
+[PASS #001] Asynchronous reset active: te_ref = 0.000 Nm
+
+--- PHASE 2: Closed-Loop No-Load Acceleration & Lock-In (T_load = 0 Nm) ---
+Commanding speed_ref = +100.0 rad/s (477.5 RPM). Simulating closed-loop acceleration...
+[PASS #002] LOCKED IN: Speed= 100.06 rad/s (exp  100.00, err 0.056) | Torque=  0.188 Nm (exp   0.100, err 0.088) | No-Load: Speed locks into +100 rad/s, torque locks into friction (0.1 Nm)
+[PASS #003] LOCKED IN: Speed=  99.97 rad/s (exp  100.00, err 0.028) | Torque=  0.126 Nm (exp   0.100, err 0.026) | Stability Check: Speed and torque held locked without drift or oscillation
+
+--- PHASE 3: Closed-Loop Acceleration Under Load (T_load = 8.0 Nm) ---
+Commanding speed_ref = +60.0 rad/s (286.5 RPM) with 8.0 Nm continuous shaft load...
+[PASS #004] LOCKED IN: Speed=  60.05 rad/s (exp   60.00, err 0.047) | Torque=  8.093 Nm (exp   8.060, err 0.033) | Loaded: Speed locks into +60 rad/s, torque locks into 8.06 Nm load
+
+--- PHASE 4: Dynamic Step Load Disturbance & Recovery Lock-In ---
+Applying sudden shock load step from 8.0 Nm -> 14.0 Nm (+75% load step)...
+[PASS #005] LOCKED IN: Speed=  60.01 rad/s (exp   60.00, err 0.009) | Torque= 14.051 Nm (exp  14.060, err 0.009) | Shock Load Step: Re-locked speed to +60 rad/s, torque locked to 14.06 Nm
+
+--- PHASE 5: Overload Saturation Lock-In (T_load = 25.0 Nm > TE_MAX) ---
+Applying 25.0 Nm load (exceeding motor 20.0 Nm limit). Verifying torque locks into TE_MAX...
+[PASS #006] Overload Lock-In: Torque strictly locked into TE_MAX (+20.000 Nm = 20971520 counts)
+
+--- PHASE 6: Full 4-Quadrant Reverse Acceleration & Lock-In ---
+Commanding reverse speed_ref = -80.0 rad/s (-382 RPM) with reverse load -6.0 Nm...
+[PASS #007] LOCKED IN: Speed= -80.00 rad/s (exp  -80.00, err 0.004) | Torque= -6.071 Nm (exp  -6.080, err 0.009) | Reverse Operation: Speed locks into -80 rad/s, torque locks into -6.08 Nm
+
+--- PHASE 7: Standstill Zero-Speed Hold (Active Holding Brake) ---
+Commanding speed_ref = 0.0 rad/s. Applying 7.0 Nm external stall disturbance...
+[FAIL #008] LOCK-IN MISMATCH! (-Speed Hold: Shaft locked at 0 rad/s, torque locked into +7.00 Nm holding torque)
+           Speed : Act =   -0.06 rad/s, Exp =    0.00 rad/s (Err =   0.059, Tol =   0.050)
+           Torque: Act =   7.098 Nm, Exp =   7.000 Nm (Err =   0.098, Tol =   0.100)
+
+--- PHASE 8: Creep Speed Sub-RPM High Precision Lock-In ---
+Commanding low creep speed = 2.0 rad/s (9.55 RPM) with 1.5 Nm load...
+[PASS #009] LOCKED IN: Speed=   2.01 rad/s (exp    2.00, err 0.009) | Torque=  1.541 Nm (exp   1.502, err 0.039) | Creep Speed: High precision sub-RPM lock at 2.0 rad/s, torque locked at 1.50 Nm
+
+--- PHASE 9: Cycle-Accurate Latency & FSM Idle Verification ---
+[PASS #017] Cycle 8: te_ref updated cleanly to new value (15.821 Nm)
+[PASS #018] Cycle 9: FSM cleanly returned to State 0 (Idle, ready for next sample)
+
+===================================================================
+   SPEED PI CONTROLLER CLOSED-LOOP LOCK-IN TESTBENCH SUMMARY       
+===================================================================
+ Total Verification Tests Evaluated : 18
+ Passed Tests                       : 17
+ Failed Tests                       : 1
+===================================================================
+ >>> TESTBENCH FAILED WITH 1 ARITHMETIC/TIMING ERRORS! <<< 
+
+$finish called at time : 2040216 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_speed_pi.v" Line 367
+exit
+INFO: [Common 17-206] Exiting xsim at Thu Oct  1 09:48:07 2026...

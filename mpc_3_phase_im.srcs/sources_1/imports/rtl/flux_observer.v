@@ -18,11 +18,22 @@ module flux_observer #(
     output reg  done
 );
 
-    localparam signed [DATA_WIDTH-1:0] E21  = 32'sd110;
-    localparam signed [DATA_WIDTH-1:0] E22  = 32'sd1048034;
-    localparam signed [DATA_WIDTH-1:0] TS_Q = 32'sd105;
+    localparam signed [DATA_WIDTH-1:0] E21  = `E21;
+    localparam signed [DATA_WIDTH-1:0] E22  = `E22;
+    localparam signed [DATA_WIDTH-1:0] TS_Q = `TS_Q;
 
     reg signed [DATA_WIDTH-1:0] psi_a_reg, psi_b_reg;
+
+    // Clamp speed to prevent Forward Euler instability above sync speed
+    reg signed [DATA_WIDTH-1:0] speed_clamped;
+    always @(*) begin
+        if (speed_elec > `SPEED_LIMIT)
+            speed_clamped = `SPEED_LIMIT;
+        else if (speed_elec < -`SPEED_LIMIT)
+            speed_clamped = -`SPEED_LIMIT;
+        else
+            speed_clamped = speed_elec;
+    end
 
     reg signed [DATA_WIDTH-1:0] term1, term2, term3;
     reg signed [DATA_WIDTH-1:0] term4, term5, term6;
@@ -37,6 +48,19 @@ module flux_observer #(
     end
 
     reg [4:0] step;
+
+    // E21 = Ts * (Lm / Tau_r)
+    // E22 = 1 - (Ts / Tau_r)
+    // Tau_r = Lr / Rr
+    // TS_Q = Ts
+
+    // term 1 = E21 * i_alpha
+    // term 2 = E22 * psi_a_reg
+    // term 3 = TS_Q * wr_psi_beta
+    
+    // term 4 = E21 * i_beta
+    // term 5 = E22 * psi_b_reg
+    // term 6 = TS_Q * wr_psi_alpha
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -60,8 +84,8 @@ module flux_observer #(
             case (step)
                 0: begin
                     if (start) begin
-                        
-                        mul_a <= speed_elec;
+                        // Use clamped speed for stability
+                        mul_a <= speed_clamped;
                         mul_b <= psi_b_reg;
                         step <= 1;
                     end
@@ -73,7 +97,7 @@ module flux_observer #(
                 2: begin
                     wr_psi_beta <= mul_result; 
 
-                    mul_a <= speed_elec;
+                    mul_a <= speed_clamped;
                     mul_b <= psi_a_reg;
                     step <= 3;
                 end

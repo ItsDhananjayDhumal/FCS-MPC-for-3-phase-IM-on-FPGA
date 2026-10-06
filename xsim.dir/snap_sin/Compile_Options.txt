@@ -1,0 +1,1 @@
+-top "tb_sin_test" -snapshot "snap_sin" 

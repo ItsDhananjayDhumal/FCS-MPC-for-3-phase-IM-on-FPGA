@@ -1,0 +1,101 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sun Oct  4 22:12:44 2026
+# Process ID: 23776
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_cost
+# Command line: xsim.exe -mode tcl -source {xsim.dir/sim_cost_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_cost/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_cost\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/sim_cost_snap/xsim_script.tcl
+# xsim {sim_cost_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===============================================================================
+STARTING EXTENSIVE COST EVALUATOR INTEGRATED TESTBENCH (tb_cost_evaluator)
+===============================================================================
+
+-------------------------------------------------------------------------------
+PHASE 1: EDGE CASES & NUMERICAL ROBUSTNESS
+-------------------------------------------------------------------------------
+PASS: [1.1] Reset outputs cleanly cleared to zero.
+PASS: [1.2] Zero-error cost is strictly zero (Cost: 0 LSB).
+PASS: [1.3.1] Pure Torque Error matches theory: 25.00 (Expected: 25.00).
+PASS: [1.3.2] Pure Flux Error matches theory: 0.98 (Expected: ~1.00).
+PASS: [1.4] Torque Error Sign Symmetry verified: cost(+10Nm) == cost(-10Nm) == 100.00.
+PASS: [1.5.1] Positive Torque Overload (+60 Nm) safely clamped to INT32_MAX, overflow asserted.
+PASS: [1.5.2] Negative Torque Overload (-60 Nm) safely clamped to INT32_MAX, overflow asserted.
+PASS: [1.5.3] Massive Flux Overload (50 Wb^2) safely clamped to INT32_MAX, overflow asserted.
+
+-------------------------------------------------------------------------------
+PHASE 2: FULL 8-VECTOR CANDIDATE SWEEP & OPTIMAL SELECTION
+-------------------------------------------------------------------------------
+PASS: [2.1] Zero-Vector Cost Equivalence: cost(V0) == cost(V7) == 84.51.
+PASS: [2.2] Active Vector V2 selected with lower cost than zero vector (3.91 vs 84.51).
+
+-------------------------------------------------------------------------------
+PHASE 3: CLOSED-LOOP MOTOR PHYSICAL TRANSIENTS (EXTENDED DYNAMIC RUN)
+-------------------------------------------------------------------------------
+Simulating Scenario 3.1: Standstill Pre-Magnetization (80 Ts periods)...
+PASS: [3.1] Flux built monotonically (mag=0.806 Wb), cost verified: 7.3472.
+Simulating Scenario 3.2: Closed-Loop Acceleration & Stabilization at 100 rad/s (600 Ts periods)...
+PASS: [3.2] Acceleration and stabilization successful: wr=110.6 rad/s (ref=100), te_ref=5.4 Nm, cost=0.25.
+Simulating Scenario 3.3: Sudden Heavy Load Impact 3.0 Nm -> 12.0 Nm (200 Ts periods)...
+PASS: [3.3] Load disturbance rejected: PI increased torque demand to 10.7 Nm, speed maintained at 94.6 rad/s.
+Simulating Scenario 3.4: Sudden Load Shedding 12.0 Nm -> 1.0 Nm (200 Ts periods)...
+PASS: [3.4] Load shedding handled: PI reduced torque demand to -0.6 Nm, speed settled at 106.0 rad/s.
+Simulating Scenario 3.5: Dynamic Speed Step Down 100 -> 40 rad/s & Regenerative Braking (300 Ts periods)...
+PASS: [3.5] Regenerative braking deceleration successful: speed reduced to 33.3 rad/s (target=40.0), torque=-12.3 Nm.
+
+-------------------------------------------------------------------------------
+PHASE 4: CLOSED-LOOP FCS-MPC DYNAMIC MOTOR PLANT SIMULATION
+         (PLANT INPUT CURRENTS & FLUXES DRIVEN BY OPTIMAL EVALUATOR CHOICES)
+-------------------------------------------------------------------------------
+Starting Closed-Loop Plant Simulation (300 Ts cycles = 30.0 ms)...
+Initial State: wr=0.0 rad/s, |psi_r|=0.960 Wb, is_mag=4.730 A, Speed Ref=50.0 rad/s
+  Cycle   0 (t= 0.0 ms): wr=  0.1 rad/s, te_ref=  9.9 Nm, te_act=  7.5 Nm, |psi|=0.960 Wb, Chosen=V3
+  Cycle  50 (t= 5.0 ms): wr=  9.4 rad/s, te_ref= 20.0 Nm, te_act= 17.8 Nm, |psi|=0.866 Wb, Chosen=V4
+  Cycle 100 (t=10.0 ms): wr= 20.4 rad/s, te_ref= 20.0 Nm, te_act= 20.4 Nm, |psi|=0.459 Wb, Chosen=V4
+  Cycle 150 (t=15.0 ms): wr= 31.6 rad/s, te_ref= 19.9 Nm, te_act= 19.5 Nm, |psi|=0.180 Wb, Chosen=V2
+  [Dynamic Event @ t=20.0 ms]: Load torque increased from 2.0 Nm to 5.0 Nm
+  Cycle 200 (t=20.0 ms): wr= 42.8 rad/s, te_ref= 19.6 Nm, te_act= 19.7 Nm, |psi|=0.218 Wb, Chosen=V6
+  Cycle 250 (t=25.0 ms): wr= 51.2 rad/s, te_ref= 16.9 Nm, te_act= 16.9 Nm, |psi|=0.243 Wb, Chosen=V4
+  Cycle 299 (t=29.9 ms): wr= 56.9 rad/s, te_ref= 11.9 Nm, te_act= 12.1 Nm, |psi|=0.292 Wb, Chosen=V7
+
+Vector Usage Summary over 300 Closed-Loop Cycles:
+  Zero Vectors   (V0, V7): 95 times (31.7 %)
+  Active Vectors (V1..V6): 205 times (68.3 %)
+  Distribution: V0=0, V1=34, V2=16, V3=16, V4=98, V5=18, V6=23, V7=95
+PASS: [4.1] Plant accelerated positively (wr=56.9 rad/s) under closed-loop FCS-MPC control.
+PASS: [4.2] Active vectors rotated continuously (152 vector switches), driving motor dynamics.
+PASS: [4.3] Plant state variables and costs remained bounded and stable without overflow.
+
+-------------------------------------------------------------------------------
+PHASE 5: EXHAUSTIVE MULTI-POINT RANDOM SWEEP (520 COMPREHENSIVE TEST CASES)
+-------------------------------------------------------------------------------
+PASS: All 520 sweep points matched exact golden reference! Max error: 0 LSB.
+
+-------------------------------------------------------------------------------
+PHASE 6: PIPELINE LATENCY, TIMING & DEADLOCK-FREE INTERFACING
+-------------------------------------------------------------------------------
+PASS: [6.1] Exact Execution Latency verified: 26 clock cycles (260 ns).
+PASS: [6.2] Done pulse width is strictly 1 clock cycle (clean handshake).
+
+===============================================================================
+INTEGRATED COST EVALUATOR TESTBENCH COMPLETE
+===============================================================================
+Total Tests Executed : 540
+Tests Passed         : 540
+Tests Failed         : 0
+Max Discrepancy (LSB): 0
+Overall Reliability  : 100.00 %
+===============================================================================
+
+>>> ALL INTEGRATED COST EVALUATOR VERIFICATION CHECKS PASSED PERFECTLY! <<<
+$finish called at time : 8906915 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_cost_evaluator.v" Line 1172
+exit
+INFO: [Common 17-206] Exiting xsim at Sun Oct  4 22:12:48 2026...

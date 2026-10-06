@@ -1,0 +1,85 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Wed Sep 30 09:04:42 2026
+# Process ID: 31048
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_mul_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_mul_snap/xsim_script.tcl
+# xsim {tb_mul_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===================================================================
+       RIGOROUS VERIFICATION TESTBENCH: fixed_point_mul.v          
+===================================================================
+
+--- PHASE 1: Cycle-Accurate Latency Verification ---
+[55000] T0: Applied inputs a=3.0, b=4.0
+[PASS #001] Latency check Cycle 1: result is still 0 (as expected for 2-cycle pipeline)
+[PASS #002] Latency check Cycle 2: result is EXACTLY 12.0 (12,582,912 counts) -> Proven 2 cycles!
+
+--- PHASE 2: Fundamental Algebraic Properties ---
+[PASS #003]   0.000 *   5.000 =   0.0000 | Got:   0.0000 | Err: 0.000000 | ltiplication by Zero
+[PASS #004]   5.000 *   0.000 =   0.0000 | Got:   0.0000 | Err: 0.000000 | Zero Multiplicand
+[PASS #005]   1.000 *   1.000 =   1.0000 | Got:   1.0000 | Err: 0.000000 | ity: 1.0 * 1.0 = 1.0
+[PASS #006]   1.000 *   7.350 =   7.3500 | Got:   7.3500 | Err: 0.000001 | dentity: 1.0 * X = X
+[PASS #007]  -1.000 *   4.250 =  -4.2500 | Got:  -4.2500 | Err: 0.000000 | rsion: -1.0 * X = -X
+[PASS #008]  -1.000 *  -1.000 =   1.0000 | Got:   1.0000 | Err: 0.000000 | : -1.0 * -1.0 = +1.0
+
+--- PHASE 3: Four-Quadrant Signed Operations ---
+[PASS #009]   2.500 *   4.000 =  10.0000 | Got:  10.0000 | Err: 0.000000 | +2.5 * +4.0 = +10.0)
+[PASS #010]   3.500 *  -2.000 =  -7.0000 | Got:  -7.0000 | Err: 0.000000 | (+3.5 * -2.0 = -7.0)
+[PASS #011]  -4.500 *   2.000 =  -9.0000 | Got:  -9.0000 | Err: 0.000000 | (-4.5 * +2.0 = -9.0)
+[PASS #012]  -3.000 *  -4.000 =  12.0000 | Got:  12.0000 | Err: 0.000000 | -3.0 * -4.0 = +12.0)
+[PASS #013]   0.500 *   0.500 =   0.2500 | Got:   0.2500 | Err: 0.000000 | re: 0.5 * 0.5 = 0.25
+[PASS #014]  -0.250 *   0.500 =  -0.1250 | Got:  -0.1250 | Err: 0.000000 | -0.25 * 0.5 = -0.125
+
+--- PHASE 4: Realistic Motor & FCS-MPC Signal Values ---
+[PASS #015]   0.999 *   0.960 =   0.9595 | Got:   0.9595 | Err: 0.000002 | bserver: E22 * psi_r
+[FAIL #016] MULTIPLICATION ERROR! ( Term: TS_Q * wr_psi)
+           Inputs   : a =  0.0001 (104), b = 300.0000 (314572800)
+           Expected : 0.030000
+           Got      : 0.029755 (result = 31200)
+           Error    : 0.000245
+[PASS #017]   0.577 *   4.330 =   2.4999 | Got:   2.4999 | Err: 0.000002 | 1/sqrt(3) * beta_sum
+[PASS #018]   2.913 *   3.360 =   9.7877 | Got:   9.7877 | Err: 0.000004 | Kt * flux_cross_curr
+[PASS #019] 311.000 *   0.667 = 207.3334 | Got: 207.3334 | Err: 0.000005 | Manager: Vdc * (2/3)
+
+--- PHASE 5: Boundary Values & Small Signal Precision ---
+[PASS #020]  45.000 *  45.000 = 2025.0000 | Got: 2025.0000 | Err: 0.000000 |  (Near Q12.20 limit)
+[PASS #021] -45.000 *  45.000 = -2025.0000 | Got: -2025.0000 | Err: 0.000000 | 5.0 * 45.0 = -2025.0
+[PASS #022]   0.001 *   0.001 =   0.0000 | Got:   0.0000 | Err: 0.000000 | 01 (1 LSB precision)
+[PASS #023]   0.001 *   1.000 =   0.0010 | Got:   0.0010 | Err: 0.000001 | ount: (1/1024) * 1.0
+
+--- PHASE 6: Pipelined Streaming Throughput (Back-to-Back Operations) ---
+-> Streaming 10 continuous multiplications with zero idle bubble cycles...
+[FAIL #024] Stream item 0 mismatch! exp=  0.600, got=  2.400
+[FAIL #025] Stream item 1 mismatch! exp=  2.400, got=  5.400
+[FAIL #026] Stream item 2 mismatch! exp=  5.400, got=  9.600
+[FAIL #027] Stream item 3 mismatch! exp=  9.600, got= 15.000
+[FAIL #028] Stream item 4 mismatch! exp= 15.000, got= 21.600
+[FAIL #029] Stream item 5 mismatch! exp= 21.600, got= 29.400
+[FAIL #030] Stream item 6 mismatch! exp= 29.400, got= 38.400
+[FAIL #031] Stream item 7 mismatch! exp= 38.400, got= 48.600
+[FAIL #032] Stream item 8 mismatch! exp= 48.600, got= 60.000
+[FAIL #033] Stream item 9 mismatch! exp= 60.000, got=  0.000
+[PASS] Successfully processed 10 continuous multiplications at 100 MSamples/sec throughput!
+
+===================================================================
+           FIXED POINT MULTIPLIER TESTBENCH EXECUTION SUMMARY      
+===================================================================
+ Total Verification Tests Evaluated : 33
+ Passed Tests                       : 22
+ Failed Tests                       : 11
+===================================================================
+ >>> TESTBENCH FAILED WITH 11 ARITHMETIC/TIMING ERRORS! <<< 
+
+$finish called at time : 826 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_fixed_point_mul.v" Line 260
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Sep 30 09:04:44 2026...

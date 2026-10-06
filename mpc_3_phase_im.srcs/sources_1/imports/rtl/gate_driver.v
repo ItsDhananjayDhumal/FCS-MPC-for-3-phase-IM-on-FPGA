@@ -43,7 +43,8 @@ module gate_driver (
             gate_ah <= 1'b0; gate_al <= 1'b0;
             gate_bh <= 1'b0; gate_bl <= 1'b0;
             gate_ch <= 1'b0; gate_cl <= 1'b0;
-            current_state <= 3'b000;
+            // Retain current_state so re-enabling enforces dead-time!
+            // target_state is set to 000 by update_tick from FSM
             dead_time_active <= 3'b000;
             dt_cnt_a <= 12'd0;
             dt_cnt_b <= 12'd0;
@@ -57,7 +58,7 @@ module gate_driver (
                     dead_time_active[2] <= 1'b1;
                     dt_cnt_a <= 12'd0;
                 end else begin
-                    if (dt_cnt_a == `DEAD_TIME_CYCLES) begin
+                    if (dt_cnt_a >= `DEAD_TIME_CYCLES) begin
                         current_state[2] <= target_state[2];
                         dead_time_active[2] <= 1'b0;
                         gate_ah <= target_state[2];
@@ -82,7 +83,7 @@ module gate_driver (
                     dead_time_active[1] <= 1'b1;
                     dt_cnt_b <= 12'd0;
                 end else begin
-                    if (dt_cnt_b == `DEAD_TIME_CYCLES) begin
+                    if (dt_cnt_b >= `DEAD_TIME_CYCLES) begin
                         current_state[1] <= target_state[1];
                         dead_time_active[1] <= 1'b0;
                         gate_bh <= target_state[1];
@@ -107,7 +108,7 @@ module gate_driver (
                     dead_time_active[0] <= 1'b1;
                     dt_cnt_c <= 12'd0;
                 end else begin
-                    if (dt_cnt_c == `DEAD_TIME_CYCLES) begin
+                    if (dt_cnt_c >= `DEAD_TIME_CYCLES) begin
                         current_state[0] <= target_state[0];
                         dead_time_active[0] <= 1'b0;
                         gate_ch <= target_state[0];

@@ -1,0 +1,107 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Wed Sep 30 09:13:14 2026
+# Process ID: 33100
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_mul_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_mul\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_mul_snap/xsim_script.tcl
+# xsim {tb_mul_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===================================================================
+       RIGOROUS VERIFICATION TESTBENCH: fixed_point_mul.v          
+===================================================================
+
+--- PHASE 1: Cycle-Accurate Latency Verification ---
+[55000] T0: Applied inputs a=3.0, b=4.0
+[PASS #001] Latency check Cycle 1: result is still 0 (as expected for 2-cycle pipeline)
+[PASS #002] Latency check Cycle 2: result is EXACTLY 12.0 (12,582,912 counts) -> Proven 2 cycles!
+
+--- PHASE 2: Fundamental Algebraic Properties ---
+[PASS #003]   0.000 *   5.000 =   0.0000 | Got:   0.0000 | Err: 0.000000 | Multiplication by Zero
+[PASS #004]   5.000 *   0.000 =   0.0000 | Got:   0.0000 | Err: 0.000000 | Zero Multiplicand
+[PASS #005]   1.000 *   1.000 =   1.0000 | Got:   1.0000 | Err: 0.000000 | Identity: 1.0 * 1.0 = 1.0
+[PASS #006]   1.000 *   7.350 =   7.3500 | Got:   7.3500 | Err: 0.000000 | Identity: 1.0 * X = X
+[PASS #007]  -1.000 *   4.250 =  -4.2500 | Got:  -4.2500 | Err: 0.000000 | Inversion: -1.0 * X = -X
+[PASS #008]  -1.000 *  -1.000 =   1.0000 | Got:   1.0000 | Err: 0.000000 | Double Negative: -1.0 * -1.0 = +1.0
+
+--- PHASE 3: Four-Quadrant Signed Operations ---
+[PASS #009]   2.500 *   4.000 =  10.0000 | Got:  10.0000 | Err: 0.000000 | Quadrant 1: Positive * Positive (+2.5 * +4.0 = +10.0)
+[PASS #010]   3.500 *  -2.000 =  -7.0000 | Got:  -7.0000 | Err: 0.000000 | Quadrant 4: Positive * Negative (+3.5 * -2.0 = -7.0)
+[PASS #011]  -4.500 *   2.000 =  -9.0000 | Got:  -9.0000 | Err: 0.000000 | Quadrant 2: Negative * Positive (-4.5 * +2.0 = -9.0)
+[PASS #012]  -3.000 *  -4.000 =  12.0000 | Got:  12.0000 | Err: 0.000000 | Quadrant 3: Negative * Negative (-3.0 * -4.0 = +12.0)
+[PASS #013]   0.500 *   0.500 =   0.2500 | Got:   0.2500 | Err: 0.000000 | Fractional Square: 0.5 * 0.5 = 0.25
+[PASS #014]  -0.250 *   0.500 =  -0.1250 | Got:  -0.1250 | Err: 0.000000 | Fractional Signed: -0.25 * 0.5 = -0.125
+
+--- PHASE 4: Realistic Motor & FCS-MPC Signal Values ---
+[PASS #015]   0.999 *   0.960 =   0.9595 | Got:   0.9595 | Err: 0.000001 | Flux Observer: E22 * psi_r
+[PASS #016]   0.000 * 300.000 =   0.0298 | Got:   0.0298 | Err: 0.000000 | Observer Cross Term: TS_Q * wr_psi
+[PASS #017]   0.577 *   4.330 =   2.4999 | Got:   2.4999 | Err: 0.000000 | Clarke Transform: 1/sqrt(3) * beta_sum
+[PASS #018]   2.913 *   3.360 =   9.7877 | Got:   9.7877 | Err: 0.000000 | Torque Estimator: Kt * flux_cross_curr
+[PASS #019] 311.000 *   0.667 = 207.3334 | Got: 207.3334 | Err: 0.000000 | Vdc Manager: Vdc * (2/3)
+
+--- PHASE 5: Boundary Values & Small Signal Precision ---
+[PASS #020]  45.000 *  45.000 = 2025.0000 | Got: 2025.0000 | Err: 0.000000 | Large Signal: 45.0 * 45.0 = 2025.0 (Near Q12.20 limit)
+[PASS #021] -45.000 *  45.000 = -2025.0000 | Got: -2025.0000 | Err: 0.000000 | Large Negative: -45.0 * 45.0 = -2025.0
+[PASS #022]   0.001 *   0.001 =   0.0000 | Got:   0.0000 | Err: 0.000000 | Micro Scale: 0.001 * 0.001 = 0.000001 (1 LSB precision)
+[PASS #023]   0.001 *   1.000 =   0.0010 | Got:   0.0010 | Err: 0.000000 | Exact 1 LSB count: (1/1024) * 1.0
+
+--- PHASE 6: Pipelined Streaming Throughput (Back-to-Back Operations) ---
+-> Streaming 10 continuous multiplications with zero idle bubble cycles...
+[PASS] Successfully processed 10 continuous multiplications at 100 MSamples/sec throughput!
+
+--- PHASE 7: Full 20-Bit Active Fractional Pattern Tests ---
+Testing dense bit patterns where all 20 fractional bits [19:0] are non-zero...
+
+[PASS #034] 0x000fffff * 0x00100000 = 0x000fffff (frac: 0xfffff) | LSB Exact! | All 20 Frac Bits = 1 * 1.0 Identity (32'h000FFFFF * 1.0)
+[PASS #035] 0x000fffff * 0x000fffff = 0x000ffffe (frac: 0xffffe) | LSB Exact! | All 20 Frac Bits = 1 Squared (Max Frac Square)
+[PASS #036] 0x000aaaaa * 0x00055555 = 0x00038e38 (frac: 0x38e38) | LSB Exact! | Alternating Checkerboard (20'hAAAAA * 20'h55555)
+[PASS #037] 0x00055555 * 0x000aaaaa = 0x00038e38 (frac: 0x38e38) | LSB Exact! | Commutative Checkerboard (20'h55555 * 20'hAAAAA)
+[PASS #038] 0x001aaaaa * 0x00255555 = 0x003e38e1 (frac: 0xe38e1) | LSB Exact! | Integer + Checkerboard Fraction (1.666666 * 2.333333)
+[PASS #039] 0x000edcba * 0x00012345 = 0x00010e8e (frac: 0x10e8e) | LSB Exact! | Dense Frac Hex Nibbles (20'hEDCBA * 20'h12345)
+[PASS #040] 0x00076543 * 0x000fedcb = 0x00075cd8 (frac: 0x75cd8) | LSB Exact! | Dense Frac Hex Nibbles (20'h76543 * 20'hFEDCB)
+[PASS #041] 0xfff00001 * 0x00100000 = 0xfff00001 (frac: 0x00001) | LSB Exact! | Signed Neg All 20 Frac Bits * 1.0 (-0.999999 * 1.0)
+[PASS #042] 0xfff00001 * 0xfff00001 = 0x000ffffe (frac: 0xffffe) | LSB Exact! | Signed Neg All 20 Frac Bits Squared (-0.999999 * -0.999999)
+[PASS #043] 0xfff55556 * 0x00055555 = 0xfffc71c7 (frac: 0xc71c7) | LSB Exact! | Signed Neg Checkerboard * Pos Checkerboard
+[PASS #044] 0x003fffff * 0xffd00001 = 0xff400006 (frac: 0x00006) | LSB Exact! | Signed Mixed Int+Frac (+3.999999 * -2.999999)
+[PASS #045] 0x003243f7 * 0x002b7e15 = 0x0088a2c1 (frac: 0x8a2c1) | LSB Exact! | Physical Constants: Pi * e (3.141592 * 2.718281)
+[PASS #046] 0x003243f7 * 0x0016a09e = 0x0047160b (frac: 0x7160b) | LSB Exact! | Physical Constants: Pi * sqrt(2) (3.141592 * 1.414213)
+[PASS #047] 0x0019e372 * 0x002b7e15 = 0x00465f43 (frac: 0x65f43) | LSB Exact! | Physical Constants: phi * e (1.618033 * 2.718281)
+[PASS #048] 0x00093ce3 * 0x0016a09e = 0x000d1074 (frac: 0xd1074) | LSB Exact! | Physical Constants: (1/sqrt3) * sqrt(2)
+
+--- Subphase 7.6: 15 Pseudo-Random Dense 20-Bit Vectors ---
+[PASS #049] 0x000d3525 * 0xfff2a17d = 0xfff4f6cd (frac: 0x4f6cd) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #050] 0xfff329f7 * 0x00045663 = 0xfffc852f (frac: 0xc852f) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #051] 0x00097b0d * 0x000f998f = 0x00093e59 (frac: 0x93e59) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #052] 0xfff57b9b * 0xfff8aded = 0x0004cfdf (frac: 0x4cfdf) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #053] 0x000be301 * 0x0007cd0f = 0x0005cba8 (frac: 0x5cba8) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #054] 0xfff40e89 * 0x000dcd3f = 0xfff5b29a (frac: 0x5b29a) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #055] 0x000c57ed * 0xfff20871 = 0xfff53993 (frac: 0x53993) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #056] 0xfff21607 * 0x000724c7 = 0xfff9c9a7 (frac: 0x9c9a7) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #057] 0x000f84c5 * 0x0007d2ab = 0x0007966a (frac: 0x7966a) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #058] 0xfff0081b * 0xfff98d89 = 0x00066f32 (frac: 0x66f32) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #059] 0x000ad613 * 0x000cdb8f = 0x0008b541 (frac: 0x8b541) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #060] 0xfff7960d * 0x000696cf = 0xfffc88f6 (frac: 0xc88f6) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #061] 0x00087ae9 * 0xfff1b139 = 0xfff86ab3 (frac: 0x86ab3) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #062] 0xfff7b6a3 * 0x000e28bf = 0xfff8aab4 (frac: 0x8aab4) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+[PASS #063] 0x000b582d * 0x00072667 = 0x000511ce (frac: 0x511ce) | LSB Exact! | Dense Pseudo-Random 20-bit Fraction Vector
+
+===================================================================
+           FIXED POINT MULTIPLIER TESTBENCH EXECUTION SUMMARY      
+===================================================================
+ Total Verification Tests Evaluated : 63
+ Passed Tests                       : 63
+ Failed Tests                       : 0
+===================================================================
+ >>> ALL FIXED POINT MULTIPLIER TESTS PASSED PERFECTLY! ZERO ERRORS. <<< 
+
+$finish called at time : 1716 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_fixed_point_mul.v" Line 353
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Sep 30 09:13:16 2026...

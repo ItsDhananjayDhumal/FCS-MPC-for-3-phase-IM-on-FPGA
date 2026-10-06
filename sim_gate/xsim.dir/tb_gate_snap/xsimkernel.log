@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_gate_snap/xsimk.exe -runall -simmode gui -wdb tb_gate_snap.wdb -simrunnum 0 -socket 49683
+Design successfully loaded
+Design Loading Memory Usage: 9416 KB (Peak: 9416 KB)
+Design Loading CPU Usage: 46 ms
+Simulation completed
+Simulation Memory Usage: 9916 KB (Peak: 9916 KB)
+Simulation CPU Usage: 62 ms

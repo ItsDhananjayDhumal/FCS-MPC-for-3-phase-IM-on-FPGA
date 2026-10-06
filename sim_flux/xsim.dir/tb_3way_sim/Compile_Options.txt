@@ -1,0 +1,1 @@
+-debug "typical" "tb_flux_observer_3way_comparison" -s "tb_3way_sim" 

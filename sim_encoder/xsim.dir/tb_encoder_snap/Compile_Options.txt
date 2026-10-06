@@ -1,0 +1,1 @@
+-top "tb_encoder_reader" -snapshot "tb_encoder_snap" -timescale "1ns/1ps" 

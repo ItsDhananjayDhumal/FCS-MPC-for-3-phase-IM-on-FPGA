@@ -1,0 +1,1 @@
+-debug "typical" "tb_flux_observer_comparison" -s "tb_comp_sim" 

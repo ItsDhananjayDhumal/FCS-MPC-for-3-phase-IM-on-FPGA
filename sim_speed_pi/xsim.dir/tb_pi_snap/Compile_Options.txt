@@ -1,0 +1,1 @@
+-top "tb_speed_pi" -snapshot "tb_pi_snap" -timescale "1ns/1ps" 

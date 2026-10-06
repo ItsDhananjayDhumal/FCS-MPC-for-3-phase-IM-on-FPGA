@@ -1,0 +1,7 @@
+Running: xsim.dir/test_fl2_snap/xsimk.exe -runall -simmode gui -wdb test_fl2_snap.wdb -simrunnum 0 -socket 49900
+Design successfully loaded
+Design Loading Memory Usage: 10364 KB (Peak: 10364 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 10644 KB (Peak: 10644 KB)
+Simulation CPU Usage: 30 ms
