@@ -70,6 +70,7 @@ To execute these equations efficiently, the continuous variables are pre-multipl
 Because rotor flux cannot be measured directly, it is estimated using a discrete-time current model observer (`flux_observer.v`). The observer runs once per sampling period using the *measured* currents and *measured* speed to estimate the current rotor flux $\psi_r(k)$, which serves as the initial state for the predictive model.
 
 The observer equations are structurally identical to the rotor flux predictive equations:
+
 $$ \hat{\psi}_{r\alpha}(k) = E_{21}i_{s\alpha}(k-1) + E_{22}\hat{\psi}_{r\alpha}(k-1) - T_s\omega_r(k)\hat{\psi}_{r\beta}(k-1) $$
 $$ \hat{\psi}_{r\beta}(k) = E_{21}i_{s\beta}(k-1) + E_{22}\hat{\psi}_{r\beta}(k-1) + T_s\omega_r(k)\hat{\psi}_{r\alpha}(k-1) $$
 
