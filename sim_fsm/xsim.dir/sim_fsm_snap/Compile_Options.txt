@@ -1,0 +1,1 @@
+"tb_control_fsm" -s "sim_fsm_snap" 

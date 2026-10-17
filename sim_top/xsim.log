@@ -1,0 +1,106 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Thu Oct 15 21:16:36 2026
+# Process ID: 47344
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_top
+# Command line: xsim.exe -mode tcl -source {xsim.dir/sim_top_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_top/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_top\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/sim_top_snap/xsim_script.tcl
+# xsim {sim_top_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===============================================================================
+STARTING EXTENSIVE TOP-LEVEL FCS-MPC TESTBENCH (tb_mpc_top)
+===============================================================================
+
+-------------------------------------------------------------------------------
+PHASE 1: POWER-ON AUTO-TARE CALIBRATION & BUTTON LATCH VERIFICATION
+-------------------------------------------------------------------------------
+PASS: [1.1] Reset deasserted cleanly. Drive initially disabled (enable=0, inverter_en=0).
+Awaiting Auto-Tare Calibration (256 samples with noise and outlier injection)...
+PASS: [1.2] Auto-tare calibration completed successfully (cal_done = 1).
+PASS: [1.3] Calibrated ADC zero-offset verified: 2048 counts (~2048 nominal). Outliers rejected cleanly.
+PASS: [1.4] All inverter gate outputs strictly 0 during auto-tare calibration.
+PASS: [1.5] FSM holding safely in S_DISABLED (State 15) awaiting START pushbutton.
+Testing Pushbutton Latching: Tapping btnu (START) for 150 cycles...
+PASS: [1.6] Pushbutton START latch verified! enable and inverter_en remain 1 after releasing btnu.
+
+-------------------------------------------------------------------------------
+PHASE 2: STANDSTILL PRE-MAGNETIZATION STARTUP (STANDSTILL DEADLOCK SOLUTION)
+-------------------------------------------------------------------------------
+PASS: [2.1] mpc_top entered Pre-Magnetization sequence (State 23).
+PASS: [2.2] Rotor flux successfully built up: psi_alpha=0.523 Wb (>0.52 Wb requirement).
+PASS: [2.3] Pre-magnetization complete. Transitioned to closed-loop MPC (S_WAIT_TS).
+
+-------------------------------------------------------------------------------
+PHASE 3: CLOSED-LOOP DYNAMIC TRANSIENTS (MATCHING tb_cost_evaluator.v)
+-------------------------------------------------------------------------------
+Scenario 3.1: Closed-Loop Acceleration & Stabilization (target = 100 rad/s)...
+PASS: [3.1] Speed acceleration successful: wr=111.5 rad/s (target=100.0), te_ref=5.8 Nm (matches tb_cost_evaluator: 110.6 rad/s).
+Scenario 3.2: Sudden Heavy Load Impact 3.0 Nm -> 12.0 Nm...
+PASS: [3.2] Heavy load rejected: PI torque demand=10.4 Nm, speed=93.1 rad/s (matches tb_cost_evaluator: 10.7 Nm, 94.6 rad/s).
+Scenario 3.3: Sudden Load Shedding 12.0 Nm -> 1.0 Nm...
+PASS: [3.3] Load shedding handled: PI torque demand=-0.8 Nm, speed=107.3 rad/s (matches tb_cost_evaluator: -0.6 Nm, 106.0 rad/s).
+Scenario 3.4: Regenerative Braking & Speed Deceleration...
+PASS: [3.4] Regenerative braking successful: speed reduced to 33.8 rad/s, torque=-13.9 Nm (matches tb_cost_evaluator: 33.3 rad/s, -12.3 Nm).
+
+-------------------------------------------------------------------------------
+PHASE 4: PLANT DYNAMICS & ACTIVE VECTOR DISTRIBUTION
+-------------------------------------------------------------------------------
+Simulating 300 Closed-Loop MPC Cycles with dynamic step load @ t=20 ms...
+  Cycle   0 (t= 0.0 ms): wr=  0.0 rad/s, te_ref=-13.9 Nm, te_act= -5.2 Nm, |psi|=0.960 Wb, Vector=V6
+  Cycle  50 (t= 5.0 ms): wr=  5.7 rad/s, te_ref= 20.0 Nm, te_act= 11.2 Nm, |psi|=0.926 Wb, Vector=V3
+  Cycle 100 (t=10.0 ms): wr= 11.4 rad/s, te_ref= 20.0 Nm, te_act= 11.1 Nm, |psi|=0.891 Wb, Vector=V3
+  Cycle 150 (t=15.0 ms): wr= 17.1 rad/s, te_ref= 20.0 Nm, te_act= 11.2 Nm, |psi|=0.860 Wb, Vector=V3
+  Cycle 200 (t=20.0 ms): wr= 22.8 rad/s, te_ref= 20.0 Nm, te_act= 11.2 Nm, |psi|=0.831 Wb, Vector=V3
+  Cycle 250 (t=25.0 ms): wr= 26.6 rad/s, te_ref= 20.0 Nm, te_act= 11.1 Nm, |psi|=0.808 Wb, Vector=V3
+  Cycle 299 (t=29.9 ms): wr= 30.2 rad/s, te_ref= 20.0 Nm, te_act= 10.7 Nm, |psi|=0.789 Wb, Vector=V3
+
+Vector Usage Summary over 300 Closed-Loop Cycles:
+  Active Vectors (V1..V6): 300 times (100.0 %)
+  Distribution: V0=0, V1=0, V2=1, V3=296, V4=2, V5=0, V6=1, V7=0
+PASS: [4.1] Plant accelerated positively (wr=30.2 rad/s) under mpc_top full orchestration.
+PASS: [4.2] Active vector distribution healthy (6 transitions, 100.0 % active).
+
+-------------------------------------------------------------------------------
+PHASE 5: TOP-LEVEL SPECIFIC EDGE CASES & HARDWARE SAFETY PROTECTION
+-------------------------------------------------------------------------------
+Testing 5.1: Overcurrent Fault Injection & Immediate Gate Tri-State Cutoff...
+PASS: [5.1] CRITICAL SAFETY VERIFIED: Overcurrent tripped S_ERROR, inverter_en dropped to 0, and ALL 6 GATES TRI-STATED TO 0!
+Testing 5.2: Fault Clearing via btnd (STOP) and Safe Restart via btnu (START)...
+PASS: [5.2] Fault successfully cleared by btnd (STOP). FSM returned to safe idle/disabled state (15).
+PASS: [5.2b] Drive successfully restarted by btnu (START) after clearing fault.
+Testing 5.3: Pre-Magnetization Overcurrent Protection Trip...
+PASS: [5.3] Pre-magnetization overcurrent caught! Tripped to S_ERROR, power disabled and gates off.
+Testing 5.4: Hardware Watchdog Timeout Trap (Cycle 9900 on stalled predictor)...
+PASS: [5.4] Hardware Watchdog timeout caught stalled predictor at cycle 9900! S_ERROR entered, inverter_en=0.
+Testing 5.5: STOP Button (btnd) Priority Over START Button (btnu)...
+PASS: [5.5] Safety Priority verified: When btnu and btnd pressed simultaneously, STOP dominates (enable=0).
+Testing 5.6: Vdc DIP Switch Dynamic Reconfiguration...
+PASS: [5.6] Vdc switch setting successfully reflected on top-level status LEDs (led[7:4] = 1000).
+
+-------------------------------------------------------------------------------
+PHASE 6: TIMING MARGIN & LATENCY BUDGET
+-------------------------------------------------------------------------------
+PASS: [6.1] Full Top-Level MPC Pipeline Latency: 662 clock cycles (6.62 us).
+PASS: [6.2] Watchdog Timing Margin: 93.4 % idle headroom (Watchdog @ 99.0 us, Budget = 100.0 us).
+PASS: [6.3] Normal clean shutdown verified: btnd commanded STOP, inverter disabled and all gates off.
+
+===============================================================================
+FINAL VERIFICATION SUMMARY FOR mpc_top (tb_mpc_top):
+  TOTAL TESTS EVALUATED : 24
+  PASSED TESTS          : 24
+  FAILED TESTS          : 0
+  SUCCESS RATE          : 100.00 %
+STATUS: >>> ALL TOP-LEVEL ASSERTIONS PASSED WITH 100.00% RELIABILITY <<<
+===============================================================================
+
+$finish called at time : 11557125 ns : File "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_mpc_top.v" Line 1110
+exit
+INFO: [Common 17-206] Exiting xsim at Thu Oct 15 21:16:42 2026...

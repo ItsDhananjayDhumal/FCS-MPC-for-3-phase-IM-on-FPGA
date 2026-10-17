@@ -1,0 +1,1 @@
+-debug "typical" "tb_mpc_top" -s "sim_top_snap" 

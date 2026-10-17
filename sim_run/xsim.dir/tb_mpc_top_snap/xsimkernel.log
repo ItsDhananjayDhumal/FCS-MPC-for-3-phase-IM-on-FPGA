@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_mpc_top_snap/xsimk.exe -runall -simmode gui -wdb tb_mpc_top_snap.wdb -simrunnum 0 -socket 49830
+Design successfully loaded
+Design Loading Memory Usage: 9768 KB (Peak: 9768 KB)
+Design Loading CPU Usage: 31 ms
+Simulation completed
+Simulation Memory Usage: 11428 KB (Peak: 11428 KB)
+Simulation CPU Usage: 6890 ms

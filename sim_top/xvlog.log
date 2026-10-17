@@ -1,0 +1,3 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_mpc_top.v" into library work
+WARNING: [VRFC 10-3381] ignoring re-definition of command line macro 'SIMULATION' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sim_1/imports/tb/tb_mpc_top.v:90]
+INFO: [VRFC 10-311] analyzing module tb_mpc_top

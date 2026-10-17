@@ -14,6 +14,8 @@ module clarke_transform #(
     input  wire signed [12:0]  adc_offset,  // Dynamic offset from auto-tare calibration
     output reg  signed [DATA_WIDTH-1:0] i_alpha,
     output reg  signed [DATA_WIDTH-1:0] i_beta,
+    output wire signed [DATA_WIDTH-1:0] ia_out,  // Phase A current in Q12.20 Amperes
+    output wire signed [DATA_WIDTH-1:0] ib_out,  // Phase B current in Q12.20 Amperes
     output reg  done
 );
 
@@ -42,6 +44,9 @@ module clarke_transform #(
     reg signed [DATA_WIDTH-1:0] ia_signed, ib_signed;
     reg signed [DATA_WIDTH-1:0] ia, ib;
     reg signed [DATA_WIDTH-1:0] temp;
+
+    assign ia_out = ia;
+    assign ib_out = ib;
     
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin

@@ -130,7 +130,13 @@
 `define NUM_VECTORS 8
 
 // ADC auto-tare calibration parameters
-`define AUTOTARE_WARMUP_CYCLES 500000000  // 5 seconds at 100 MHz
+`ifndef AUTOTARE_WARMUP_CYCLES
+    `ifdef SIMULATION
+        `define AUTOTARE_WARMUP_CYCLES 100        // Fast warmup for simulation (1 us)
+    `else
+        `define AUTOTARE_WARMUP_CYCLES 500000000  // 5 seconds at 100 MHz
+    `endif
+`endif
 `define AUTOTARE_NUM_SAMPLES   256        // samples to average
 `define AUTOTARE_OUTLIER_THRESH 12'd100   // reject > 100 LSBs from running mean
 

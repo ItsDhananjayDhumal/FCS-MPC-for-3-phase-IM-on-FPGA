@@ -1,8 +1,9 @@
 `timescale 1ns / 1ps
 
 module control_fsm #(
-    parameter DATA_WIDTH = `DATA_WIDTH,
-    parameter FRAC_BITS  = `FRAC_BITS
+    parameter DATA_WIDTH = 32,
+    parameter FRAC_BITS  = 20,
+    parameter SIMULATION = 1'b0
 )(
     input  wire                          clk,
     input  wire                          rst_n,
@@ -57,6 +58,8 @@ module control_fsm #(
 
     output reg  signed [12:0]            adc_offset,     // Auto-tare calibrated ADC zero offset
     output reg                           cal_done,       // Calibration complete flag
+    output wire [2:0]                    cal_countdown,  // 5..1 seconds countdown during warmup
+    output reg  [1:0]                    fault_code,     // 0=NaN, 1=Overcurrent, 2=Premag, 3=Watchdog
 
     output reg  [4:0]                    fsm_state_out,  
     output reg                           heartbeat        
@@ -142,6 +145,16 @@ module control_fsm #(
     // Pre-magnetization registers
     reg [7:0] mag_cycle_cnt;         // magnetization Ts period counter
 
+    // Auto-tare calibration timing
+    localparam [28:0] WARMUP_MAX = SIMULATION ? 29'd100 : 29'd500_000_000;
+
+    // 5-second countdown signal for OLED display
+    assign cal_countdown = SIMULATION ? 3'd1 :
+                           (warmup_cnt < 29'd100_000_000) ? 3'd5 :
+                           (warmup_cnt < 29'd200_000_000) ? 3'd4 :
+                           (warmup_cnt < 29'd300_000_000) ? 3'd3 :
+                           (warmup_cnt < 29'd400_000_000) ? 3'd2 : 3'd1;
+
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             state            <= S_IDLE;
@@ -167,13 +180,15 @@ module control_fsm #(
             cal_accum_ch1    <= 0;
             cal_mean         <= 13'sd2048;
             mag_cycle_cnt    <= 0;
+            fault_code       <= 2'b00;      // 0 = NaN (no fault)
         end else if (ts_counter == 16'd9900 && state != S_WAIT_TS && state != S_IDLE && 
                      state != S_DISABLED && state != S_ERROR &&
                      state != S_CAL_WARMUP && state != S_CAL_ADC && state != S_CAL_WAIT &&
                      state != S_CAL_ACCUM && state != S_CAL_DONE &&
                      state != S_MAG_WAIT_TS && state != S_MAG_APPLY && 
                      state != S_MAG_ADC && state != S_MAG_WAIT_ADC && state != S_MAG_CHECK) begin
-            state <= S_ERROR;
+            state      <= S_ERROR;
+            fault_code <= 2'b11; // Watchdog Timeout
         end else begin
             
             adc_start      <= 1'b0;
@@ -229,7 +244,8 @@ module control_fsm #(
                             ($signed({1'b0, adc_data_ch0}) - adc_offset) < -`MAX_CURRENT_DELTA ||
                             ($signed({1'b0, adc_data_ch1}) - adc_offset) > `MAX_CURRENT_DELTA ||
                             ($signed({1'b0, adc_data_ch1}) - adc_offset) < -`MAX_CURRENT_DELTA) begin
-                            state <= S_ERROR; 
+                            state      <= S_ERROR; 
+                            fault_code <= 2'b01; // Normal Overcurrent (>5A)
                         end else begin
                             state <= S_CLARKE;
                         end
@@ -299,7 +315,10 @@ module control_fsm #(
                     // Tri-state coast: keep all gates LOW (no gate_update!)
                     // gate_switch_state does not matter since gate_update stays 0
                     // Heartbeat is frozen (handled below) to signal fault
-                    if (!enable) state <= S_IDLE; 
+                    if (!enable) begin
+                        state      <= S_IDLE; 
+                        fault_code <= 2'b00; // Clear fault code when acknowledged
+                    end
                 end
 
                 S_MPC_NEXT: begin
@@ -327,8 +346,8 @@ module control_fsm #(
                 // ============================================
 
                 S_CAL_WARMUP: begin
-                    // Wait 5 seconds for sensor/power supply to settle
-                    if (warmup_cnt >= `AUTOTARE_WARMUP_CYCLES) begin
+                    // Wait 5 seconds for sensor/power supply to settle (fast in simulation)
+                    if (warmup_cnt >= WARMUP_MAX) begin
                         warmup_cnt     <= 0;
                         cal_sample_cnt <= 0;
                         cal_valid_cnt  <= 0;
@@ -429,6 +448,7 @@ module control_fsm #(
                         gate_switch_state <= 3'b000;
                         gate_update       <= 1'b1;
                         state             <= S_ERROR;
+                        fault_code        <= 2'b10; // Pre-magnetization Overcurrent (>1.25A)
                     end else if (mag_cycle_cnt >= `MAG_CYCLES - 1) begin
                         // Magnetization complete: transition to normal MPC
                         mag_cycle_cnt <= 0;

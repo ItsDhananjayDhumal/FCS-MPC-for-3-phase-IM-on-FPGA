@@ -12,8 +12,8 @@
 - mpc_3_phase_im.srcs\sources_1\imports\rtl\motor_predictor.v
 - mpc_3_phase_im.srcs\sources_1\imports\rtl\cost_evaluator.v
 - mpc_3_phase_im.srcs\sources_1\imports\rtl\optimal_selector.v
-
 - mpc_3_phase_im.srcs\sources_1\imports\rtl\control_fsm.v
+
 - mpc_3_phase_im.srcs\sources_1\imports\rtl\mpc_top.v
 - mpc_3_phase_im.srcs\sources_1\imports\rtl\mpc_params.vh
 

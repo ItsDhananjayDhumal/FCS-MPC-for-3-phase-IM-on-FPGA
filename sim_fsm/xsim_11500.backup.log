@@ -1,0 +1,43 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sun Oct 11 18:02:22 2026
+# Process ID: 11500
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_fsm
+# Command line: xsim.exe -mode tcl -source {xsim.dir/sim_fsm_snap/xsim_script.tcl}
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_fsm/xsim.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/sim_fsm\xsim.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source xsim.dir/sim_fsm_snap/xsim_script.tcl
+# xsim {sim_fsm_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+===============================================================================
+STARTING EXTENSIVE CONTROL FSM INTEGRATED TESTBENCH (tb_control_fsm)
+===============================================================================
+
+-------------------------------------------------------------------------------
+PHASE 1: POWER-ON AUTO-TARE CALIBRATION & INITIALIZATION
+-------------------------------------------------------------------------------
+PASS: [1.1] Reset outputs clean: state=S_IDLE, gates=3'b000, cal_done=0.
+PASS: [1.2] FSM entered S_CAL_WARMUP (State 18) for power rail settling.
+Awaiting Auto-Tare Calibration completion (256 samples with outlier injection)...
+PASS: [1.3] Auto-tare calibration completed successfully (cal_done = 1).
+PASS: [1.4] Calibrated ADC zero-offset verified: 2048 counts (~2048 nominal). Outliers rejected cleanly.
+PASS: [1.5] FSM holding safely in S_DISABLED (State 15) with gates off while enable == 0.
+
+-------------------------------------------------------------------------------
+PHASE 2: PRE-MAGNETIZATION STARTUP (STANDSTILL DEADLOCK SOLUTION)
+-------------------------------------------------------------------------------
+PASS: [2.1] FSM entered Pre-Magnetization sequence (S_MAG_WAIT_TS = 23) upon enable.
+Simulating Pre-Magnetization flux buildup (MAG_CYCLES = 100)...
+PASS: [2.2] Rotor flux successfully established before closed loop: psi_alpha=0.523 Wb.
+PASS: [2.3] Pre-magnetization concluded cleanly, transitioned to normal MPC loop (S_WAIT_TS).
+
+-------------------------------------------------------------------------------
+PHASE 3: CLOSED-LOOP MOTOR PHYSICAL TRANSIENTS (MATCHING tb_cost_evaluator.v)
+-------------------------------------------------------------------------------
+Scenario 3.1: Closed-Loop Acceleration & Stabilization at 100 rad/s (600 Ts periods)...

@@ -1,0 +1,31 @@
+Vivado Simulator v2023.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe -top tb_mpc_top -snapshot tb_mpc_top_snap -debug typical 
+Multi-threading is on. Using 18 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'cost_overflow' remains unconnected for this instance [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_top.v:335]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.adc_pmod_ad1
+Compiling module work.encoder_reader
+Compiling module work.clarke_transform
+Compiling module work.flux_observer
+Compiling module work.vdc_manager
+Compiling module work.voltage_lut
+Compiling module work.motor_predictor
+Compiling module work.cost_evaluator_default
+Compiling module work.speed_pi
+Compiling module work.optimal_selector
+Compiling module work.gate_driver
+Compiling module work.control_fsm(SIMULATION=1'b1)
+Compiling module work.oled_formatter
+Compiling module work.oled_spi_tx_default
+Compiling module work.oled_font_rom
+Compiling module work.oled_controller(SIMULATION=1'b1)
+Compiling module work.mpc_top(DEBOUNCE_CYCLES=20'b0110...
+Compiling module work.tb_mpc_top
+Built simulation snapshot tb_mpc_top_snap
