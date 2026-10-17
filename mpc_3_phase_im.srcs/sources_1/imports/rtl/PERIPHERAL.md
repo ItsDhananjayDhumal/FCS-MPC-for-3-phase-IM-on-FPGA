@@ -44,16 +44,3 @@
 * > `JB7 (W9)` Phase C High (gate_ch)
 * > `JB8 (Y9):` Phase C Low (gate_cl)
 * > `JB9 (Y8)`: Inverter Hardware Enable (inverter_en)
-
-AUTOTARE TIME
-the autotare 0amp voltage value
-vdc value
-STATE START/STOP
-IN CASE OF FAULT THE REASON SHOULD BE SHOWN
-PEAK TO PEAK CURRENT VALUE SHOULD BE SHOWN continuously
-flux extimates
-rpm, torque
-
-Speed, Status, torque, DC-Bus Voltage (V_{dc})
-Stator Currents (Iₐ, I_b) and Flux Magnitude (|ψᵣ|), and reason of fault (nan if fault has not occured)
-ADC Raw Offsets and Auto-Tare Calibration Results, Pk pk current
