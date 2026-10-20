@@ -1,0 +1,1 @@
+-debug "typical" "tb_ac_current_test" -s "sim_ac_test" 

@@ -19,7 +19,7 @@
 // 3.3V / (4096 * 0.050 V/A) = 0.01611328 A/count -> 0.01611328 * 2^20 = 16896
 `define ADC_SCALE 32'sd16896
 
-`define ENCODER_PPR 2500
+`define ENCODER_PPR 1024
 `define ENCODER_CPR (`ENCODER_PPR * 4)
 `define NUM_POLES   4
 `define POLE_PAIRS (`NUM_POLES / 2)
@@ -32,14 +32,15 @@
 `define SPEED_ONE_MINUS_ALPHA 32'sd943718
 
 // =============================================================================
-// MOTOR PHYSICAL PARAMETERS (Default: 2.2 kW, 400V, 50 Hz, 4-Pole Motor)
-// Modify these base values when changing to a different induction motor!
+// MOTOR PHYSICAL PARAMETERS (0.75 kW / 1 HP, 400V, 50 Hz, 4-Pole, 1440 RPM Motor)
+// Rs=8.0 Ohm, Rr=6.5 Ohm, Lm=0.64 H, Lls=28.6 mH, Llr=28.6 mH
+// Ls = Lm + Lls = 668.6 mH, Lr = Lm + Llr = 668.6 mH
 // =============================================================================
-`define MOTOR_RS_MOHM      64'd1120       // Stator resistance: 1.12 Ohm (1120 mOhm)
-`define MOTOR_RR_MOHM      64'd1080       // Rotor resistance: 1.08 Ohm (1080 mOhm)
-`define MOTOR_LM_UH        64'd202950     // Mutual magnetizing inductance: 202.95 mH (202950 uH)
-`define MOTOR_LS_UH        64'd208930     // Stator total inductance (Lm + Lls): 208.93 mH (208930 uH)
-`define MOTOR_LR_UH        64'd208930     // Rotor total inductance (Lm + Llr): 208.93 mH (208930 uH)
+`define MOTOR_RS_MOHM      64'd8000       // Stator resistance: 8.0 Ohm (8000 mOhm)
+`define MOTOR_RR_MOHM      64'd6500       // Rotor resistance: 6.5 Ohm (6500 mOhm)
+`define MOTOR_LM_UH        64'd640000     // Mutual magnetizing inductance: 0.64 H (640000 uH)
+`define MOTOR_LS_UH        64'd668600     // Stator total inductance (Lm + Lls): 668.6 mH (668600 uH)
+`define MOTOR_LR_UH        64'd668600     // Rotor total inductance (Lm + Llr): 668.6 mH (668600 uH)
 `define MOTOR_FREQ_HZ      50             // Rated supply frequency (Hz)
 `define MOTOR_VOLTAGE_V    64'd400        // Rated line-to-line RMS voltage (V)
 
@@ -118,9 +119,9 @@
 `define SPEED_REF_DEFAULT 32'sd104857600
 
 `define PI_KP 32'sd524288       // K_P = 0.5 (Gentle, safe proportional response)
-`define PI_KI 32'sd10486       // K_I = 0.01 (Slow, safe integration: reaches 20 Nm smoothly in ~200 ms)
-`define TE_MAX 32'sd20971520    // T_MAX = 20 N.m
-`define TE_MIN -32'sd20971520   // T_MIN = -20 N.m
+`define PI_KI 32'sd10486       // K_I = 0.01 (Slow, safe integration: reaches 10 Nm smoothly in ~200 ms)
+`define TE_MAX 32'sd10485760    // T_MAX = 10 N.m (2x rated for 0.75 kW motor)
+`define TE_MIN -32'sd10485760   // T_MIN = -10 N.m
 
 // Overcurrent protection threshold: +/- 5.0 Amperes (in ADC counts)
 // 5.0 A / (0.01611328 A/count) = 310 counts
@@ -143,9 +144,9 @@
 // Pre-magnetization startup parameters
 `define MAG_VECTOR             3'b100     // V1 (Phase A high) for magnetization
 `define MAG_CYCLES             100        // Ts periods for magnetization
-// Pre-magnetization current limit: 25% of overcurrent threshold = 1.25 Amperes
-// 310 counts * 0.25 = 78 counts
-`define MAG_CURRENT_MAX_DELTA  13'sd78
-`define MAG_CURRENT_MAX        12'd950
+// Pre-magnetization current limit: 2.01 Amperes (allows 1.50A magnetizing current to establish)
+// 2.01 A / 0.01611328 = 125 counts
+`define MAG_CURRENT_MAX_DELTA  13'sd125
+`define MAG_CURRENT_MAX        12'd2300
 
 `endif

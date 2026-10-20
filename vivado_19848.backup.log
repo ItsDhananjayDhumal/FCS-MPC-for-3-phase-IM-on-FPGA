@@ -1,0 +1,1134 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sun Oct 18 23:55:07 2026
+# Process ID: 19848
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im
+# Command line: vivado.exe -mode batch -source ac_current_test/run_timing.tcl
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/vivado.log
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im\vivado.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source ac_current_test/run_timing.tcl
+# set_param general.maxThreads 8
+# create_project -in_memory -part xc7a200tsbg484-1
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 486.957 ; gain = 179.684
+# read_verilog "ac_current_test/ac_current_top.v"
+# read_verilog "ac_current_test/adc_pmod_ad1.v"
+# read_verilog "ac_current_test/oled_controller.v"
+# read_verilog "ac_current_test/oled_font_rom.v"
+# read_verilog "ac_current_test/oled_spi_tx.v"
+# read_xdc "ac_current_test/nexys_video_ac.xdc"
+# synth_design -top ac_current_top -part xc7a200tsbg484-1
+Command: synth_design -top ac_current_top -part xc7a200tsbg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Device 21-403] Loading part xc7a200tsbg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 31280
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1374.621 ; gain = 440.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'ac_current_top' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:31]
+INFO: [Synth 8-6157] synthesizing module 'adc_pmod_ad1' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/adc_pmod_ad1.v:5]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'adc_pmod_ad1' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/adc_pmod_ad1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'oled_controller' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/oled_controller.v:12]
+	Parameter SIMULATION bound to: 1'b0 
+INFO: [Synth 8-6157] synthesizing module 'oled_spi_tx' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/oled_spi_tx.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'oled_spi_tx' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/oled_spi_tx.v:10]
+INFO: [Synth 8-6157] synthesizing module 'oled_font_rom' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/oled_font_rom.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'oled_font_rom' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/oled_font_rom.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'oled_controller' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/oled_controller.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'ac_current_top' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:31]
+WARNING: [Synth 8-6014] Unused sequential element cal_accum_ch1_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:221]
+WARNING: [Synth 8-6014] Unused sequential element cal_mean_ch1_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:197]
+WARNING: [Synth 8-6014] Unused sequential element adc_offset_ch1_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:225]
+WARNING: [Synth 8-6014] Unused sequential element live_raw_ch0_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:231]
+WARNING: [Synth 8-6014] Unused sequential element live_raw_ch1_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:232]
+WARNING: [Synth 8-6014] Unused sequential element snap_off0_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:878]
+WARNING: [Synth 8-6014] Unused sequential element snap_mean_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/ac_current_top.v:880]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1541.375 ; gain = 606.754
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1541.375 ; gain = 606.754
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1541.375 ; gain = 606.754
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.070 . Memory (MB): peak = 1541.375 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc]
+Finished Parsing XDC File [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/ac_current_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/ac_current_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1604.402 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 1604.402 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1604.402 ; gain = 669.781
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a200tsbg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1604.402 ; gain = 669.781
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1604.402 ; gain = 669.781
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'adc_pmod_ad1'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'oled_spi_tx'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'oled_controller'
+INFO: [Synth 8-802] inferred FSM for state register 'calc_pipe_step_reg' in module 'ac_current_top'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              001 |                               00
+                     RUN |                              010 |                               01
+                   QUIET |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'adc_pmod_ad1'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  S_IDLE |                               00 |                               00
+                   S_LOW |                               01 |                               01
+                  S_HIGH |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'oled_spi_tx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+               S_PWR_OFF |                            00000 |                            00000
+               S_PWR_VDD |                            00001 |                            00001
+               S_RES_LOW |                            00010 |                            00010
+              S_RES_HIGH |                            00011 |                            00011
+           S_INIT_CMD_TX |                            00100 |                            00100
+         S_INIT_CMD_WAIT |                            00101 |                            00101
+           S_CLR_PG_CMD0 |                            00110 |                            00110
+           S_CLR_PG_CMD1 |                            00111 |                            00111
+           S_CLR_PG_CMD2 |                            01000 |                            01000
+           S_CLR_DATA_TX |                            01001 |                            01001
+         S_CLR_DATA_WAIT |                            01010 |                            01010
+              S_PWR_VBAT |                            01011 |                            01011
+            S_DISP_ON_TX |                            01100 |                            01100
+          S_DISP_ON_WAIT |                            01101 |                            01101
+           S_REF_PG_CMD0 |                            01110 |                            01110
+           S_REF_PG_CMD1 |                            01111 |                            01111
+           S_REF_PG_CMD2 |                            10000 |                            10000
+             S_REF_FETCH |                            10001 |                            10001
+           S_REF_DATA_TX |                            10010 |                            10010
+         S_REF_DATA_WAIT |                            10011 |                            10011
+           S_FRAME_DELAY |                            10100 |                            10100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'oled_controller'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              000 |                              000
+                 iSTATE0 |                              001 |                              001
+                 iSTATE1 |                              010 |                              010
+                 iSTATE2 |                              011 |                              011
+                 iSTATE3 |                              100 |                              100
+                 iSTATE4 |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'calc_pipe_step_reg' using encoding 'sequential' in module 'ac_current_top'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1604.402 ; gain = 669.781
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   29 Bit       Adders := 1     
+	   2 Input   24 Bit       Adders := 3     
+	   2 Input   20 Bit       Adders := 3     
+	   4 Input   17 Bit       Adders := 2     
+	   2 Input   16 Bit       Adders := 7     
+	   3 Input   14 Bit       Adders := 2     
+	   2 Input   14 Bit       Adders := 1     
+	   2 Input   13 Bit       Adders := 3     
+	   2 Input   12 Bit       Adders := 11    
+	   3 Input   12 Bit       Adders := 2     
+	   2 Input   11 Bit       Adders := 3     
+	   2 Input   10 Bit       Adders := 36    
+	   2 Input    9 Bit       Adders := 1     
+	   2 Input    8 Bit       Adders := 4     
+	   2 Input    7 Bit       Adders := 64    
+	   2 Input    5 Bit       Adders := 3     
+	   2 Input    4 Bit       Adders := 71    
+	   2 Input    3 Bit       Adders := 5     
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 4     
+	               29 Bit    Registers := 1     
+	               24 Bit    Registers := 2     
+	               20 Bit    Registers := 1     
+	               17 Bit    Registers := 2     
+	               16 Bit    Registers := 35    
+	               13 Bit    Registers := 2     
+	               12 Bit    Registers := 57    
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 69    
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 3     
+	                4 Bit    Registers := 42    
+	                3 Bit    Registers := 7     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 32    
++---Muxes : 
+	   2 Input   41 Bit        Muxes := 2     
+	   2 Input   29 Bit        Muxes := 2     
+	   2 Input   28 Bit        Muxes := 2     
+	   2 Input   25 Bit        Muxes := 2     
+	   2 Input   24 Bit        Muxes := 3     
+	  21 Input   24 Bit        Muxes := 1     
+	  13 Input   24 Bit        Muxes := 1     
+	   2 Input   20 Bit        Muxes := 2     
+	   2 Input   17 Bit        Muxes := 4     
+	   2 Input   16 Bit        Muxes := 16    
+	  13 Input   16 Bit        Muxes := 3     
+	   2 Input   13 Bit        Muxes := 3     
+	  13 Input   13 Bit        Muxes := 1     
+	   2 Input   12 Bit        Muxes := 99    
+	   2 Input    9 Bit        Muxes := 3     
+	   3 Input    8 Bit        Muxes := 1     
+	   6 Input    8 Bit        Muxes := 5     
+	   5 Input    8 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 5     
+	  21 Input    8 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 108   
+	   6 Input    7 Bit        Muxes := 54    
+	   4 Input    7 Bit        Muxes := 12    
+	   5 Input    7 Bit        Muxes := 24    
+	  21 Input    7 Bit        Muxes := 1     
+	   3 Input    7 Bit        Muxes := 3     
+	   6 Input    6 Bit        Muxes := 2     
+	   2 Input    6 Bit        Muxes := 13    
+	  21 Input    6 Bit        Muxes := 1     
+	   3 Input    5 Bit        Muxes := 1     
+	   6 Input    5 Bit        Muxes := 1     
+	  21 Input    5 Bit        Muxes := 2     
+	   2 Input    5 Bit        Muxes := 7     
+	   2 Input    4 Bit        Muxes := 4     
+	   3 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 1     
+	  21 Input    4 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 1     
+	  10 Input    4 Bit        Muxes := 3     
+	   2 Input    3 Bit        Muxes := 6     
+	   3 Input    3 Bit        Muxes := 4     
+	  21 Input    3 Bit        Muxes := 2     
+	   7 Input    3 Bit        Muxes := 2     
+	   5 Input    3 Bit        Muxes := 5     
+	   3 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 4     
+	  21 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 73    
+	   3 Input    1 Bit        Muxes := 42    
+	   4 Input    1 Bit        Muxes := 1     
+	  21 Input    1 Bit        Muxes := 21    
+	  13 Input    1 Bit        Muxes := 10    
+	   6 Input    1 Bit        Muxes := 6     
+	   7 Input    1 Bit        Muxes := 9     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 740 (col length:100)
+BRAMs: 730 (col length: RAMB18 100 RAMB36 50)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP prod_pp_ch1, operation Mode is: C+A*B.
+DSP Report: operator prod_pp_ch1 is absorbed into DSP prod_pp_ch1.
+DSP Report: operator prod_pp_ch1 is absorbed into DSP prod_pp_ch1.
+DSP Report: Generating DSP prod_pp_ch0, operation Mode is: C+A*B.
+DSP Report: operator prod_pp_ch0 is absorbed into DSP prod_pp_ch0.
+DSP Report: operator prod_pp_ch0 is absorbed into DSP prod_pp_ch0.
+DSP Report: Generating DSP i_pp_calc_ch00, operation Mode is: (C:0x400)+(A:0x80e8)*B.
+DSP Report: operator i_pp_calc_ch00 is absorbed into DSP i_pp_calc_ch00.
+DSP Report: operator i_pp_calc_ch01 is absorbed into DSP i_pp_calc_ch00.
+DSP Report: Generating DSP i_rms_calc_ch00, operation Mode is: (C:0x200)+A*(B:0x16a).
+DSP Report: operator i_rms_calc_ch00 is absorbed into DSP i_rms_calc_ch00.
+DSP Report: operator i_rms_calc_ch01 is absorbed into DSP i_rms_calc_ch00.
+DSP Report: Generating DSP i_pp_calc_ch10, operation Mode is: (C:0x400)+(A:0x80e8)*B.
+DSP Report: operator i_pp_calc_ch10 is absorbed into DSP i_pp_calc_ch10.
+DSP Report: operator i_pp_calc_ch11 is absorbed into DSP i_pp_calc_ch10.
+DSP Report: Generating DSP i_rms_calc_ch10, operation Mode is: (C:0x200)+A*(B:0x16a).
+DSP Report: operator i_rms_calc_ch10 is absorbed into DSP i_rms_calc_ch10.
+DSP Report: operator i_rms_calc_ch11 is absorbed into DSP i_rms_calc_ch10.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:38 . Memory (MB): peak = 1604.402 ; gain = 669.781
+---------------------------------------------------------------------------------
+ Sort Area is  prod_pp_ch0_2 : 0 0 : 2988 2988 : Used 1 time 0
+ Sort Area is  prod_pp_ch1_0 : 0 0 : 2988 2988 : Used 1 time 0
+ Sort Area is  i_rms_calc_ch00_5 : 0 0 : 492 492 : Used 1 time 0
+ Sort Area is  i_rms_calc_ch10_8 : 0 0 : 492 492 : Used 1 time 0
+ Sort Area is  i_pp_calc_ch00_3 : 0 0 : 427 427 : Used 1 time 0
+ Sort Area is  i_pp_calc_ch10_7 : 0 0 : 427 427 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++----------------+--------------+---------------+----------------+
+|Module Name     | RTL Object   | Depth x Width | Implemented As | 
++----------------+--------------+---------------+----------------+
+|oled_controller | get_init_cmd | 32x8          | LUT            | 
+|ac_current_top  | recip_mult   | 32x25         | LUT            | 
+|oled_controller | get_init_cmd | 32x8          | LUT            | 
+|ac_current_top  | recip_mult   | 32x25         | LUT            | 
++----------------+--------------+---------------+----------------+
+
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++---------------+------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name    | DSP Mapping            | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++---------------+------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|ac_current_top | C+A*B                  | 24     | 17     | 36     | -      | 36     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | C+A*B                  | 24     | 17     | 36     | -      | 36     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | (C:0x400)+(A:0x80e8)*B | 12     | 16     | 11     | -      | 28     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | (C:0x200)+A*(B:0x16a)  | 16     | 9      | 10     | -      | 25     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | (C:0x400)+(A:0x80e8)*B | 12     | 16     | 11     | -      | 28     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | (C:0x200)+A*(B:0x16a)  | 16     | 9      | 10     | -      | 25     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
++---------------+------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:41 ; elapsed = 00:00:45 . Memory (MB): peak = 1604.402 ; gain = 669.781
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:44 ; elapsed = 00:00:49 . Memory (MB): peak = 1604.402 ; gain = 669.781
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:46 ; elapsed = 00:00:51 . Memory (MB): peak = 1648.301 ; gain = 713.680
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:49 ; elapsed = 00:00:55 . Memory (MB): peak = 1661.082 ; gain = 726.461
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:49 ; elapsed = 00:00:55 . Memory (MB): peak = 1661.082 ; gain = 726.461
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:49 ; elapsed = 00:00:55 . Memory (MB): peak = 1661.082 ; gain = 726.461
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:49 ; elapsed = 00:00:55 . Memory (MB): peak = 1661.082 ; gain = 726.461
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:50 ; elapsed = 00:00:55 . Memory (MB): peak = 1661.082 ; gain = 726.461
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:50 ; elapsed = 00:00:55 . Memory (MB): peak = 1661.082 ; gain = 726.461
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++---------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name    | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++---------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|ac_current_top | Dynamic     | -      | -      | -      | -      | 36     | -    | -    | -    | -    | -     | 0    | 0    | 
+|ac_current_top | Dynamic     | -      | -      | -      | -      | 36     | -    | -    | -    | -    | -     | 0    | 0    | 
+|ac_current_top | C+A*B       | 12     | 16     | 11     | -      | 28     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | C+A*B       | 16     | 9      | 10     | -      | 25     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | C+A*B       | 12     | 16     | 11     | -      | 28     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|ac_current_top | C+A*B       | 16     | 9      | 10     | -      | 25     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
++---------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     1|
+|2     |CARRY4  |   167|
+|3     |DSP48E1 |     6|
+|4     |LUT1    |    81|
+|5     |LUT2    |   526|
+|6     |LUT3    |   313|
+|7     |LUT4    |   320|
+|8     |LUT5    |   972|
+|9     |LUT6    |   840|
+|10    |MUXF7   |   126|
+|11    |MUXF8   |    46|
+|12    |FDCE    |  1824|
+|13    |FDPE    |    37|
+|14    |IBUF    |     7|
+|15    |OBUF    |    16|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:50 ; elapsed = 00:00:55 . Memory (MB): peak = 1661.082 ; gain = 726.461
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:41 ; elapsed = 00:00:53 . Memory (MB): peak = 1661.082 ; gain = 663.434
+Synthesis Optimization Complete : Time (s): cpu = 00:00:50 ; elapsed = 00:00:56 . Memory (MB): peak = 1661.082 ; gain = 726.461
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 1673.152 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 345 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc]
+WARNING: [Constraints 18-402] set_false_path: 'rst_sync2_i_1' is not a valid startpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:78]
+Resolution: A valid start point is a main or generated clock pin or port, a clock pin of a sequential cell, or a primary input or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_1' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_10' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_11' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_4' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_5' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_6' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_7' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[0]_i_8' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_1' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_10' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_11' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_4' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_5' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_6' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_8' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[1]_i_9' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_10' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_11' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_14' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_2' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_3' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_4' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_6' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[2]_i_7' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_10' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_11' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_2' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_3' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_4' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_5' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_6' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[3]_i_7' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[4]_i_1' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[4]_i_5' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[4]_i_8' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[4]_i_9' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[6]_i_2' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[6]_i_7' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+WARNING: [Constraints 18-401] set_false_path: 'u_oled/font_ascii_reg[6]_i_9' is not a valid endpoint. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc:84]
+Resolution: A valid end point is a data pin of a sequential cell or a primary output or inout port. Please validate that all the objects returned by your query belong to this list.
+Finished Parsing XDC File [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/ac_current_test/nexys_video_ac.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1679.883 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: af0db07d
+INFO: [Common 17-83] Releasing license: Synthesis
+33 Infos, 48 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:55 ; elapsed = 00:01:03 . Memory (MB): peak = 1679.883 ; gain = 1192.926
+# opt_design
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a200t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.828 . Memory (MB): peak = 1679.883 ; gain = 0.000
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 10d96dfa5
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1761.891 ; gain = 82.008
+
+Starting Logic Optimization Task
+
+Phase 1 Initialization
+
+Phase 1.1 Core Generation And Design Setup
+Phase 1.1 Core Generation And Design Setup | Checksum: 10d96dfa5
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 1.2 Setup Constraints And Sort Netlist
+Phase 1.2 Setup Constraints And Sort Netlist | Checksum: 10d96dfa5
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 1 Initialization | Checksum: 10d96dfa5
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 2 Timer Update And Timing Data Collection
+
+Phase 2.1 Timer Update
+Phase 2.1 Timer Update | Checksum: 10d96dfa5
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.069 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 2.2 Timing Data Collection
+Phase 2.2 Timing Data Collection | Checksum: 10d96dfa5
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.078 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 2 Timer Update And Timing Data Collection | Checksum: 10d96dfa5
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.079 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3 Retarget
+INFO: [Opt 31-1566] Pulled 4 inverters resulting in an inversion of 43 pins
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 3 Retarget | Checksum: 17dce51e9
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.143 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Retarget | Checksum: 17dce51e9
+INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 4 cells
+
+Phase 4 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 4 Constant propagation | Checksum: 14415be9e
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.187 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Constant propagation | Checksum: 14415be9e
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
+
+Phase 5 Sweep
+Phase 5 Sweep | Checksum: 11cf9e051
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.234 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Sweep | Checksum: 11cf9e051
+INFO: [Opt 31-389] Phase Sweep created 2 cells and removed 0 cells
+
+Phase 6 BUFG optimization
+Phase 6 BUFG optimization | Checksum: 11cf9e051
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.277 . Memory (MB): peak = 2123.855 ; gain = 0.000
+BUFG optimization | Checksum: 11cf9e051
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 7 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 7 Shift Register Optimization | Checksum: 11cf9e051
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.281 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Shift Register Optimization | Checksum: 11cf9e051
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 8 Post Processing Netlist
+Phase 8 Post Processing Netlist | Checksum: 11cf9e051
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.294 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Post Processing Netlist | Checksum: 11cf9e051
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+
+Phase 9 Finalization
+
+Phase 9.1 Finalizing Design Cores and Updating Shapes
+Phase 9.1 Finalizing Design Cores and Updating Shapes | Checksum: 9a6a175f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.358 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 9.2 Verifying Netlist Connectivity
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 9.2 Verifying Netlist Connectivity | Checksum: 9a6a175f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.366 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 9 Finalization | Checksum: 9a6a175f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.367 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |               0  |               4  |                                              0  |
+|  Constant propagation         |               0  |               0  |                                              0  |
+|  Sweep                        |               2  |               0  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Ending Logic Optimization Task | Checksum: 9a6a175f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.368 . Memory (MB): peak = 2123.855 ; gain = 0.000
+INFO: [Constraints 18-11670] Building netlist checker database with flags, 0x8
+Done building netlist checker database: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 9a6a175f
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 9a6a175f
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Ending Netlist Obfuscation Task | Checksum: 9a6a175f
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2123.855 ; gain = 0.000
+INFO: [Common 17-83] Releasing license: Implementation
+19 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:08 ; elapsed = 00:00:07 . Memory (MB): peak = 2123.855 ; gain = 443.973
+# place_design
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a200t'
+INFO: [Common 17-83] Releasing license: Implementation
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 6481b970
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 1ae13a28d
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.511 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 1c5629f73
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1c5629f73
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: 1c5629f73
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 2179a362a
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:02 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 1e056fdbb
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:02 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 2.3 Post-Processing in Floorplanning
+Phase 2.3 Post-Processing in Floorplanning | Checksum: 1e056fdbb
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:02 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 2.4 Global Placement Core
+
+Phase 2.4.1 UpdateTiming Before Physical Synthesis
+Phase 2.4.1 UpdateTiming Before Physical Synthesis | Checksum: 22521b4f3
+
+Time (s): cpu = 00:00:30 ; elapsed = 00:00:11 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 2.4.2 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 0 LUTNM shape to break, 104 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 0, two critical 0, total 0, new lutff created 0
+INFO: [Physopt 32-1138] End 1 Pass. Optimized 48 nets or LUTs. Breaked 0 LUT, combined 48 existing LUTs and moved 0 existing LUT
+INFO: [Physopt 32-65] No nets found for high-fanout optimization.
+INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-670] No setup violation found.  DSP Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register to Pipeline Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  BRAM Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  URAM Register Optimization was not performed.
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |            0  |             48  |                    48  |           0  |           1  |  00:00:00  |
+|  Retime                                           |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |            0  |             48  |                    48  |           0  |           4  |  00:00:00  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.4.2 Physical Synthesis In Placer | Checksum: 1bda94473
+
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:11 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 2.4 Global Placement Core | Checksum: 142aebda0
+
+Time (s): cpu = 00:00:33 ; elapsed = 00:00:12 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 2 Global Placement | Checksum: 142aebda0
+
+Time (s): cpu = 00:00:33 ; elapsed = 00:00:12 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 1882bb933
+
+Time (s): cpu = 00:00:34 ; elapsed = 00:00:12 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 1239a7792
+
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:13 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: fc45df2b
+
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:13 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: 1b1f25587
+
+Time (s): cpu = 00:00:35 ; elapsed = 00:00:13 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3.5 Small Shape Detail Placement
+Phase 3.5 Small Shape Detail Placement | Checksum: 178ef443c
+
+Time (s): cpu = 00:00:38 ; elapsed = 00:00:14 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3.6 Re-assign LUT pins
+Phase 3.6 Re-assign LUT pins | Checksum: 19e0796b2
+
+Time (s): cpu = 00:00:38 ; elapsed = 00:00:14 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 3.7 Pipeline Register Optimization
+Phase 3.7 Pipeline Register Optimization | Checksum: 1d1f5834f
+
+Time (s): cpu = 00:00:38 ; elapsed = 00:00:14 . Memory (MB): peak = 2123.855 ; gain = 0.000
+Phase 3 Detail Placement | Checksum: 1d1f5834f
+
+Time (s): cpu = 00:00:38 ; elapsed = 00:00:14 . Memory (MB): peak = 2123.855 ; gain = 0.000
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: 1a0e7c54b
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 8 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.011 | TNS=0.000 |
+Phase 1 Physical Synthesis Initialization | Checksum: 180cae683
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.141 . Memory (MB): peak = 2129.871 ; gain = 0.000
+INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to netlist editing failed: 0.
+Ending Physical Synthesis Task | Checksum: 180cae683
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.182 . Memory (MB): peak = 2129.871 ; gain = 0.000
+Phase 4.1.1.1 BUFG Insertion | Checksum: 1a0e7c54b
+
+Time (s): cpu = 00:00:41 ; elapsed = 00:00:15 . Memory (MB): peak = 2129.871 ; gain = 6.016
+
+Phase 4.1.1.2 Post Placement Timing Optimization
+INFO: [Place 30-746] Post Placement Timing Summary WNS=0.517. For the most accurate timing information please run report_timing.
+Phase 4.1.1.2 Post Placement Timing Optimization | Checksum: 24b79d72e
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+Phase 4.1 Post Commit Optimization | Checksum: 24b79d72e
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 24b79d72e
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                1x1|                1x1|
+|___________|___________________|___________________|
+|      South|                1x1|                1x1|
+|___________|___________________|___________________|
+|       East|                1x1|                1x1|
+|___________|___________________|___________________|
+|       West|                1x1|                1x1|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 24b79d72e
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+Phase 4.3 Placer Reporting | Checksum: 24b79d72e
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2129.871 ; gain = 0.000
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1a86266ed
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+Ending Placer Task | Checksum: 13d7e1cf2
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+29 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:00:46 ; elapsed = 00:00:19 . Memory (MB): peak = 2129.871 ; gain = 6.016
+# route_design
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a200t'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: f82290e0 ConstDB: 0 ShapeSum: 455b8c12 RouteDB: 0
+Post Restoration Checksum: NetGraph: 4ecc5b29 | NumContArr: f83e967f | Constraints: c2a8fa9d | Timing: c2a8fa9d
+Phase 1 Build RT Design | Checksum: 2cc5ce6e2
+
+Time (s): cpu = 00:00:53 ; elapsed = 00:00:50 . Memory (MB): peak = 2233.023 ; gain = 95.168
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 2cc5ce6e2
+
+Time (s): cpu = 00:00:54 ; elapsed = 00:00:50 . Memory (MB): peak = 2233.023 ; gain = 95.168
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 2cc5ce6e2
+
+Time (s): cpu = 00:00:54 ; elapsed = 00:00:50 . Memory (MB): peak = 2233.023 ; gain = 95.168
+ Number of Nodes with overlaps = 0
+
+Phase 2.3 Update Timing
+Phase 2.3 Update Timing | Checksum: 198d1c2e4
+
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:51 . Memory (MB): peak = 2374.215 ; gain = 236.359
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.487  | TNS=0.000  | WHS=-0.154 | THS=-40.564|
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 3465
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 3465
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 21f18e7d3
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:52 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 21f18e7d3
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:52 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 3.2 Initial Net Routing
+Phase 3.2 Initial Net Routing | Checksum: 2199cf671
+
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:52 . Memory (MB): peak = 2395.883 ; gain = 258.027
+Phase 3 Initial Routing | Checksum: 2199cf671
+
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:52 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 396
+ Number of Nodes with overlaps = 45
+ Number of Nodes with overlaps = 17
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.293  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.1 Global Iteration 0 | Checksum: 27752663f
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:54 . Memory (MB): peak = 2395.883 ; gain = 258.027
+Phase 4 Rip-up And Reroute | Checksum: 27752663f
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:54 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+
+Phase 5.1.1 Update Timing
+Phase 5.1.1 Update Timing | Checksum: 2a5722289
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.389  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 5.1 Delay CleanUp | Checksum: 2a5722289
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 2a5722289
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+Phase 5 Delay and Skew Optimization | Checksum: 2a5722289
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 2fbef3ba7
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.389  | TNS=0.000  | WHS=0.058  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 2e4feb108
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+Phase 6 Post Hold Fix | Checksum: 2e4feb108
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.224436 %
+  Global Horizontal Routing Utilization  = 0.288764 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 2e4feb108
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 2e4feb108
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 31649b39d
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.389  | TNS=0.000  | WHS=0.058  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 31649b39d
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+INFO: [Route 35-16] Router Completed Successfully
+
+Phase 11 Post-Route Event Processing
+Phase 11 Post-Route Event Processing | Checksum: 12dccd0bb
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+Ending Routing Task | Checksum: 12dccd0bb
+
+Time (s): cpu = 00:01:04 ; elapsed = 00:00:55 . Memory (MB): peak = 2395.883 ; gain = 258.027
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+13 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:01:06 ; elapsed = 00:00:56 . Memory (MB): peak = 2395.883 ; gain = 266.012
+# report_timing_summary -max_paths 10 -file ac_current_test/ac_current_top_timing_summary_routed.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+# report_utilization -file ac_current_test/ac_current_top_utilization_routed.rpt
+# set wns [get_property SLACK [get_timing_paths -max_paths 1 -nworst 1 -setup]]
+# puts "========================================================="
+=========================================================
+# puts "FINAL ROUTED WNS: $wns ns"
+FINAL ROUTED WNS: 0.386 ns
+# puts "========================================================="
+=========================================================
+# if {$wns < 0.0} {
+#     puts "CRITICAL: TIMING VIOLATION DETECTED"
+#     exit 1
+# } else {
+#     puts "SUCCESS: TIMING CONSTRAINTS MET (WNS >= 0.000 ns)"
+# }
+SUCCESS: TIMING CONSTRAINTS MET (WNS >= 0.000 ns)
+INFO: [Common 17-206] Exiting Vivado at Sun Oct 18 23:57:41 2026...

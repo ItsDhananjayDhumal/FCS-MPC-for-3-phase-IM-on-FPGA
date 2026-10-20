@@ -164,13 +164,14 @@ module cost_evaluator #(
                     end
                     3: begin
                         cross2 <= mul_saturated;
-                        cross_diff <= sat_sub(cross1, mul_saturated);
-                        if (mul_overflow || is_sub_ovf(cross1, mul_saturated))
-                            overflow_latched <= 1'b1;
+                        if (mul_overflow) overflow_latched <= 1'b1;
                     end
                     4: begin
+                        cross_diff <= sat_sub(cross1, cross2);
+                        if (is_sub_ovf(cross1, cross2))
+                            overflow_latched <= 1'b1;
                         mul_a <= KT;
-                        mul_b <= cross_diff; 
+                        mul_b <= sat_sub(cross1, cross2); 
                     end
                     5: begin
                         // Wait for multiplier pipeline
@@ -211,18 +212,19 @@ module cost_evaluator #(
                     end
                     14: begin
                         psi_b_sq <= mul_saturated;
-                        psi_sq <= sat_add(psi_a_sq, mul_saturated);
-                        if (mul_overflow || is_add_ovf(psi_a_sq, mul_saturated))
-                            overflow_latched <= 1'b1;
+                        if (mul_overflow) overflow_latched <= 1'b1;
                     end
                     15: begin
-                        flux_err <= sat_sub(PSI_REF_SQ, psi_sq);
-                        if (is_sub_ovf(PSI_REF_SQ, psi_sq))
+                        psi_sq <= sat_add(psi_a_sq, psi_b_sq);
+                        if (is_add_ovf(psi_a_sq, psi_b_sq))
                             overflow_latched <= 1'b1;
                     end
                     16: begin
-                        mul_a <= flux_err;
-                        mul_b <= flux_err;
+                        flux_err <= sat_sub(PSI_REF_SQ, psi_sq);
+                        if (is_sub_ovf(PSI_REF_SQ, psi_sq))
+                            overflow_latched <= 1'b1;
+                        mul_a <= sat_sub(PSI_REF_SQ, psi_sq);
+                        mul_b <= sat_sub(PSI_REF_SQ, psi_sq);
                     end
                     17: begin
                         // Wait for multiplier pipeline

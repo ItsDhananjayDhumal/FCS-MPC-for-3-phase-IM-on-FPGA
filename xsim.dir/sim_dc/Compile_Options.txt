@@ -1,0 +1,1 @@
+--nolog -top "tb_dc_current_test" -s "sim_dc" 

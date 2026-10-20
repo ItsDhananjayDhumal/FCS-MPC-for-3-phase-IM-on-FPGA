@@ -136,11 +136,21 @@ module control_fsm #(
 
     // Auto-tare calibration registers
     reg [28:0] warmup_cnt;           // 5-second warmup counter
-    reg [8:0]  cal_sample_cnt;       // sample counter (0-255)
-    reg [8:0]  cal_valid_cnt;        // count of non-outlier samples
-    reg signed [23:0] cal_accum_ch0; // accumulator for ch0 (enough for 256*4095)
+    reg [15:0] cal_sample_cnt;       // sample attempt counter
+    reg [15:0] cal_valid_cnt;        // count of non-outlier samples
+    reg signed [23:0] cal_accum_ch0; // accumulator for ch0 (256 * 4095 fits in 21 bits)
     reg signed [23:0] cal_accum_ch1; // accumulator for ch1
     reg signed [12:0] cal_mean;      // running mean estimate
+    wire signed [13:0] cal_ch0_diff = $signed({1'b0, adc_data_ch0}) - cal_mean;
+
+    // 4x ADC Oversampling Registers and Wires
+    reg  [1:0]  os_cnt;           // Oversampling sample index (0..3)
+    reg  [13:0] os_accum_ch0;     // Accumulates 4 x 12-bit ADC samples (max 16380, fits in 14 bits)
+    reg  [13:0] os_accum_ch1;     // Accumulates 4 x 12-bit ADC samples
+    wire [13:0] os_sum_ch0 = os_accum_ch0 + {2'b00, adc_data_ch0};
+    wire [13:0] os_sum_ch1 = os_accum_ch1 + {2'b00, adc_data_ch1};
+    wire [11:0] os_avg_ch0 = (os_sum_ch0 + 14'd2) >> 2;
+    wire [11:0] os_avg_ch1 = (os_sum_ch1 + 14'd2) >> 2;
 
     // Pre-magnetization registers
     reg [7:0] mag_cycle_cnt;         // magnetization Ts period counter
@@ -181,6 +191,9 @@ module control_fsm #(
             cal_mean         <= 13'sd2048;
             mag_cycle_cnt    <= 0;
             fault_code       <= 2'b00;      // 0 = NaN (no fault)
+            os_cnt           <= 2'd0;
+            os_accum_ch0     <= 14'd0;
+            os_accum_ch1     <= 14'd0;
         end else if (ts_counter == 16'd9900 && state != S_WAIT_TS && state != S_IDLE && 
                      state != S_DISABLED && state != S_ERROR &&
                      state != S_CAL_WARMUP && state != S_CAL_ADC && state != S_CAL_WAIT &&
@@ -230,24 +243,37 @@ module control_fsm #(
                 end
 
                 S_START_ADC: begin
-                    adc_start <= 1'b1;
-                    state <= S_WAIT_ADC;
+                    adc_start    <= 1'b1;
+                    os_cnt       <= 2'd0;
+                    os_accum_ch0 <= 14'd0;
+                    os_accum_ch1 <= 14'd0;
+                    state        <= S_WAIT_ADC;
                 end
 
                 S_WAIT_ADC: begin
                     if (adc_done) begin
-                        clarke_ia_raw <= adc_data_ch0;
-                        clarke_ib_raw <= adc_data_ch1;
+                        if (os_cnt == 2'd3) begin
+                            // 4th sample complete: latch rounded 4x average
+                            clarke_ia_raw <= os_avg_ch0;
+                            clarke_ib_raw <= os_avg_ch1;
 
-                        // Symmetric overcurrent protection around calibrated zero offset (+/- 5.0A = +/- 310 counts)
-                        if (($signed({1'b0, adc_data_ch0}) - adc_offset) > `MAX_CURRENT_DELTA ||
-                            ($signed({1'b0, adc_data_ch0}) - adc_offset) < -`MAX_CURRENT_DELTA ||
-                            ($signed({1'b0, adc_data_ch1}) - adc_offset) > `MAX_CURRENT_DELTA ||
-                            ($signed({1'b0, adc_data_ch1}) - adc_offset) < -`MAX_CURRENT_DELTA) begin
-                            state      <= S_ERROR; 
-                            fault_code <= 2'b01; // Normal Overcurrent (>5A)
+                            // Symmetric overcurrent protection using 4x filtered current (+/- 5.0A = +/- 310 counts)
+                            if (($signed({1'b0, os_avg_ch0}) - adc_offset) > `MAX_CURRENT_DELTA ||
+                                ($signed({1'b0, os_avg_ch0}) - adc_offset) < -`MAX_CURRENT_DELTA ||
+                                ($signed({1'b0, os_avg_ch1}) - adc_offset) > `MAX_CURRENT_DELTA ||
+                                ($signed({1'b0, os_avg_ch1}) - adc_offset) < -`MAX_CURRENT_DELTA) begin
+                                state      <= S_ERROR; 
+                                fault_code <= 2'b01; // Normal Overcurrent (>5A)
+                            end else begin
+                                state <= S_CLARKE;
+                            end
                         end else begin
-                            state <= S_CLARKE;
+                            // Accumulate sample and immediately trigger next conversion
+                            os_accum_ch0 <= os_sum_ch0;
+                            os_accum_ch1 <= os_sum_ch1;
+                            os_cnt       <= os_cnt + 2'd1;
+                            adc_start    <= 1'b1;
+                            state        <= S_WAIT_ADC;
                         end
                     end
                 end
@@ -348,15 +374,15 @@ module control_fsm #(
                 S_CAL_WARMUP: begin
                     // Wait 5 seconds for sensor/power supply to settle (fast in simulation)
                     if (warmup_cnt >= WARMUP_MAX) begin
-                        warmup_cnt     <= 0;
-                        cal_sample_cnt <= 0;
-                        cal_valid_cnt  <= 0;
-                        cal_accum_ch0  <= 0;
-                        cal_accum_ch1  <= 0;
+                        warmup_cnt     <= 29'd0;
+                        cal_sample_cnt <= 16'd0;
+                        cal_valid_cnt  <= 16'd0;
+                        cal_accum_ch0  <= 24'sd0;
+                        cal_accum_ch1  <= 24'sd0;
                         cal_mean       <= 13'sd2048; // Initial estimate
                         state          <= S_CAL_ADC;
                     end else begin
-                        warmup_cnt <= warmup_cnt + 1;
+                        warmup_cnt <= warmup_cnt + 29'd1;
                     end
                 end
 
@@ -374,22 +400,27 @@ module control_fsm #(
                 end
 
                 S_CAL_ACCUM: begin
-                    // Outlier rejection: check if sample is within ±THRESHOLD of mean
-                    if (($signed({1'b0, adc_data_ch0}) > (cal_mean - `AUTOTARE_OUTLIER_THRESH)) &&
-                        ($signed({1'b0, adc_data_ch0}) < (cal_mean + `AUTOTARE_OUTLIER_THRESH))) begin
+                    // Outlier rejection: accept sample if within ±THRESHOLD of mean
+                    // On first sample (cal_valid_cnt == 0), seed cal_mean directly
+                    if (cal_valid_cnt == 16'd0) begin
+                        cal_mean      <= $signed({1'b0, adc_data_ch0});
+                        cal_accum_ch0 <= $signed({1'b0, adc_data_ch0});
+                        cal_accum_ch1 <= $signed({1'b0, adc_data_ch1});
+                        cal_valid_cnt <= 16'd1;
+                    end else if (($signed({1'b0, adc_data_ch0}) > (cal_mean - `AUTOTARE_OUTLIER_THRESH)) &&
+                                 ($signed({1'b0, adc_data_ch0}) < (cal_mean + `AUTOTARE_OUTLIER_THRESH))) begin
                         cal_accum_ch0 <= cal_accum_ch0 + $signed({1'b0, adc_data_ch0});
                         cal_accum_ch1 <= cal_accum_ch1 + $signed({1'b0, adc_data_ch1});
-                        cal_valid_cnt <= cal_valid_cnt + 1;
-                        // Update running mean from accumulated average
-                        if (cal_valid_cnt > 0)
-                            cal_mean <= (cal_accum_ch0 + $signed({1'b0, adc_data_ch0})) / 
-                                        ($signed({20'd0, cal_valid_cnt}) + 1);
+                        cal_valid_cnt <= cal_valid_cnt + 16'd1;
+                        // Running mean updated via 4-bit shift filter (1/16 factor, no division)
+                        cal_mean      <= cal_mean + (cal_ch0_diff >>> 4);
                     end
-                    // else: outlier, skip this sample
+                    // else: outlier (>100 LSBs away from mean), skip accumulation
 
-                    cal_sample_cnt <= cal_sample_cnt + 1;
+                    cal_sample_cnt <= cal_sample_cnt + 16'd1;
 
-                    if (cal_sample_cnt >= `AUTOTARE_NUM_SAMPLES - 1) begin
+                    // Transition to DONE when 256 valid samples accumulated, or on timeout (1024 attempts)
+                    if (cal_valid_cnt >= `AUTOTARE_NUM_SAMPLES - 1 || cal_sample_cnt >= 16'd1023) begin
                         state <= S_CAL_DONE;
                     end else begin
                         state <= S_CAL_ADC; // Take next sample
@@ -397,11 +428,11 @@ module control_fsm #(
                 end
 
                 S_CAL_DONE: begin
-                    // Compute final offset = average of valid samples
-                    if (cal_valid_cnt > 0)
-                        adc_offset <= cal_accum_ch0[23:0] / $signed({15'd0, cal_valid_cnt});
+                    // Compute final offset: exactly 256 valid samples -> shift right by 8 bits (no division!)
+                    if (cal_valid_cnt >= `AUTOTARE_NUM_SAMPLES)
+                        adc_offset <= (cal_accum_ch0 + 24'sd128) >>> 8;
                     else
-                        adc_offset <= 13'sd2048; // Fallback if all samples rejected
+                        adc_offset <= cal_mean; // Fallback to running mean if timed out
                     cal_done <= 1'b1;
                     state    <= S_DISABLED; // Wait for enable
                 end

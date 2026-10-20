@@ -1,0 +1,949 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Oct 20 13:50:17 2026
+# Process ID: 28700
+# Current directory: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.runs/synth_1
+# Command line: vivado.exe -log mpc_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source mpc_top.tcl
+# Log file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.runs/synth_1/mpc_top.vds
+# Journal file: C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.runs/synth_1\vivado.jou
+# Running On: LAPTOP-0Q2U4T72, OS: Windows, CPU Frequency: 2918 MHz, CPU Physical cores: 14, Host memory: 16908 MB
+#-----------------------------------------------------------
+source mpc_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:23 . Memory (MB): peak = 487.125 ; gain = 180.848
+Command: read_checkpoint -auto_incremental -incremental {C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/utils_1/imports/synth_1/mpc_top.dcp}
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/utils_1/imports/synth_1/mpc_top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top mpc_top -part xc7a200tsbg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a200t'
+INFO: [Device 21-403] Loading part xc7a200tsbg484-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 37192
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1376.242 ; gain = 439.695
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-11065] parameter 'SPEED_SCALE' becomes localparam in 'encoder_reader' with formal parameter declaration list [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/encoder_reader.v:23]
+INFO: [Synth 8-6157] synthesizing module 'mpc_top' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_top.v:3]
+INFO: [Synth 8-6157] synthesizing module 'adc_pmod_ad1' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/adc_pmod_ad1.v:5]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'adc_pmod_ad1' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/adc_pmod_ad1.v:5]
+INFO: [Synth 8-6157] synthesizing module 'encoder_reader' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/encoder_reader.v:5]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'encoder_reader' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/encoder_reader.v:5]
+INFO: [Synth 8-6157] synthesizing module 'clarke_transform' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/clarke_transform.v:4]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'clarke_transform' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/clarke_transform.v:4]
+INFO: [Synth 8-6157] synthesizing module 'flux_observer' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer.v:4]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'flux_observer' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer.v:4]
+INFO: [Synth 8-6157] synthesizing module 'vdc_manager' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/vdc_manager.v:4]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'vdc_manager' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/vdc_manager.v:4]
+INFO: [Synth 8-6157] synthesizing module 'voltage_lut' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/voltage_lut.v:4]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-226] default block is never used [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/voltage_lut.v:18]
+INFO: [Synth 8-6155] done synthesizing module 'voltage_lut' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/voltage_lut.v:4]
+INFO: [Synth 8-6157] synthesizing module 'motor_predictor' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v:4]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'motor_predictor' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v:4]
+INFO: [Synth 8-6157] synthesizing module 'cost_evaluator' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/cost_evaluator.v:21]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'cost_evaluator' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/cost_evaluator.v:21]
+WARNING: [Synth 8-7071] port 'cost_overflow' of module 'cost_evaluator' is unconnected for instance 'u_cost' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_top.v:338]
+WARNING: [Synth 8-7023] instance 'u_cost' of module 'cost_evaluator' has 11 connections declared, but only 10 given [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_top.v:338]
+INFO: [Synth 8-6157] synthesizing module 'speed_pi' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/speed_pi.v:4]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/speed_pi.v:44]
+INFO: [Synth 8-6155] done synthesizing module 'speed_pi' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/speed_pi.v:4]
+INFO: [Synth 8-6157] synthesizing module 'optimal_selector' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/optimal_selector.v:3]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'optimal_selector' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/optimal_selector.v:3]
+INFO: [Synth 8-6157] synthesizing module 'gate_driver' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/gate_driver.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'gate_driver' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/gate_driver.v:5]
+INFO: [Synth 8-6157] synthesizing module 'control_fsm' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/control_fsm.v:3]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+	Parameter SIMULATION bound to: 1'b0 
+INFO: [Synth 8-6155] done synthesizing module 'control_fsm' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/control_fsm.v:3]
+INFO: [Synth 8-6157] synthesizing module 'oled_formatter' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_formatter.v:13]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter FRAC_BITS bound to: 20 - type: integer 
+INFO: [Synth 8-226] default block is never used [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_formatter.v:151]
+INFO: [Synth 8-226] default block is never used [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_formatter.v:235]
+INFO: [Synth 8-226] default block is never used [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_formatter.v:313]
+INFO: [Synth 8-226] default block is never used [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_formatter.v:391]
+INFO: [Synth 8-6155] done synthesizing module 'oled_formatter' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_formatter.v:13]
+INFO: [Synth 8-6157] synthesizing module 'oled_controller' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_controller.v:12]
+	Parameter SIMULATION bound to: 1'b0 
+INFO: [Synth 8-6157] synthesizing module 'oled_spi_tx' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_spi_tx.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'oled_spi_tx' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_spi_tx.v:10]
+INFO: [Synth 8-6157] synthesizing module 'oled_font_rom' [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_font_rom.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'oled_font_rom' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_font_rom.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'oled_controller' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/oled_controller.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'mpc_top' (0#1) [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/mpc_top.v:3]
+WARNING: [Synth 8-6014] Unused sequential element z_sync_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/encoder_reader.v:30]
+WARNING: [Synth 8-6014] Unused sequential element t4_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v:62]
+WARNING: [Synth 8-6014] Unused sequential element t8_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v:63]
+WARNING: [Synth 8-6014] Unused sequential element t11_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v:64]
+WARNING: [Synth 8-6014] Unused sequential element t14_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/motor_predictor.v:65]
+WARNING: [Synth 8-6014] Unused sequential element cross_diff_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/cost_evaluator.v:133]
+WARNING: [Synth 8-6014] Unused sequential element flux_err_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/cost_evaluator.v:136]
+WARNING: [Synth 8-6014] Unused sequential element cal_accum_ch1_reg was removed.  [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/control_fsm.v:190]
+WARNING: [Synth 8-7129] Port speed_elec[31] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[30] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[29] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[28] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[27] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[26] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[25] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[24] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[23] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[22] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[21] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[20] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[19] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[18] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[17] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[16] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[15] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[14] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[13] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[12] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[11] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[10] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[9] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[8] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[7] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[6] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[5] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[4] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[3] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[2] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[1] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_elec[0] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port speed_valid in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[31] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[30] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[29] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[28] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[27] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[26] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[25] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[24] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[23] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[22] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[21] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[20] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[19] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[18] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[17] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[16] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[15] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[14] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[13] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[12] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[11] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[10] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[9] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[8] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[7] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[6] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[5] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[4] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[3] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[2] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[1] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_alpha[0] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[31] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[30] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[29] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[28] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[27] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[26] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[25] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[24] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[23] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[22] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[21] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[20] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[19] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[18] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[17] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[16] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[15] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[14] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[13] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[12] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[11] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[10] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[9] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[8] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[7] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[6] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[5] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[4] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[3] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[2] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[1] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port i_beta[0] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port psi_r_alpha[31] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port psi_r_alpha[30] in module control_fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port psi_r_alpha[29] in module control_fsm is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:21 ; elapsed = 00:00:25 . Memory (MB): peak = 1526.730 ; gain = 590.184
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:21 ; elapsed = 00:00:25 . Memory (MB): peak = 1526.730 ; gain = 590.184
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:25 . Memory (MB): peak = 1526.730 ; gain = 590.184
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.149 . Memory (MB): peak = 1526.730 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/constrs_1/imports/constrs/nexys_video.xdc]
+Finished Parsing XDC File [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/constrs_1/imports/constrs/nexys_video.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/constrs_1/imports/constrs/nexys_video.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/mpc_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/mpc_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1627.301 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.066 . Memory (MB): peak = 1627.301 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:45 ; elapsed = 00:00:53 . Memory (MB): peak = 1627.301 ; gain = 690.754
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a200tsbg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:45 ; elapsed = 00:00:53 . Memory (MB): peak = 1627.301 ; gain = 690.754
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:45 ; elapsed = 00:00:53 . Memory (MB): peak = 1627.301 ; gain = 690.754
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'adc_pmod_ad1'
+WARNING: [Synth 8-3936] Found unconnected internal register 'mul_result_full_reg' and it is trimmed from '64' to '52' bits. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/clarke_transform.v:38]
+WARNING: [Synth 8-3936] Found unconnected internal register 'mul_result_full_reg' and it is trimmed from '64' to '52' bits. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/flux_observer.v:44]
+WARNING: [Synth 8-3936] Found unconnected internal register 'mul_result_full_reg' and it is trimmed from '64' to '52' bits. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/vdc_manager.v:34]
+WARNING: [Synth 8-3936] Found unconnected internal register 'mul_result_full_reg' and it is trimmed from '64' to '52' bits. [C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.srcs/sources_1/imports/rtl/speed_pi.v:21]
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'control_fsm'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'oled_spi_tx'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'oled_controller'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              001 |                               00
+                     RUN |                              010 |                               01
+                   QUIET |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'adc_pmod_ad1'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  S_IDLE |                            00000 |                            00000
+            S_CAL_WARMUP |                            00001 |                            10010
+               S_CAL_ADC |                            00010 |                            10011
+              S_CAL_WAIT |                            00011 |                            10100
+             S_CAL_ACCUM |                            00100 |                            10101
+              S_CAL_DONE |                            00101 |                            10110
+              S_DISABLED |                            00110 |                            01111
+           S_MAG_WAIT_TS |                            00111 |                            10111
+             S_MAG_APPLY |                            01000 |                            11000
+               S_MAG_ADC |                            01001 |                            11001
+          S_MAG_WAIT_ADC |                            01010 |                            11010
+             S_MAG_CHECK |                            01011 |                            11011
+               S_WAIT_TS |                            01100 |                            00001
+             S_START_ADC |                            01101 |                            00010
+              S_WAIT_ADC |                            01110 |                            00011
+                S_CLARKE |                            01111 |                            00100
+           S_WAIT_CLARKE |                            10000 |                            00101
+                  S_FLUX |                            10001 |                            00110
+             S_WAIT_FLUX |                            10010 |                            00111
+              S_MPC_INIT |                            10011 |                            01000
+           S_MPC_PREDICT |                            10100 |                            01001
+             S_WAIT_PRED |                            10101 |                            01010
+              S_MPC_COST |                            10110 |                            01011
+             S_WAIT_COST |                            10111 |                            01100
+              S_WAIT_SEL |                            11000 |                            10000
+              S_MPC_NEXT |                            11001 |                            01101
+                 S_APPLY |                            11010 |                            01110
+                 S_ERROR |                            11011 |                            10001
+                  iSTATE |                            11100 |                            11111
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'control_fsm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  S_IDLE |                               00 |                               00
+                   S_LOW |                               01 |                               01
+                  S_HIGH |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'oled_spi_tx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+               S_PWR_OFF |                            00000 |                            00000
+               S_PWR_VDD |                            00001 |                            00001
+               S_RES_LOW |                            00010 |                            00010
+              S_RES_HIGH |                            00011 |                            00011
+           S_INIT_CMD_TX |                            00100 |                            00100
+         S_INIT_CMD_WAIT |                            00101 |                            00101
+           S_CLR_PG_CMD0 |                            00110 |                            00110
+           S_CLR_PG_CMD1 |                            00111 |                            00111
+           S_CLR_PG_CMD2 |                            01000 |                            01000
+           S_CLR_DATA_TX |                            01001 |                            01001
+         S_CLR_DATA_WAIT |                            01010 |                            01010
+              S_PWR_VBAT |                            01011 |                            01011
+            S_DISP_ON_TX |                            01100 |                            01100
+          S_DISP_ON_WAIT |                            01101 |                            01101
+           S_REF_PG_CMD0 |                            01110 |                            01110
+           S_REF_PG_CMD1 |                            01111 |                            01111
+           S_REF_PG_CMD2 |                            10000 |                            10000
+             S_REF_FETCH |                            10001 |                            10001
+           S_REF_DATA_TX |                            10010 |                            10010
+         S_REF_DATA_WAIT |                            10011 |                            10011
+           S_FRAME_DELAY |                            10100 |                            10100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'oled_controller'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:52 ; elapsed = 00:01:01 . Memory (MB): peak = 1627.301 ; gain = 690.754
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   33 Bit       Adders := 2     
+	   2 Input   33 Bit       Adders := 3     
+	   3 Input   32 Bit       Adders := 6     
+	   2 Input   32 Bit       Adders := 20    
+	   4 Input   32 Bit       Adders := 3     
+	   5 Input   32 Bit       Adders := 1     
+	   2 Input   24 Bit       Adders := 3     
+	   2 Input   20 Bit       Adders := 4     
+	   2 Input   16 Bit       Adders := 2     
+	   2 Input   14 Bit       Adders := 5     
+	   3 Input   14 Bit       Adders := 2     
+	   3 Input   13 Bit       Adders := 4     
+	   2 Input   13 Bit       Adders := 3     
+	   2 Input    8 Bit       Adders := 3     
+	   2 Input    7 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 4     
+	   2 Input    4 Bit       Adders := 6     
+	   2 Input    3 Bit       Adders := 6     
+	   2 Input    2 Bit       Adders := 3     
++---Registers : 
+	               64 Bit    Registers := 5     
+	               52 Bit    Registers := 4     
+	               32 Bit    Registers := 74    
+	               24 Bit    Registers := 2     
+	               20 Bit    Registers := 4     
+	               16 Bit    Registers := 6     
+	               14 Bit    Registers := 2     
+	               13 Bit    Registers := 2     
+	               12 Bit    Registers := 7     
+	                8 Bit    Registers := 7     
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 5     
+	                4 Bit    Registers := 6     
+	                3 Bit    Registers := 14    
+	                2 Bit    Registers := 6     
+	                1 Bit    Registers := 57    
++---Multipliers : 
+	              26x32  Multipliers := 1     
+	              21x32  Multipliers := 1     
+	              32x32  Multipliers := 6     
+	              18x32  Multipliers := 1     
+	               3x32  Multipliers := 1     
++---Muxes : 
+	  11 Input   32 Bit        Muxes := 1     
+	  20 Input   32 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 28    
+	   8 Input   32 Bit        Muxes := 5     
+	   3 Input   32 Bit        Muxes := 5     
+	  26 Input   32 Bit        Muxes := 1     
+	  10 Input   32 Bit        Muxes := 2     
+	   2 Input   24 Bit        Muxes := 2     
+	  29 Input   24 Bit        Muxes := 1     
+	  21 Input   24 Bit        Muxes := 1     
+	   2 Input   20 Bit        Muxes := 8     
+	   2 Input   16 Bit        Muxes := 1     
+	  29 Input   16 Bit        Muxes := 2     
+	   2 Input   14 Bit        Muxes := 1     
+	  29 Input   14 Bit        Muxes := 2     
+	   2 Input   13 Bit        Muxes := 2     
+	  29 Input   13 Bit        Muxes := 1     
+	   2 Input   10 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 7     
+	   3 Input    8 Bit        Muxes := 1     
+	   6 Input    8 Bit        Muxes := 5     
+	   5 Input    8 Bit        Muxes := 1     
+	  21 Input    8 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 11    
+	   4 Input    7 Bit        Muxes := 24    
+	  64 Input    7 Bit        Muxes := 1     
+	   6 Input    7 Bit        Muxes := 54    
+	   5 Input    7 Bit        Muxes := 3     
+	  21 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 17    
+	   6 Input    6 Bit        Muxes := 2     
+	  21 Input    6 Bit        Muxes := 1     
+	   3 Input    5 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 8     
+	  29 Input    5 Bit        Muxes := 1     
+	  41 Input    5 Bit        Muxes := 1     
+	   6 Input    5 Bit        Muxes := 1     
+	  21 Input    5 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 7     
+	   3 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 1     
+	  21 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 9     
+	   3 Input    3 Bit        Muxes := 4     
+	   8 Input    3 Bit        Muxes := 2     
+	  26 Input    3 Bit        Muxes := 1     
+	  29 Input    3 Bit        Muxes := 2     
+	   5 Input    3 Bit        Muxes := 1     
+	  21 Input    3 Bit        Muxes := 2     
+	   3 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 5     
+	   4 Input    2 Bit        Muxes := 1     
+	  29 Input    2 Bit        Muxes := 2     
+	  21 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 94    
+	   3 Input    1 Bit        Muxes := 23    
+	   4 Input    1 Bit        Muxes := 7     
+	  11 Input    1 Bit        Muxes := 8     
+	  20 Input    1 Bit        Muxes := 14    
+	   8 Input    1 Bit        Muxes := 9     
+	  31 Input    1 Bit        Muxes := 1     
+	  30 Input    1 Bit        Muxes := 15    
+	  27 Input    1 Bit        Muxes := 1     
+	  26 Input    1 Bit        Muxes := 15    
+	  10 Input    1 Bit        Muxes := 8     
+	  29 Input    1 Bit        Muxes := 22    
+	  21 Input    1 Bit        Muxes := 21    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 740 (col length:100)
+BRAMs: 730 (col length: RAMB18 100 RAMB36 50)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP filt_term2_reg0, operation Mode is: (A:0xe6666)*B.
+DSP Report: operator filt_term2_reg0 is absorbed into DSP filt_term2_reg0.
+DSP Report: operator filt_term2_reg0 is absorbed into DSP filt_term2_reg0.
+DSP Report: Generating DSP filt_term2_reg0, operation Mode is: (PCIN>>17)+(A:0xe6666)*B.
+DSP Report: operator filt_term2_reg0 is absorbed into DSP filt_term2_reg0.
+DSP Report: operator filt_term2_reg0 is absorbed into DSP filt_term2_reg0.
+DSP Report: Generating DSP raw_mult_reg0, operation Mode is: (A:0xdfb5)*B.
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: Generating DSP raw_mult_reg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: Generating DSP raw_mult_reg0, operation Mode is: A*(B:0xdfb5).
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: Generating DSP raw_mult_reg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: operator raw_mult_reg0 is absorbed into DSP raw_mult_reg0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP mul_result_full0, operation Mode is: A*B.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full0.
+DSP Report: Generating DSP mul_result_full_reg, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: register mul_result_full_reg is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: operator mul_result_full0 is absorbed into DSP mul_result_full_reg.
+DSP Report: Generating DSP pk_frac0, operation Mode is: A*(B:0x64).
+DSP Report: operator pk_frac0 is absorbed into DSP pk_frac0.
+DSP Report: Generating DSP ia_frac0, operation Mode is: A*(B:0x64).
+DSP Report: operator ia_frac0 is absorbed into DSP ia_frac0.
+DSP Report: Generating DSP ib_frac0, operation Mode is: A*(B:0x64).
+DSP Report: operator ib_frac0 is absorbed into DSP ib_frac0.
+DSP Report: Generating DSP flx_frac0, operation Mode is: A*(B:0x3e8).
+DSP Report: operator flx_frac0 is absorbed into DSP flx_frac0.
+DSP Report: Generating DSP trq_frac0, operation Mode is: A*(B:0x64).
+DSP Report: operator trq_frac0 is absorbed into DSP trq_frac0.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[47]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[46]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[45]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[44]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[43]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[42]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[41]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[40]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[39]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[38]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[37]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[36]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[35]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[34]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[33]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[32]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[31]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[30]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[29]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[28]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[27]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[26]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[25]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[24]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[23]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[22]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[21]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[20]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[19]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[18]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[17]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[16]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[15]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[14]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[13]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[12]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[11]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[10]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[9]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[8]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[7]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[6]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[5]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[4]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[3]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[2]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[1]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[0]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[47]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[46]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[45]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[44]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[43]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[42]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[41]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[40]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[39]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[38]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[37]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[36]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[35]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[2]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[1]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (filt_term2_reg_reg[0]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[47]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[46]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[45]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[44]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[43]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[42]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[41]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[40]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[39]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[38]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[37]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[36]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[35]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[34]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[33]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[32]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[31]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[30]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[29]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[28]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[27]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[26]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[25]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[24]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[23]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[22]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[21]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[20]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[19]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[18]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[17]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[16]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[15]) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[47]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[46]__0) is unused and will be removed from module encoder_reader.
+WARNING: [Synth 8-3332] Sequential element (raw_mult_reg_reg[45]__0) is unused and will be removed from module encoder_reader.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:54 ; elapsed = 00:02:07 . Memory (MB): peak = 1641.930 ; gain = 705.383
+---------------------------------------------------------------------------------
+ Sort Area is  mul_result_full0_11 : 0 0 : 3101 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_11 : 0 1 : 2701 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_19 : 0 0 : 3101 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_19 : 0 1 : 2701 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_9 : 0 0 : 3101 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_9 : 0 1 : 2701 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_f : 0 0 : 3101 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_f : 0 1 : 2701 5802 : Used 1 time 0
+ Sort Area is  mul_result_full0_13 : 0 0 : 3101 5754 : Used 1 time 0
+ Sort Area is  mul_result_full0_13 : 0 1 : 2653 5754 : Used 1 time 0
+ Sort Area is  mul_result_full0_17 : 0 0 : 3101 5754 : Used 1 time 0
+ Sort Area is  mul_result_full0_17 : 0 1 : 2653 5754 : Used 1 time 0
+ Sort Area is  mul_result_full0_10 : 0 0 : 2634 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_10 : 0 1 : 2533 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_12 : 0 0 : 2634 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_12 : 0 1 : 2533 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_1a : 0 0 : 2634 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_1a : 0 1 : 2533 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_c : 0 0 : 2634 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_c : 0 1 : 2533 5167 : Used 1 time 0
+ Sort Area is  mul_result_full0_15 : 0 0 : 2634 5119 : Used 1 time 0
+ Sort Area is  mul_result_full0_15 : 0 1 : 2485 5119 : Used 1 time 0
+ Sort Area is  mul_result_full0_18 : 0 0 : 2634 5119 : Used 1 time 0
+ Sort Area is  mul_result_full0_18 : 0 1 : 2485 5119 : Used 1 time 0
+ Sort Area is  filt_term2_reg0_6 : 0 0 : 2419 4854 : Used 1 time 0
+ Sort Area is  filt_term2_reg0_6 : 0 1 : 2435 4854 : Used 1 time 0
+ Sort Area is  raw_mult_reg0_0 : 0 0 : 2017 3659 : Used 1 time 0
+ Sort Area is  raw_mult_reg0_0 : 0 1 : 1642 3659 : Used 1 time 0
+ Sort Area is  raw_mult_reg0_3 : 0 0 : 2014 3557 : Used 1 time 0
+ Sort Area is  raw_mult_reg0_3 : 0 1 : 1543 3557 : Used 1 time 0
+ Sort Area is  flx_frac0_1d : 0 0 : 385 385 : Used 1 time 0
+ Sort Area is  ia_frac0_20 : 0 0 : 338 338 : Used 1 time 0
+ Sort Area is  ib_frac0_1f : 0 0 : 338 338 : Used 1 time 0
+ Sort Area is  pk_frac0_21 : 0 0 : 338 338 : Used 1 time 0
+ Sort Area is  trq_frac0_1b : 0 0 : 338 338 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++----------------+--------------+---------------+----------------+
+|Module Name     | RTL Object   | Depth x Width | Implemented As | 
++----------------+--------------+---------------+----------------+
+|flux_observer   | step         | 32x5          | LUT            | 
+|motor_predictor | mul_a        | 32x1          | LUT            | 
+|motor_predictor | mul_a        | 32x14         | LUT            | 
+|cost_evaluator  | mul_a        | 32x1          | LUT            | 
+|oled_controller | get_init_cmd | 32x8          | LUT            | 
+|flux_observer   | step         | 32x5          | LUT            | 
+|motor_predictor | mul_a        | 32x1          | LUT            | 
+|motor_predictor | mul_a        | 32x14         | LUT            | 
+|cost_evaluator  | mul_a        | 32x1          | LUT            | 
+|oled_controller | get_init_cmd | 32x8          | LUT            | 
++----------------+--------------+---------------+----------------+
+
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++-----------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name      | DSP Mapping              | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-----------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|encoder_reader   | (A:0xe6666)*B            | 21     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|encoder_reader   | (PCIN>>17)+(A:0xe6666)*B | 21     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|encoder_reader   | (A:0xdfb5)*B             | 15     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|encoder_reader   | (PCIN>>17)+A*B           | 15     | 9      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|encoder_reader   | A*(B:0xdfb5)             | 18     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|encoder_reader   | (PCIN>>17)+A*B           | 18     | 9      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|clarke_transform | A*B                      | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|clarke_transform | (PCIN>>17)+A*B           | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|clarke_transform | A*B                      | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|clarke_transform | (PCIN>>17)+A*B           | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|flux_observer    | A*B                      | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|flux_observer    | (PCIN>>17)+A*B           | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|flux_observer    | A*B                      | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|flux_observer    | (PCIN>>17)+A*B           | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|vdc_manager      | A*B                      | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|vdc_manager      | (PCIN>>17)+A*B           | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|vdc_manager      | A*B                      | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|vdc_manager      | (PCIN>>17)+A*B           | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|motor_predictor  | A*B                      | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|motor_predictor  | (PCIN>>17)+A*B           | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|motor_predictor  | A*B                      | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|motor_predictor  | (PCIN>>17)+A*B           | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cost_evaluator   | A*B                      | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cost_evaluator   | (PCIN>>17)+A*B           | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cost_evaluator   | A*B                      | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cost_evaluator   | (PCIN>>17)+A*B           | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|speed_pi         | A*B                      | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|speed_pi         | (PCIN>>17)+A*B           | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|speed_pi         | A*B                      | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|speed_pi         | (PCIN>>17)+A*B           | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|oled_formatter   | A*(B:0x64)               | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*(B:0x64)               | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*(B:0x64)               | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*(B:0x3e8)              | 20     | 10     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*(B:0x64)               | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++-----------------+--------------------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:11 ; elapsed = 00:02:25 . Memory (MB): peak = 1641.930 ; gain = 705.383
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:02:13 ; elapsed = 00:02:27 . Memory (MB): peak = 1641.930 ; gain = 705.383
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:02:18 ; elapsed = 00:02:32 . Memory (MB): peak = 1763.629 ; gain = 827.082
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:02:22 ; elapsed = 00:02:36 . Memory (MB): peak = 1776.844 ; gain = 840.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:22 ; elapsed = 00:02:36 . Memory (MB): peak = 1776.844 ; gain = 840.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:23 ; elapsed = 00:02:37 . Memory (MB): peak = 1776.844 ; gain = 840.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:23 ; elapsed = 00:02:37 . Memory (MB): peak = 1776.844 ; gain = 840.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:23 ; elapsed = 00:02:37 . Memory (MB): peak = 1776.844 ; gain = 840.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:23 ; elapsed = 00:02:37 . Memory (MB): peak = 1776.844 ; gain = 840.297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++-----------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name      | DSP Mapping     | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-----------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|clarke_transform | A*B             | 17     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|clarke_transform | (PCIN>>17+A*B)' | 30     | 3      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|clarke_transform | A*B             | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|clarke_transform | (PCIN>>17+A*B)' | 0      | 3      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|cost_evaluator   | A*B             | 17     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cost_evaluator   | (PCIN>>17+A*B)' | 30     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|cost_evaluator   | A*B             | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|cost_evaluator   | (PCIN>>17+A*B)' | 0      | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|encoder_reader   | A*B             | 20     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|encoder_reader   | (PCIN>>17+A*B)' | 0      | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|encoder_reader   | (A*B)'          | 30     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|encoder_reader   | A*B             | 17     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|encoder_reader   | (PCIN>>17+A*B)' | 0      | 8      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|flux_observer    | A*B             | 17     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|flux_observer    | (PCIN>>17+A*B)' | 30     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|flux_observer    | A*B             | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|flux_observer    | (PCIN>>17+A*B)' | 0      | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|oled_formatter   | A*B             | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*B             | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*B             | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*B             | 20     | 10     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|oled_formatter   | A*B             | 20     | 7      | -      | -      | 27     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|motor_predictor  | A*B             | 17     | 3      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|motor_predictor  | (PCIN>>17+A*B)' | 3      | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|motor_predictor  | A*B             | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|motor_predictor  | (PCIN>>17+A*B)' | 17     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|speed_pi         | A*B             | 17     | 3      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|speed_pi         | (PCIN>>17+A*B)' | 3      | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|speed_pi         | A*B             | 14     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|speed_pi         | (PCIN>>17+A*B)' | 14     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|vdc_manager      | A*B             | 17     | 13     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|vdc_manager      | (PCIN>>17+A*B)' | 13     | 3      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|vdc_manager      | A*B             | 0      | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|vdc_manager      | (PCIN>>17+A*B)' | 0      | 3      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
++-----------------+-----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     1|
+|2     |CARRY4  |  1068|
+|3     |DSP48E1 |    34|
+|5     |LUT1    |   461|
+|6     |LUT2    |  1658|
+|7     |LUT3    |  1566|
+|8     |LUT4    |  1491|
+|9     |LUT5    |  1130|
+|10    |LUT6    |  1698|
+|11    |MUXF7   |    48|
+|12    |MUXF8   |     1|
+|13    |FDCE    |  2826|
+|14    |FDPE    |    98|
+|15    |FDRE    |    72|
+|16    |IBUF    |    17|
+|17    |OBUF    |    23|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:23 ; elapsed = 00:02:38 . Memory (MB): peak = 1776.844 ; gain = 840.297
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1197 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:54 ; elapsed = 00:02:28 . Memory (MB): peak = 1776.844 ; gain = 739.727
+Synthesis Optimization Complete : Time (s): cpu = 00:02:23 ; elapsed = 00:02:38 . Memory (MB): peak = 1776.844 ; gain = 840.297
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.101 . Memory (MB): peak = 1784.551 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1151 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1790.859 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 8b5eb2ed
+INFO: [Common 17-83] Releasing license: Synthesis
+71 Infos, 216 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:02:35 ; elapsed = 00:03:20 . Memory (MB): peak = 1790.859 ; gain = 1299.762
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 1790.859 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Dhananjay Dhumal/mpc_3_phase_im/mpc_3_phase_im.runs/synth_1/mpc_top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file mpc_top_utilization_synth.rpt -pb mpc_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 20 13:54:14 2026...

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xc7a200tsbg484-1" LaunchTime="1792484411" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/mpc_top.dcp">
+  <File Type="PA-TCL" Name="mpc_top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="mpc_top_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="mpc_top_reports.tcl"/>
+  <File Type="RDS-RDS" Name="mpc_top.vds"/>
+  <File Type="RDS-UTIL" Name="mpc_top_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="mpc_top_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="mpc_top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="mpc_top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="mpc_top_timing_summary_synth.pb"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/mpc_params.vh">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/mpc_params.vh"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+        <Attr Name="IsVisible" Val="1"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/adc_pmod_ad1.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/adc_pmod_ad1.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/clarke_transform.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/clarke_transform.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/control_fsm.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/control_fsm.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/cost_evaluator.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/cost_evaluator.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/encoder_reader.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/encoder_reader.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/flux_observer.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/flux_observer.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/gate_driver.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/gate_driver.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/motor_predictor.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/motor_predictor.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/oled_controller.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/oled_font_rom.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/oled_formatter.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/oled_spi_tx.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/optimal_selector.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/optimal_selector.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/speed_pi.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/speed_pi.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/vdc_manager.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/vdc_manager.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/voltage_lut.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/voltage_lut.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/mpc_top.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/mpc_top.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/fixed_point_mul.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/fixed_point_mul.v"/>
+        <Attr Name="ImportTime" Val="1788903528"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/mpc_params_pkg.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/src/rtl/mpc_params_pkg.sv"/>
+        <Attr Name="ImportTime" Val="1789564321"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/flux_observer_2nd_order.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/rtl/flux_observer_exact.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="mpc_top"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/imports/constrs/nexys_video.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
+    <Filter Type="Utils"/>
+    <File Path="$PSRCDIR/utils_1/imports/synth_1/mpc_top.dcp">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedInSteps" Val="synth_1"/>
+        <Attr Name="AutoDcp" Val="1"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+    <Step Id="synth_design"/>
+  </Strategy>
+</GenRun>

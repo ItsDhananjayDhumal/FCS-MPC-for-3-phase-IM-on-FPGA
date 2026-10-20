@@ -1,6 +1,9 @@
 `timescale 1ns / 1ps
 
-module mpc_top (
+module mpc_top #(
+    parameter DEBOUNCE_CYCLES = 20'd999_999, // 10ms at 100MHz (override to ~100 in simulation)
+    parameter SIMULATION      = 1'b0
+)(
     
     input  wire        sys_clk_i,       
     input  wire        cpu_resetn,      
@@ -26,6 +29,14 @@ module mpc_top (
     output wire        gate_cl,         
     output wire        inverter_en,     
 
+    // Onboard OLED Display Pins (Nexys Video Bank 14)
+    output wire        oled_sclk,
+    output wire        oled_sdin,
+    output wire        oled_dc,
+    output wire        oled_res,
+    output wire        oled_vbat,
+    output wire        oled_vdd,
+
     output wire [7:0]  led,             
     input  wire [7:0]  sw               
 );
@@ -48,19 +59,85 @@ module mpc_top (
     end
     wire rst_n = rst_sync2;  
 
+    // 2-FF Synchronizers for START (btnu), STOP (btnd), and PAGE CYCLE (btnc)
     reg btnu_sync1, btnu_sync2;
+    reg btnd_sync1, btnd_sync2;
+    reg btnc_sync1, btnc_sync2;
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             btnu_sync1 <= 1'b0;
             btnu_sync2 <= 1'b0;
+            btnd_sync1 <= 1'b0;
+            btnd_sync2 <= 1'b0;
+            btnc_sync1 <= 1'b0;
+            btnc_sync2 <= 1'b0;
         end else begin
             btnu_sync1 <= btnu;
             btnu_sync2 <= btnu_sync1;
+            btnd_sync1 <= btnd;
+            btnd_sync2 <= btnd_sync1;
+            btnc_sync1 <= btnc;
+            btnc_sync2 <= btnc_sync1;
         end
     end
-    wire enable = btnu_sync2;
 
-    assign inverter_en = enable;
+    // Debounce filters and Start/Stop Run Latch
+    // btnu = START (latch run), btnd = STOP (clear run / acknowledge fault)
+    // btnc = PAGE CYCLE (pulse on button press)
+    reg run_latch;
+    reg [19:0] db_cnt_u, db_cnt_d, db_cnt_c;
+    reg btnc_debounced, btnc_prev;
+    wire btnc_pulse = btnc_debounced && !btnc_prev;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            run_latch      <= 1'b0;
+            db_cnt_u       <= 20'd0;
+            db_cnt_d       <= 20'd0;
+            db_cnt_c       <= 20'd0;
+            btnc_debounced <= 1'b0;
+            btnc_prev      <= 1'b0;
+        end else begin
+            btnc_prev <= btnc_debounced;
+
+            // Center Button (btnc) Debouncer (Page Cycle)
+            if (btnc_sync2 != btnc_debounced) begin
+                if (db_cnt_c >= DEBOUNCE_CYCLES) begin
+                    btnc_debounced <= btnc_sync2;
+                    db_cnt_c       <= 20'd0;
+                end else begin
+                    db_cnt_c <= db_cnt_c + 20'd1;
+                end
+            end else begin
+                db_cnt_c <= 20'd0;
+            end
+
+            // STOP Button (btnd) has highest priority
+            if (btnd_sync2) begin
+                if (db_cnt_d >= DEBOUNCE_CYCLES) begin
+                    run_latch <= 1'b0;
+                    db_cnt_d  <= 20'd0;
+                end else begin
+                    db_cnt_d  <= db_cnt_d + 20'd1;
+                end
+            end else begin
+                db_cnt_d <= 20'd0;
+            end
+
+            // START Button (btnu) sets the run latch (if STOP is not active)
+            if (btnu_sync2 && !btnd_sync2) begin
+                if (db_cnt_u >= DEBOUNCE_CYCLES) begin
+                    run_latch <= 1'b1;
+                    db_cnt_u  <= 20'd0;
+                end else begin
+                    db_cnt_u  <= db_cnt_u + 20'd1;
+                end
+            end else begin
+                db_cnt_u <= 20'd0;
+            end
+        end
+    end
+    wire enable = run_latch;
 
     
 
@@ -72,44 +149,44 @@ module mpc_top (
 
     wire        sample_tick_w;
     wire signed [31:0] enc_position_w;
-    wire signed [DATA_WIDTH-1:0] speed_elec_w;
+    wire signed [`DATA_WIDTH-1:0] speed_elec_w;
     wire        speed_valid_w;
 
     wire        clarke_start_w;
     wire [11:0] clarke_ia_raw_w;
     wire [11:0] clarke_ib_raw_w;
     wire        clarke_done_w;
-    wire signed [DATA_WIDTH-1:0] i_alpha_w;
-    wire signed [DATA_WIDTH-1:0] i_beta_w;
+    wire signed [`DATA_WIDTH-1:0] i_alpha_w;
+    wire signed [`DATA_WIDTH-1:0] i_beta_w;
 
     wire        flux_start_w;
     wire        flux_done_w;
-    wire signed [DATA_WIDTH-1:0] psi_r_alpha_w;
-    wire signed [DATA_WIDTH-1:0] psi_r_beta_w;
-    wire signed [DATA_WIDTH-1:0] wr_psi_alpha_w;
-    wire signed [DATA_WIDTH-1:0] wr_psi_beta_w;
+    wire signed [`DATA_WIDTH-1:0] psi_r_alpha_w;
+    wire signed [`DATA_WIDTH-1:0] psi_r_beta_w;
+    wire signed [`DATA_WIDTH-1:0] wr_psi_alpha_w;
+    wire signed [`DATA_WIDTH-1:0] wr_psi_beta_w;
 
-    wire signed [DATA_WIDTH-1:0] vdc_q_w;
-    wire signed [DATA_WIDTH-1:0] v1_alpha_w;
-    wire signed [DATA_WIDTH-1:0] v2_alpha_w;
-    wire signed [DATA_WIDTH-1:0] v2_beta_w;
+    wire signed [`DATA_WIDTH-1:0] vdc_q_w;
+    wire signed [`DATA_WIDTH-1:0] v1_alpha_w;
+    wire signed [`DATA_WIDTH-1:0] v2_alpha_w;
+    wire signed [`DATA_WIDTH-1:0] v2_beta_w;
     wire        vdc_valid_w;
 
     wire [2:0]  vec_idx_w;
-    wire signed [DATA_WIDTH-1:0] vs_alpha_w;
-    wire signed [DATA_WIDTH-1:0] vs_beta_w;
+    wire signed [`DATA_WIDTH-1:0] vs_alpha_w;
+    wire signed [`DATA_WIDTH-1:0] vs_beta_w;
     wire [2:0]  lut_switch_state_w;
 
     wire        pred_start_w;
     wire        pred_done_w;
-    wire signed [DATA_WIDTH-1:0] is_alpha_pred_w;
-    wire signed [DATA_WIDTH-1:0] is_beta_pred_w;
-    wire signed [DATA_WIDTH-1:0] psi_r_alpha_pred_w;
-    wire signed [DATA_WIDTH-1:0] psi_r_beta_pred_w;
+    wire signed [`DATA_WIDTH-1:0] is_alpha_pred_w;
+    wire signed [`DATA_WIDTH-1:0] is_beta_pred_w;
+    wire signed [`DATA_WIDTH-1:0] psi_r_alpha_pred_w;
+    wire signed [`DATA_WIDTH-1:0] psi_r_beta_pred_w;
 
     wire        cost_start_w;
     wire        cost_done_w;
-    wire signed [DATA_WIDTH-1:0] cost_value_w;
+    wire signed [`DATA_WIDTH-1:0] cost_value_w;
 
     wire        sel_reset_w;
     wire        sel_cost_valid_w;
@@ -119,15 +196,32 @@ module mpc_top (
     wire        gate_update_w;
     wire [2:0]  gate_switch_state_w;
 
-    wire [3:0]  fsm_state_w;
+    wire [4:0]  fsm_state_w;  // 5-bit: supports states 0-17
     wire        heartbeat_w;
+
+    // Fault active flag: state 17 is S_ERROR in control_fsm
+    wire        fault_active = (fsm_state_w == 5'd17);
+
+    // Power stage enable: active only when run is commanded AND no fault has tripped
+    wire        pwr_enable   = enable && !fault_active;
+    assign inverter_en = pwr_enable;
+
+    // Speed PI controller output
+    wire signed [`DATA_WIDTH-1:0] te_ref_w;
+
+    // Auto-tare calibration signals
+    wire signed [12:0] adc_offset_w;
+    wire               cal_done_w;
+    wire [2:0]         cal_countdown_w;
+    wire [1:0]         fault_code_w;
+    wire signed [`DATA_WIDTH-1:0] ia_w, ib_w;
 
     
 
     
     adc_pmod_ad1 #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
     ) u_adc (
         .clk       (clk),
         .rst_n     (rst_n),
@@ -142,8 +236,8 @@ module mpc_top (
     );
 
     encoder_reader #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
     ) u_encoder (
         .clk         (clk),
         .rst_n       (rst_n),
@@ -157,22 +251,25 @@ module mpc_top (
     );
 
     clarke_transform #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
     ) u_clarke (
-        .clk     (clk),
-        .rst_n   (rst_n),
-        .start   (clarke_start_w),
-        .ia_raw  (clarke_ia_raw_w),
-        .ib_raw  (clarke_ib_raw_w),
-        .i_alpha (i_alpha_w),
-        .i_beta  (i_beta_w),
-        .done    (clarke_done_w)
+        .clk        (clk),
+        .rst_n      (rst_n),
+        .start      (clarke_start_w),
+        .ia_raw     (clarke_ia_raw_w),
+        .ib_raw     (clarke_ib_raw_w),
+        .adc_offset (adc_offset_w),    // Dynamic offset from auto-tare
+        .i_alpha    (i_alpha_w),
+        .i_beta     (i_beta_w),
+        .ia_out     (ia_w),
+        .ib_out     (ib_w),
+        .done       (clarke_done_w)
     );
 
     flux_observer #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
     ) u_flux (
         .clk          (clk),
         .rst_n        (rst_n),
@@ -188,8 +285,8 @@ module mpc_top (
     );
 
     vdc_manager #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
     ) u_vdc (
         .clk          (clk),
         .rst_n        (rst_n),
@@ -202,7 +299,7 @@ module mpc_top (
     );
 
     voltage_lut #(
-        .DATA_WIDTH(DATA_WIDTH)
+        .DATA_WIDTH(`DATA_WIDTH)
     ) u_vlut (
         .vec_idx      (vec_idx_w),
         .v1_alpha     (v1_alpha_w),
@@ -214,8 +311,8 @@ module mpc_top (
     );
 
     motor_predictor #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
     ) u_predictor (
         .clk              (clk),
         .rst_n            (rst_n),
@@ -236,8 +333,8 @@ module mpc_top (
     );
 
     cost_evaluator #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
     ) u_cost (
         .clk              (clk),
         .rst_n            (rst_n),
@@ -246,12 +343,26 @@ module mpc_top (
         .is_beta_pred     (is_beta_pred_w),
         .psi_r_alpha_pred (psi_r_alpha_pred_w),
         .psi_r_beta_pred  (psi_r_beta_pred_w),
+        .te_ref_in        (te_ref_w),          // Connected to speed_pi output
         .cost             (cost_value_w),
         .done             (cost_done_w)
     );
 
+    // Speed PI controller: cascaded speed loop driving torque reference
+    speed_pi #(
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS)
+    ) u_speed_pi (
+        .clk         (clk),
+        .rst_n       (rst_n),
+        .sample_tick (sample_tick_w),
+        .speed_ref   (`SPEED_REF_DEFAULT),
+        .speed_fb    (speed_elec_w),
+        .te_ref      (te_ref_w)
+    );
+
     optimal_selector #(
-        .DATA_WIDTH(DATA_WIDTH)
+        .DATA_WIDTH(`DATA_WIDTH)
     ) u_selector (
         .clk              (clk),
         .rst_n            (rst_n),
@@ -266,7 +377,7 @@ module mpc_top (
     gate_driver u_gate (
         .clk          (clk),
         .rst_n        (rst_n),
-        .enable       (enable),
+        .enable       (pwr_enable),
         .switch_state (gate_switch_state_w),
         .update_tick  (gate_update_w),
         .gate_ah      (gate_ah),
@@ -278,8 +389,9 @@ module mpc_top (
     );
 
     control_fsm #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .FRAC_BITS(FRAC_BITS)
+        .DATA_WIDTH(`DATA_WIDTH),
+        .FRAC_BITS(`FRAC_BITS),
+        .SIMULATION(SIMULATION)
     ) u_fsm (
         .clk               (clk),
         .rst_n             (rst_n),
@@ -332,14 +444,67 @@ module mpc_top (
         .gate_update       (gate_update_w),
         .gate_switch_state (gate_switch_state_w),
         
+        .adc_offset        (adc_offset_w),
+        .cal_done          (cal_done_w),
+        .cal_countdown     (cal_countdown_w),
+        .fault_code        (fault_code_w),
+
         .fsm_state_out     (fsm_state_w),
         .heartbeat         (heartbeat_w)
     );
 
-    
+    // =========================================================================
+    // OLED Telemetry Display Subsystem
+    // =========================================================================
+    wire [5:0]  oled_text_addr_w;
+    wire [7:0]  oled_text_char_w;
+    wire [1:0]  oled_active_page_w;
+    wire        oled_init_done_w;
 
-    
-    
+    oled_formatter #(
+        .DATA_WIDTH (`DATA_WIDTH),
+        .FRAC_BITS  (`FRAC_BITS)
+    ) u_oled_fmt (
+        .clk              (clk),
+        .rst_n            (rst_n),
+        .cal_done         (cal_done_w),
+        .cal_countdown    (cal_countdown_w),
+        .btnc_pulse       (btnc_pulse),
+        .fsm_state        (fsm_state_w),
+        .opt_switch_state (opt_switch_state_w),
+        .enable           (enable),
+        .fault_code       (fault_code_w),
+        .speed_elec       (speed_elec_w),
+        .te_ref           (te_ref_w),
+        .vdc_int          ({4'b0000, vdc_q_w[31:20]}),
+        .ia               (ia_w),
+        .ib               (ib_w),
+        .psi_r_alpha      (psi_r_alpha_w),
+        .psi_r_beta       (psi_r_beta_w),
+        .adc_offset       (adc_offset_w),
+        .adc_data_ch0     (adc_data_ch0_w),
+        .adc_data_ch1     (adc_data_ch1_w),
+        .text_addr        (oled_text_addr_w),
+        .text_char        (oled_text_char_w),
+        .active_page      (oled_active_page_w)
+    );
+
+    oled_controller #(
+        .SIMULATION       (SIMULATION)
+    ) u_oled_ctrl (
+        .clk              (clk),
+        .rst_n            (rst_n),
+        .text_addr        (oled_text_addr_w),
+        .text_char        (oled_text_char_w),
+        .init_done        (oled_init_done_w),
+        .oled_sclk        (oled_sclk),
+        .oled_sdin        (oled_sdin),
+        .oled_dc          (oled_dc),
+        .oled_res         (oled_res),
+        .oled_vbat        (oled_vbat),
+        .oled_vdd         (oled_vdd)
+    );
+
     assign led[7:4] = sw[7:4];
     assign led[3]   = heartbeat_w;
     assign led[2:0] = opt_switch_state_w;

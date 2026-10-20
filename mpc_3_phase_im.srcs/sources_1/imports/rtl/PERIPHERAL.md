@@ -28,13 +28,13 @@
 * > `JA9 (Y8)`: Inverter Hardware Enable (inverter_en) -->
 
 - `PMOD JA:`
-* > `JA1 (AB22):` adc_cs_n
-* > `JA2 (AB21):` adc_d0
-* > `JA3 (AB20):` adc_d1
-* > `JA4 (AB18):` adc_sclk
-* > `JA7 (Y21)` enc_a
-* > `JA8 (AA21):` enc_b
-* > `JA9 (AA20)`: enc_z
+* > `JA1 (AB22):` enc_a
+* > `JA2 (AB21):` enc_b
+* > `JA3 (AB20):` enc_z
+* > `JA7 (Y21)` adc_cs_n
+* > `JA8 (AA21):` adc_d0
+* > `JA9 (AA20):` adc_d1
+* > `JA10 (AA18):` adc_sclk
 
 - `PMOD JB:`
 * > `JB1 (V9):` Phase A High (gate_ah)

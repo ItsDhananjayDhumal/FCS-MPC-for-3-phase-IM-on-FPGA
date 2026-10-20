@@ -1,0 +1,1 @@
+-debug "typical" "work.tb_ac_current_test" -s "sim_ac" -nolog 
